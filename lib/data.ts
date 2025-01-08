@@ -164,6 +164,216 @@ export const sellers = [
       verified: true
   },
 
+  {
+    src: "/images/sellers/s1.png",
+    title: 'Seller name',
+    totalproduct: '23',
+    verified: true
+},
+{
+    src: "/images/sellers/s2.png",
+    title: 'Seller name',
+    totalproduct: '23',
+    verified: true
+},
+{
+    src: "/images/sellers/s2.png",
+    title: 'Seller name',
+    totalproduct: '23',
+    verified: false
+},
+{
+    src: "/images/sellers/s2.png",
+    title: 'Seller name',
+    totalproduct: '23',
+    verified: false
+},
+{
+    src: "/images/sellers/s2.png",
+    title: 'Seller name',
+    totalproduct: '23',
+    verified: false
+},
+{
+    src: "/images/sellers/s1.png",
+    title: 'Seller name',
+    totalproduct: '23',
+    verified: true
+},
+{
+    src: "/images/sellers/s2.png",
+    title: 'Seller name',
+    totalproduct: '23',
+    verified: true
+},
+{
+  src: "/images/sellers/s1.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: false
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: false
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: false
+},
+{
+  src: "/images/sellers/s1.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s1.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: false
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: false
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: false
+},
+{
+  src: "/images/sellers/s1.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s1.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: false
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: false
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: false
+},
+{
+  src: "/images/sellers/s1.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s1.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: false
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: false
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: false
+},
+{
+  src: "/images/sellers/s1.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
+{
+  src: "/images/sellers/s2.png",
+  title: 'Seller name',
+  totalproduct: '23',
+  verified: true
+},
 ]
 
 export  const blog = [
@@ -568,4 +778,51 @@ export const intrests = [
         name: "artefacts",
         image: "/images/artefacts.svg",
     },
+];
+
+
+export const slides = [
+  {
+    productsCount: "23",
+    products: Array.from({ length: 6 }).map((_, index) => ({
+      id: index,
+      image: "/images/products/1.png",
+    })),
+    title: "Antique Flower Jewelry",
+    description: `Lorem ipsum dolor sit amet, consectetuer adipi scing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magn.`,
+  },
+
+  {
+    productsCount: "45",
+    products: Array.from({ length: 6 }).map((_, index) => ({
+      id: index,
+      image: "/images/products/1.png",
+    })),
+    title: "Antique Animal Jewelry",
+    description: `Lorem ipsum dolor sit amet, consectetuer adipi scing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magn.`,
+  },
+
+
+  {
+    productsCount: "262",
+    products: Array.from({ length: 6 }).map((_, index) => ({
+      id: index,
+      image: "/images/products/1.png",
+    })),
+    title: "Antique Bird Jewelry",
+    description: `Lorem ipsum dolor sit amet, consectetuer adipi scing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magn.`,
+  },
+
+
+  {
+    productsCount: "23",
+    products: Array.from({ length: 6 }).map((_, index) => ({
+      id: index,
+      image: "/images/products/1.png",
+    })),
+    title: "Antique Animal Jewelry",
+    description: `Lorem ipsum dolor sit amet, consectetuer adipi scing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magn.`,
+  },
+
+
 ];

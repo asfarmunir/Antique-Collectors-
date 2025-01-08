@@ -42,7 +42,7 @@ const Presentations = () => {
     return (
         <>
             <div>
-                <div className="py-4 px-4 md:px-6 lg:px-10 border-b border-[#EBE9E0] flex flex-row flex-wrap gap-4 justify-between items-center" >
+                <div className="py-4 px-4 md:px-6 lg:px-12 border-b border-[#EBE9E0] flex flex-row flex-wrap gap-4 justify-between items-center" >
                     <div>
                         <p className="text-xs">Home / Live Presentations</p>
                         <h1 className="font-playfair pt-4 uppercase text-base md:text-xl ">Live Presentations</h1>
@@ -54,7 +54,7 @@ const Presentations = () => {
                 </div>
 
 
-                <section className="py-4 px-4 md:px-6 lg:z-10">
+                <section className="py-4 px-4 md:px-6 lg:px-12 lg:z-10">
                     <h1 className="text-3xl font-playfair capitalize">Discover Upcoming Live Showcases</h1>
                     <p className="text-sm py-3 text-[#919089]">Explore our schedule of live presentations where sellers unveil unique antiques, share their stories, and answer your questions in real time. Don’t miss the chance to connect and find your next treasure.</p>
 
@@ -147,7 +147,7 @@ const Presentations = () => {
 
 
 
-                <section className="py-4 px-4 md:px-6 lg:px-10">
+                <section className="py-4 px-4 md:px-6 lg:px-12">
                     <h1 className="text-3xl font-playfair capitalize">Catch Up on Recent Showcases</h1>
                     <p className="text-xs py-3">Missed a live session? Watch the highlights and explore featured antiques from the past 24 hours before they’re gone.</p>
 

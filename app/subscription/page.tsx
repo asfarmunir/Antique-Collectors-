@@ -1,15 +1,30 @@
-import React from "react";
+'use client';
+import React, { useContext, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { subscriptionPlans } from "@/lib/data";
 import Button from "@/components/ui/Button";
+import { LayoutContext } from "../layout";
 
 const sub = ['posting', 'feed access', 'scheduled posts', 'account support', 'forum access', 'pop-Up ads',
     'messaging', 'sharing', 'analytics'
 ]
 const Subscription = () => {
+    // const {setHideNavbarFooter} = useContext(LayoutContext);
+    const {setHideNavbarFooter}= useContext(LayoutContext);
+
+    React.useEffect(() => {
+        setHideNavbarFooter(true);
+
+        // Revert the Navbar and Footer visibility when the component unmounts
+        return () => setHideNavbarFooter(false);
+    }, [setHideNavbarFooter]);
+    
+
     return (
         <>
-            <div className="absolute top-0 w-full h-screen">
+
+    
+            <div className="absolute top-0 w-full">
                 <div className="border-b border-[#EBE9E0] flex flex-row justify-between gap-6 px-4 items-center">
                     <h1 className="text-xl py-4 uppercase font-playfair">Setting up your account </h1>
                     <IoClose className="text-xl" />
@@ -75,7 +90,7 @@ const Subscription = () => {
 
 
                 </div>
-                <div className="mt-20 px-8">
+                <div className="mt-20 mb-10 px-8">
                     <h1 className="text-3xl font-playfair capitalize">Or Continue with a free account</h1>
                     <div className="py-8">
                         <p className="text-sm"><span className="pr-1">•</span> Minimum Posts: 1 per week (or auto-bump to Bronze)</p>
@@ -92,6 +107,8 @@ const Subscription = () => {
 
 
             </div>
+
+
         </>
     )
 }

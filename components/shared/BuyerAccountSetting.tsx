@@ -55,9 +55,9 @@ export const BuyerAccountSetting = ({ onClose }: { onClose: any }) => {
   };
 
   const handleCheckboxChange = (interest: string) => {
-    setFormData((prev:any) => {
+    setFormData((prev: any) => {
       const updatedInterests = prev.selectedInterests.includes(interest)
-        ? prev.selectedInterests.filter((i:any) => i !== interest)
+        ? prev.selectedInterests.filter((i: any) => i !== interest)
         : [...prev.selectedInterests, interest];
       return { ...prev, selectedInterests: updatedInterests };
     });
@@ -91,7 +91,7 @@ export const BuyerAccountSetting = ({ onClose }: { onClose: any }) => {
             </DialogTitle>
           </DialogHeader>
 
-         
+
           {step === 1 && (
             <div className="flex flex-col px-2 md:px-6">
               <h1 className="text-3xl md:text-4xl">Location Preferences</h1>
@@ -102,29 +102,30 @@ export const BuyerAccountSetting = ({ onClose }: { onClose: any }) => {
               <form>
                 <div className="py-3">
                   <p className="text-xs pb-2 font-sans uppercase">What is your country of residence?</p>
-                 <div onClick={(e) => e.stopPropagation()}>
-                  <Dropdown
-                    label="-Select-"
-                    items={sortData}
-                    onSelect={(item) => handleSelect('country', item)}
-                    isOpen={openDropdown === 1}
-                    toggleDropdown={() => toggleDropdown(1)}
-                    className='bg-white border border-[#EBE9E0] font-sans'
-                  />
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <Dropdown
+                      label="-Select-"
+                      items={sortData}
+                      onSelect={(item) => handleSelect('country', item)}
+                      isOpen={openDropdown === 1}
+                      toggleDropdown={() => toggleDropdown(1)}
+                      className="bg-white border border-[#EBE9E0] font-sans"
+                    />
                   </div>
+
                 </div>
 
                 <div className="py-3">
                   <p className="text-xs pb-2 font-sans uppercase">Do you have a preference for countries you would like to buy from?</p>
                   <div onClick={(e) => e.stopPropagation()}>
-                  <Dropdown
-                    label="-Select-"
-                    items={sortData}
-                    onSelect={(item) => handleSelect('buyFromCountries', item)}
-                    isOpen={openDropdown === 2}
-                    toggleDropdown={() => toggleDropdown(2)}
-                     className='bg-white border border-[#EBE9E0] font-sans'
-                  />
+                    <Dropdown
+                      label="-Select-"
+                      items={sortData}
+                      onSelect={(item) => handleSelect('buyFromCountries', item)}
+                      isOpen={openDropdown === 2}
+                      toggleDropdown={() => toggleDropdown(2)}
+                      className='bg-white border border-[#EBE9E0] font-sans'
+                    />
                   </div>
                 </div>
 
@@ -145,7 +146,7 @@ export const BuyerAccountSetting = ({ onClose }: { onClose: any }) => {
           )}
 
 
-{step === 2 && (
+          {step === 2 && (
             <div className="flex flex-col px-2 md:px-6">
               <h1 className="text-2xl md:text-3xl">What Interests You</h1>
               <p className="text-xs font-sans">

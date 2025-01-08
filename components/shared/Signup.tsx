@@ -42,7 +42,7 @@ const SignUp = ({ onClose }: { onClose: any }) => {
             [name]: type === "checkbox" ? checked : value,
         });
     };
-    
+
 
 
     const handleOtpChange = (index: any, value: any) => {
@@ -78,13 +78,7 @@ const SignUp = ({ onClose }: { onClose: any }) => {
             setCurrentStep(2);
         }
 
-
-
-
     };
-
-
-
 
 
     // Handle Buyer or Seller selection
@@ -158,7 +152,7 @@ const SignUp = ({ onClose }: { onClose: any }) => {
 
                                     <p className="text-[10px] font-sans uppercase text-[#0D0106] py-2">Instantly Login or sign up via google</p>
 
-                                    <div className="flex flex-row flex-wrap gap-3">
+                                    <div className="flex flex-col md:flex-row gap-3">
                                         <Button icon={<FcGoogle />} label="Continue with google" className="w-full font-semibold font-sans bg-white uppercase  border border-[#919089] text-nowrap flex text-xs text-black flex-row " />
                                         <Button icon={<FaApple />} label="Continue with apple" className="w-full font-semibold uppercase font-sans bg-white border border-[#919089] text-nowrap text-xs flex flex-row text-black " />
                                     </div>
@@ -224,7 +218,7 @@ const SignUp = ({ onClose }: { onClose: any }) => {
                                                 label="By signing up you agree to our Terms and Conditions & Privacy Policy."
 
                                                 name="terms"
-                                                
+
                                                 checked={formData.terms}
                                                 onChange={handleInputChange}
                                             />
@@ -252,22 +246,10 @@ const SignUp = ({ onClose }: { onClose: any }) => {
                                         <Button icon={<FaApple />} label="Continue with apple" className="w-full font-semibold uppercase text-nowrap font-sans bg-white border border-[#919089] text-xs flex flex-row text-black " />
                                     </div>
                                 </div>
-
-
-
-
                             </div>
 
 
-
-
                         )}
-
-
-
-
-
-
 
                         {/* step 3 */}
 
@@ -308,19 +290,6 @@ const SignUp = ({ onClose }: { onClose: any }) => {
                             </div>
 
                         )}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

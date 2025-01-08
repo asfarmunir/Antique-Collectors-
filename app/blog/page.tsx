@@ -11,11 +11,8 @@ import Button from "@/components/ui/Button";
 import InputField from "@/components/ui/InputField";
 import { blog as blogData } from "@/lib/data";
 import { useRouter } from "next/navigation";
-
-
-const checkboxlablel = ["Roman - 753 BC - 476 AD", "Elizabethan - 1558 - 1603", "Renaissance - early 1425 - 1490", "Baroque - 1600 - 1750", "William and Mary - 1689 - 1702", "Georgian - 1714 - 1837", "Queen Anne - 1702 - 1714"];
-
-const checkboxlablel1 = ["Excellent Condition", "Very Good Condition", "Good Condition", "Fair Condition"];
+import { checkboxLabels, conditionLabels, sortOptions } from "@/lib/constants";
+import { useBlogs } from "@/hooks/useBlogs";
 
 const post = [
     { title: 'Exploring new ways of decorating', src: "/images/post/post1.jpeg", date: "03 AUG 2022" },
@@ -24,33 +21,26 @@ const post = [
     { title: 'Colorful office redesign', src: "/images/post/post4.jpeg", date: "03 AUG 2022" },
 ];
 
-const sortData = ['Latest', 'A to Z', 'Low to Higher Price', 'Higher to Low Price', 'Highest Sale Products'];
 
 const Blog = () => {
+    const { blog, error } = useBlogs();
     const [filterOpen, setFilterOpen] = useState(false);
     const [visibleBlogs, setVisibleBlogs] = useState(10); // Show 10 blogs initially
-    const [displayedBlog, setDisplayedBlog] = useState([]); // Currently visible blogs
     const [openDropdown, setOpenDropdown] = useState<number | null>(null); // Tracks which dropdown is open
-    const [blog, setBlog] = useState([]); // Full blog list
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredBlogs, setFilteredBlogs] = useState(blog);
     const router = useRouter();
     const [showAll, setShowAll] = useState(false); // Toggle between "View More" and "View Less"
 
-
-
-    useEffect(() => {
-        const fetchBlog = async () => {
-            try {
-                const response = await fetch("https://dummyjson.com/posts");
-                const data = await response.json();
-                setBlog(data.posts);
-                setDisplayedBlog(data.posts); // Display first 10 blogs initially
-            } catch (error) {
-                console.log("Error fetching blogs:", error);
-            }
-        };
-
-        fetchBlog();
-    }, []);
+    useEffect(()=> {
+        if(searchQuery){
+            setFilteredBlogs(
+                blog.filter((item)=> item.title.toLowerCase().includes(searchQuery.toLowerCase()))
+            );
+        }else{
+            setFilteredBlogs(blog);
+        }
+    }, [searchQuery, blog]);
 
 
     const handleViewMoreOrLess = () => {
@@ -68,11 +58,9 @@ const Blog = () => {
 
     const handleSelect = (item: string) => {
         console.log('Selected:', item);
+        
     };
 
-    const handleViewMore = () => {
-        setVisibleBlogs((prev) => prev + 10); // Load 10 more blogs on "View More" button click
-    };
 
     const handleReadMore = (id: any) => {
         router.push(`/blog/${id}`);
@@ -123,20 +111,21 @@ const Blog = () => {
                                 <p className="text-xs text-[#0D0106] ">FILTER</p>
                             </div>
 
-                            <p className="uppercase text-xs text-[#463F3A] md:hidden block">Showing {blog.length} Results</p>
-                            <InputField placeholder="Search" className="text-sm placeholder:text-sm w-full md:w-1/3 border border-[#EBE9E0]" />
-                            <div className="flex flex-row gap-2 items-center">
-                                <p className="uppercase text-xs text-[#463F3A] md:block hidden">Showing 320 Results</p>
-                                <div className="flex flex-row items-center gap-5">
+                            <p className="uppercase text-xs text-[#463F3A] md:hidden block text-nowrap">Showing {blog.length} Results</p>
+                           
+                            <InputField placeholder="Search" value={searchQuery} onChange={(e)=> setSearchQuery(e.target.value)} className="text-sm placeholder:text-sm w-full md:w-1/3 border border-[#EBE9E0]" />
+                            <div className="w-full md:w-auto flex flex-row gap-2 items-center">
+                                <p className="uppercase text-xs text-[#463F3A] md:block hidden text-nowrap">Showing {blog.length} Results</p>
+                                <div className="w-full flex flex-row items-center gap-5">
                                     <p className="uppercase text-xs text-nowrap">Sort by</p>
                                     <div className="w-full">
                                         <Dropdown
                                             label="Sort it"
-                                            items={sortData}
+                                            items={sortOptions}
                                             onSelect={handleSelect}
                                             isOpen={openDropdown === 1}
                                             toggleDropdown={() => toggleDropdown(1)}
-                                            className="bg-white"
+                                            className="bg-white w-full"
                                         />
                                     </div>
                                 </div>
@@ -145,9 +134,9 @@ const Blog = () => {
                     </section>
 
                     {filterOpen && (
-                        <div className="bg-white p-4 md:hidden absolute z-10">
+                        <div className="bg-white p-4 md:hidden absolute z-10 w-full">
                             <FilterComponent
-                                checkboxlablel={checkboxlablel} checkboxlablel1={checkboxlablel1} filtersToShow={['category']}
+                                checkboxlablel={checkboxLabels} checkboxlablel1={conditionLabels} filtersToShow={['category']}
                             />
                             <Button label="Apply Filters" onClick={() => setFilterOpen(false)} className="mt-4 w-full" />
                         </div>
@@ -157,7 +146,7 @@ const Blog = () => {
                     <div className="py-4 px-5 md:px-6 md:grid md:grid-cols-5">
                         <div className="md:col-span-1 py-6">
                             <div className="md:block hidden">
-                                <FilterComponent checkboxlablel={checkboxlablel} checkboxlablel1={checkboxlablel1} filtersToShow={['category']} />
+                                <FilterComponent checkboxlablel={checkboxLabels} checkboxlablel1={conditionLabels} filtersToShow={['category']} />
                             </div>
 
                             <div className="md:block hidden">
@@ -177,7 +166,7 @@ const Blog = () => {
                         </div>
 
                         <div className="md:px-4 col-span-4">
-                            {blog.slice(0, visibleBlogs).map((blogs) => (
+                            {filteredBlogs.slice(0, visibleBlogs).map((blogs: any) => (
                                 <div key={blogs.userId} className="md:border-l md:border-[#EBE9E0]">
                                     <div className="w-full py-4 md:px-10 md:py-5">
                                         <div className="h-80 relative">
@@ -195,8 +184,8 @@ const Blog = () => {
                                         </div>
 
                                         <h1 className="text-xl font-playfair mt-2">{blogs.title}</h1>
-                                        <p className="mt-2 text-[#919089] text-sm">
-                                            {`${blogs.body.split(' ').slice(0, 20).join(' ')}...`}
+                                        <p className="mt-2 text-[#919089] text-sm lime-clamp-5">
+                                            {blogs.body}
                                         </p>
 
                                         <Button
