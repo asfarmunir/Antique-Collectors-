@@ -90,7 +90,7 @@ export const useSellerAccountDetails = (initialData: SellerData,) => {
             console.log(updatedData);
           
             toast.success("Account updated successfully!");
-          handleNext();
+         
         } catch (error) {
             toast.error("Failed to update account. Please try again.");
         } finally {

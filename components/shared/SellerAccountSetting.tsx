@@ -21,7 +21,7 @@ const checkboxlablel = ["Roman - 753 BC - 476 AD", "Elizabethan - 1558 - 1603", 
 
 const SellerAccountSetting = ({ onClose, sellerData, onUpdate}: { onClose: any, sellerData: SellerData; onUpdate: (data: SellerData) => void}) => {
 
-    const {  step, handleNext,  handleFinish,  formData, setFormData, handleUpdate,handleCheckboxChange, handleImageUpload } = useSellerAccountDetails({ initialData: sellerData, onUpdate })
+    const {  step, handleNext,  formData, setFormData, handleUpdate,handleCheckboxChange, handleImageUpload } = useSellerAccountDetails({ initialData: sellerData, onUpdate })
 
     const router = useRouter();
 
@@ -118,7 +118,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate}: { onClose: any, 
 
                         )}
 
-                        {step === 2 && (
+                        {step === 3 && (
 
                             <div className='flex flex-col px-1 md:px-6'>
 
@@ -186,7 +186,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate}: { onClose: any, 
 
                         )}
 
-                        {step === 3 && (
+                        {step === 2 && (
                             <div>
                                 <h2 className="text-4xl font-playfair">Tell us a bit about yourself and your collection.</h2>
 

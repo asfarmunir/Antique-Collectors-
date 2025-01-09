@@ -144,7 +144,7 @@ const SignUp = ({ onClose }: { onClose: any }) => {
 
                                         <div className="mt-4">
                                             <label className="block text-xs pb-2 uppercase font-sans">create a Password</label>
-                                            <InputField required className="text-sm font-sans placeholder:text-sm text-[#919089] w-full border border-[#EBE9E0]" placeholder="*******" type="password" name="password" value={formData.password} onChange={handleInputChange} />
+                                            <InputField required minLength={8} className="text-sm font-sans placeholder:text-sm text-[#919089] w-full border border-[#EBE9E0]" placeholder="*******" type="password" name="password" value={formData.password} onChange={handleInputChange} />
                                             <p className="text-[10px] py-2 font-sans text-[#919089] text-start">Create a strong password containing at least 1 Upper case, 1 Lower case and a Number</p>
 
                                         </div>
@@ -152,7 +152,7 @@ const SignUp = ({ onClose }: { onClose: any }) => {
 
                                         <div className="mt-4">
                                             <label className="block text-xs pb-2 uppercase font-sans">confirm Password</label>
-                                            <InputField required className="text-sm font-sans placeholder:text-sm text-[#919089] w-full border border-[#EBE9E0]" placeholder="*******" type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange} />
+                                            <InputField required minLength={8} className="text-sm font-sans placeholder:text-sm text-[#919089] w-full border border-[#EBE9E0]" placeholder="*******" type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange} />
 
                                         </div>
 
