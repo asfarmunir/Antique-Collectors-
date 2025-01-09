@@ -494,7 +494,7 @@ const page = () => {
               <div className="absolute top-4 right-5 ">
                 <CiHeart />
               </div>
-              <Image src="/images/products/1.png" width={140} height={100} alt="img" layout="responsive" />
+              <Image src="/images/products/p1.png" width={140} height={100} alt="img" layout="responsive" />
 
               <div className="text-sm text-[#919089] flex flex-row gap-2 justify-between flex-nowrap mt-3">
                 <h1>Seller Name</h1>

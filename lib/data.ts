@@ -786,7 +786,7 @@ export const slides = [
     productsCount: "23",
     products: Array.from({ length: 6 }).map((_, index) => ({
       id: index,
-      image: "/images/products/1.png",
+      image: "/images/products/p1.png",
     })),
     title: "Antique Flower Jewelry",
     description: `Lorem ipsum dolor sit amet, consectetuer adipi scing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magn.`,
@@ -796,7 +796,7 @@ export const slides = [
     productsCount: "45",
     products: Array.from({ length: 6 }).map((_, index) => ({
       id: index,
-      image: "/images/products/1.png",
+      image: "/images/products/p1.png",
     })),
     title: "Antique Animal Jewelry",
     description: `Lorem ipsum dolor sit amet, consectetuer adipi scing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magn.`,
@@ -807,7 +807,7 @@ export const slides = [
     productsCount: "262",
     products: Array.from({ length: 6 }).map((_, index) => ({
       id: index,
-      image: "/images/products/1.png",
+      image: "/images/products/p1.png",
     })),
     title: "Antique Bird Jewelry",
     description: `Lorem ipsum dolor sit amet, consectetuer adipi scing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magn.`,
@@ -818,7 +818,7 @@ export const slides = [
     productsCount: "23",
     products: Array.from({ length: 6 }).map((_, index) => ({
       id: index,
-      image: "/images/products/1.png",
+      image: "/images/products/p1.png",
     })),
     title: "Antique Animal Jewelry",
     description: `Lorem ipsum dolor sit amet, consectetuer adipi scing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magn.`,

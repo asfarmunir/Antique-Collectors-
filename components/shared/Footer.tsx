@@ -65,7 +65,7 @@ const Footer = () => {
                         <div className="space-y-2">
                             {productsLink.map((items) => (
 
-                                <div className="text-xs ">
+                                <div key={items.href} className="text-xs ">
                                     <Link key={items.label} href={items.href} className="text-[#919089] text-[10px]">{items.label}</Link>
                                 </div>
                             ))}
@@ -77,7 +77,7 @@ const Footer = () => {
                         <div className="space-y-2">
                             {sellersLink.map((items) => (
 
-                                <div className="text-xs ">
+                                <div key={items.href} className="text-xs ">
                                     <Link key={items.label} href={items.href} className="text-[#919089] text-[10px]">{items.label}</Link>
                                 </div>
                             ))}
@@ -91,7 +91,7 @@ const Footer = () => {
                         <div className="space-y-2">
                             {forumLink.map((items) => (
 
-                                <div className="text-xs ">
+                                <div key={items.href} className="text-xs ">
                                     <Link key={items.label} href={items.href} className="text-[#0D0106] uppercase text-[10px]">{items.label}</Link>
                                 </div>
                             ))}
@@ -103,7 +103,7 @@ const Footer = () => {
                         <div className="space-y-2">
                             {myaccountLink.map((items) => (
 
-                                <div className="text-xs ">
+                                <div key={items.href} className="text-xs ">
                                     <Link key={items.label} href={items.href} className="text-[#919089] text-[10px]">{items.label}</Link>
                                 </div>
                             ))}

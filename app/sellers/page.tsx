@@ -28,9 +28,8 @@ const Seller = () => {
         setIsHorizontalView(false);
     };
 
-
     const handleSelect = (item: string) => {
-        console.log('Selected:', item);
+        console.log("Selected:", item);
     };
 
     const handleHorizontalView = () => {
@@ -66,7 +65,10 @@ const Seller = () => {
 
                 <section className="bg-[#F9F8F3] py-4 px-4 lg:px-10 md:px-6">
                     <div className="flex flex-wrap gap-5 flex-row justify-between items-center">
-                        <div onClick={() => setFilterOpen(!filterOpen)} className="inline-flex cursor-pointer flex-row items-center gap-2 py-3 px-8 bg-[#EBE9E0]">
+                        <div
+                            onClick={() => setFilterOpen(!filterOpen)}
+                            className="inline-flex cursor-pointer flex-row items-center gap-2 py-3 px-8 bg-[#EBE9E0]"
+                        >
                             <BiCandles className="text-lg text-[#0D0106]" />
                             <p className="text-xs text-[#0D0106]">FILTER</p>
                         </div>
@@ -77,11 +79,13 @@ const Seller = () => {
                                 <p className="uppercase text-xs">Showing {sellers.length} Results</p>
                                 <div className="flex flex-row gap-2 items-center ">
                                     <HiViewGrid
-                                        className={`text-lg cursor-pointer ${isGridView ? "text-black opacity-100" : "text-gray-400 opacity-50"}`}
+                                        className={`text-lg cursor-pointer ${isGridView ? "text-black opacity-100" : "text-gray-400 opacity-50"
+                                            }`}
                                         onClick={handleGridView}
                                     />
                                     <TbLayoutDistributeHorizontal
-                                        className={`text-lg cursor-pointer ${isHorizontalView ? "text-black opacity-100" : "text-gray-400 opacity-50"}`}
+                                        className={`text-lg cursor-pointer ${isHorizontalView ? "text-black opacity-100" : "text-gray-400 opacity-50"
+                                            }`}
                                         onClick={handleHorizontalView}
                                     />
                                 </div>
@@ -102,30 +106,52 @@ const Seller = () => {
                     </div>
                 </section>
 
-                <div className={`px-4 md:px-6 md:grid md:grid-cols-${filterOpen ? 4 : 4}`}>
+                <div className={`px-4 md:px-6 grid gap-6 grid-cols-1 md:grid-cols-${filterOpen ? 4 : 4}`}>
                     {filterOpen && (
                         <div className="md:col-span-1 py-6 md:block hidden">
-                            <FilterComponent checkboxlablel={checkboxLabels} checkboxlablel1={conditionLabels} filtersToShow={['category', 'eraPeriod', 'condition', 'sellerLocation', 'color', 'availability']} />
+                            <FilterComponent
+                                checkboxlablel={checkboxLabels}
+                                checkboxlablel1={conditionLabels}
+                                filtersToShow={[
+                                    "category",
+                                    "eraPeriod",
+                                    "condition",
+                                    "sellerLocation",
+                                    "color",
+                                    "availability",
+                                ]}
+                            />
                         </div>
                     )}
 
                     <div className={`col-span-${filterOpen ? 3 : 4} py-6`}>
                         {isGridView && (
-                            <div className="w-full grid grid-cols-1 px-4 md:px-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-3">
+                            <div
+                                className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-${filterOpen ? 3 : 4} gap-4`}
+                            >
                                 {sellers.slice(0, visibleGridUsers).map((items) => (
-                                     <div key={items.title} className="relative flex flex-col items-center hover:scale-105 transition duration-500 ease-in-out" onClick={handleSellerDetails}>
-                                     <div className="relative z-30 top-6">
-                                         <Image src={items.src} alt={items.title} width={80} height={80} />
-                                     </div>
-                                     <div className="bg-[#F9F8F3] w-full capitalize flex flex-col gap-1 items-center relative pt-6 pb-6 z-10">
-                                         <div className="flex flex-row items-center gap-2 pt-1">
-                                             <h1 className="font-playfair text-base font-semibold">Seller Name</h1>
-                                             {items.verified ? <VscVerifiedFilled className="text-green-600" /> : ""}
-                                         </div>
-                                         <p className="uppercase text-xs">{items.totalproduct} Products</p>
-                                         <Button className="bg-transparent text-xs text-[#0D0106] p-0" label="Follow" />
-                                     </div>
-                                 </div>
+                                    <div
+                                        key={items.title}
+                                        className="relative flex flex-col items-center hover:scale-105 transition duration-500 ease-in-out"
+                                        onClick={handleSellerDetails}
+                                    >
+                                        <div className="relative z-30 top-6">
+                                            <Image src={items.src} alt={items.title} width={80} height={80} />
+                                        </div>
+                                        <div className="bg-[#F9F8F3] w-full capitalize flex flex-col gap-1 items-center relative pt-6 pb-6 z-10">
+                                            <div className="flex flex-row items-center gap-2 pt-1">
+                                                <h1 className="font-playfair text-base font-semibold">
+                                                    Seller Name
+                                                </h1>
+                                                {items.verified ? <VscVerifiedFilled className="text-green-600" /> : ""}
+                                            </div>
+                                            <p className="uppercase text-xs">{items.totalproduct} Products</p>
+                                            <Button
+                                                className="bg-transparent text-xs text-[#0D0106] p-0"
+                                                label="Follow"
+                                            />
+                                        </div>
+                                    </div>
                                 ))}
                             </div>
                         )}
@@ -133,14 +159,24 @@ const Seller = () => {
                         {isHorizontalView && (
                             <div className="mx-4 md:mx-6">
                                 {sellerdata.slice(0, visibleHorizontalUsers).map((item) => (
-                                    <div className="bg-[#EBE9E0] p-4 my-6" key={item.id} onClick={handleSellerDetails}>
+                                    <div
+                                        className="bg-[#EBE9E0] p-4 my-6"
+                                        key={item.id}
+                                        onClick={handleSellerDetails}
+                                    >
                                         <div className="uppercase text-xs flex flex-row justify-between items-center">
                                             <p>{item.product_count} products</p>
                                             <Link href={"#"}>Shop All</Link>
                                         </div>
                                         <div className="flex flex-row items-center gap-2 py-2 overflow-x-auto">
                                             {Array.from({ length: 6 }).map((_, index) => (
-                                                <Image src="/images/products/p2.png" width={120} height={120} alt="images" key={index} />
+                                                <Image
+                                                    src="/images/products/p2.png"
+                                                    width={120}
+                                                    height={120}
+                                                    alt="images"
+                                                    key={index}
+                                                />
                                             ))}
                                         </div>
                                         <h2 className="pt-2">{item.seller.location}</h2>
@@ -154,9 +190,15 @@ const Seller = () => {
 
                 <div className="mt-6 flex justify-center">
                     <Button
-                        label={isGridView
-                            ? visibleGridUsers === 24 ? "View More" : "View Less"
-                            : visibleHorizontalUsers === 12 ? "View More" : "View Less"}
+                        label={
+                            isGridView
+                                ? visibleGridUsers === 24
+                                    ? "View More"
+                                    : "View Less"
+                                : visibleHorizontalUsers === 12
+                                    ? "View More"
+                                    : "View Less"
+                        }
                         onClick={isGridView ? handleGridToggle : handleHorizontalToggle}
                         className="uppercase border border-[#0D0106] py-2 px-8 bg-white text-[#0D0106]"
                     />

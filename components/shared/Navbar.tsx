@@ -65,11 +65,11 @@ const Navbar = () => {
 
       {/* Burger Menu (Mobile/Small Screen) */}
       <div
-        className={`absolute top-[100%] left-0 w-full bg-white opacity-90 z-10 border-b border-[#EBE9E0] shadow-lg md:hidden ${
+        className={`absolute top-[100%] left-0 w-full bg-white opacity-95 z-10 border-y-2 border-[#EBE9E0] shadow-lg md:hidden ${
           isMenuOpen ? "flex" : "hidden"
-        } flex-col items-center gap-5 py-2`}
+        } flex-col  gap-5 py-2`}
       >
-        <ul className="flex flex-col items-start gap-5 py-2">
+        <ul className="w-full px-5 flex flex-col items-start gap-5 py-2">
           {navlinks.map((navlink, index) => (
             <li key={index}>
               <a
@@ -85,8 +85,8 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <div className="flex flex-col items-start gap-3 py-2">
-          <div className="flex flex-row gap-5">
+        <div className=" flex flex-col gap-3 py-2 px-5">
+          <div className="w-1/2 flex flex-row items-center gap-5">
             <Image
               src={"/images/notification.svg"}
               alt="Notification Icon"
@@ -102,20 +102,18 @@ const Navbar = () => {
               className="cursor-pointer"
             />
           </div>
-         <div className="w-full"> <button onClick={handleLogin} className="py-2 px-4 bg-black text-white text-sm w-full text-left">
+         <div className=" w-full">
+          <button onClick={handleLogin} className=" py-3 px-6 bg-black text-white text-sm w-full ">
             LOG IN
           </button>
           </div>
         </div>
-        <input
-          className="border border-[#EBE9E0] px-4 py-3"
-          placeholder="Search"
-        />
+     
       </div>
 
       {/* Horizontal Menu (Desktop/Large Screens) */}
       <div
-        className={`hidden md:flex items-center justify-between py-3 px-9 2xl:px-12 border-b border-[#EBE9E0]`}
+        className={`hidden md:flex items-center justify-between py-3 px-9 2xl:px-12 border-y border-[#EBE9E0]`}
       >
         <ul className="flex items-center gap-5 py-2">
           {navlinks.map((navlink, index) => (

@@ -21,7 +21,7 @@ import { FaHeart } from "react-icons/fa";
 const Product = () => {
   const { products, toggleFavorite, isFavorite } = useProducts();
   const [isGridView, setIsGridView] = useState(true); // State for grid layout
-  const [filterOpen, setFilterOpen] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(true);
   const [openDropdown, setOpenDropdown] = useState<number | null>(null); // Tracks which dropdown is open
   const router = useRouter();
   const [isViewMore, setIsViewMore] = useState(true);
@@ -153,22 +153,31 @@ const Product = () => {
         )}
 
 
-        <div className="px-4 md:px-6 lg:px-12 grid md:grid-cols-4">
+        <div className={`px-4 md:px-6 lg:px-12 grid grid-cols-1 md:grid-cols-${filterOpen ? 4 : 4}`}>
           {/* Filter Sidebar */}
-          <div className="md:col-span-1 py-6 md:block hidden">
-            <FilterComponent
-              checkboxlablel={checkboxLabels}
-              checkboxlablel1={conditionLabels}
-              filtersToShow={["category", "eraPeriod", "condition", "sellerLocation", "color", "availability"]}
-            />
-          </div>
+          {filterOpen && (
+            <div className="md:col-span-1 py-6 md:block hidden">
+              <FilterComponent
+                checkboxlablel={checkboxLabels}
+                checkboxlablel1={conditionLabels}
+                filtersToShow={[
+                  "category",
+                  "eraPeriod",
+                  "condition",
+                  "sellerLocation",
+                  "color",
+                  "availability",
+                ]}
+              />
+            </div>
+          )}
 
           {/* Conditional rendering for Grid and Horizontal layouts */}
-          <div className="col-span-3 py-2">
+          <div className={`col-span-${filterOpen ? 3: 4} py-8 md:py-2`}>
             {isGridView ? (
 
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ">
+              <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4  md:grid-cols-${filterOpen ? 3: 4} lg:grid-cols-${ filterOpen ? 3: 4}`}>
                 {products.slice(0, gridProductCount).map((p, index) => {
                   const columns = 3; // Adjust based on your actual column count for grid view
                   const isLastRow = Math.floor(index / columns) === Math.floor((products.length - 1) / columns);
@@ -179,8 +188,8 @@ const Product = () => {
                     <div
                       key={p.id}
                       className={`flex flex-col stroke-black md:py-6 px-6 cursor-pointer border-[#EBE9E0]
-                  ${!isLastRow ? 'border-b' : ''} 
-                  ${!isLastColumn ? 'border-r -mr-[3px]' : ''}`}
+                  ${!isLastRow ? 'md:border-b' : ''} 
+                  ${!isLastColumn ? 'md:border-r -mr-[3px]' : ''}`}
                       onClick={() => handleProductDetails(p.id)}
                     >
                       <div className="bg-red-50 flex items-center justify-center relative">
@@ -210,7 +219,7 @@ const Product = () => {
                           <p className="text-[#919089] mb-1">{p.brand}</p>
                           <p className="text-[#aa994c]">FOLLOW</p>
                         </div>
-                        <h2 className="text-xs md:text-sm">{p.title}</h2>
+                        <h2 className="md:text-sm">{p.title}</h2>
                       </div>
                     </div>
                   );
@@ -237,7 +246,7 @@ const Product = () => {
 
                     <div className="flex flex-col">
                       <div className="mx-auto w-96 p-4">
-                        <Image src={"/images/products/1.png"} alt="product" width={0} height={0} layout="responsive" className="transform  hover:scale-105 transition duration-500 ease-in-out" />
+                        <Image src={"/images/products/p1.png"} alt="product" width={0} height={0} layout="responsive" className="transform  hover:scale-105 transition duration-500 ease-in-out" />
                       </div>
 
                       <div className="flex flex-row items-center gap-6 mt-2">
@@ -312,9 +321,9 @@ const Product = () => {
 
           </div>
 
-          <div className={`col-span-3 py-2`}>
+          <div className={`col-span-${filterOpen ? 3 : 4}  py-2`}>
             {isGridView ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ">
+              <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-${filterOpen ? 3 : 4} lg:grid-cols-${filterOpen ? 3 : 4}`}>
                 {products.slice(0, gridProductCount).map((p, index) => {
                   const columns = 3; // Adjust based on your actual column count for grid view
                   const isLastRow = Math.floor(index / columns) === Math.floor((products.length - 1) / columns);
@@ -344,7 +353,7 @@ const Product = () => {
                           </button>
                         </div>
                         <Image
-                          src="/images/products/1.png"
+                          src="/images/products/p1.png"
                           alt={p.title}
                           width={150}
                           height={150}
@@ -380,7 +389,7 @@ const Product = () => {
 
                     <div className="flex flex-col">
                       <div className="mx-auto w-96 p-4">
-                        <Image src={item.image || "/images/products/1.png"} alt="product" width={0} height={0} layout="responsive" className="transform  hover:scale-105 transition duration-500 ease-in-out" />
+                        <Image src={item.image || "/images/products/p1.png"} alt="product" width={0} height={0} layout="responsive" className="transform  hover:scale-105 transition duration-500 ease-in-out" />
                       </div>
 
                       <div className="flex flex-row items-center gap-6 mt-2">

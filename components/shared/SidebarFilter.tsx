@@ -5,7 +5,6 @@ import Dropdown from '../ui/DropDown';
 import { categoriesData } from '@/lib/data';
 import CategoryDropdown from '../ui/SubDropdown';
 
-
 interface FilterComponentProps {
   checkboxlablel: string[];
   checkboxlablel1: string[];
@@ -17,69 +16,93 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
   checkboxlablel1,
   filtersToShow,
 }) => {
-  const [openCategory, setOpenCategory] = useState(true);
-  const [openEraPeriod, setOpenEraPeriod] = useState(true);
-  const [openCondition, setOpenCondition] = useState(true);
-  const [openSellerLocation, setOpenSellerLocation] = useState(false);
+  // State to manage filter visibility
+  const [openFilters, setOpenFilters] = useState({
+    category: true,
+    eraPeriod: true,
+    condition: true,
+    sellerLocation: false,
+    color: false,
+    availability: false,
+  });
 
+  // State to track selected filters
+  const [selectedFilters, setSelectedFilters] = useState<{
+    [key: string]: string[];
+  }>({
+    category: [],
+    eraPeriod: [],
+    condition: [],
+    sellerLocation: [],
+    color: [],
+    availability: [],
+  });
+
+  // Toggle filter section visibility
   const handleToggle = (filter: string) => {
-    switch (filter) {
-      case 'category':
-        setOpenCategory(!openCategory);
-        break;
-      case 'eraPeriod':
-        setOpenEraPeriod(!openEraPeriod);
-        break;
-      case 'condition':
-        setOpenCondition(!openCondition);
-        break;
-      case 'sellerLocation':
-        setOpenSellerLocation(!openSellerLocation);
-        break;
-      default:
-        break;
-    }
+    setOpenFilters((prev) => ({
+      ...prev,
+      [filter]: !prev[filter],
+    }));
   };
 
+  // Handle checkbox changes
+  const handleCheckboxChange = (filterName: string, value: string) => {
+    setSelectedFilters((prev) => {
+      const existingValues = prev[filterName] || [];
+      if (existingValues.includes(value)) {
+        return {
+          ...prev,
+          [filterName]: existingValues.filter((item) => item !== value),
+        };
+      } else {
+        return {
+          ...prev,
+          [filterName]: [...existingValues, value],
+        };
+      }
+    });
+  };
 
   return (
-    <>
-      {/* Categories */}
+    <div>
       {filtersToShow.includes('category') && (
         <div className="border border-[#EBE9E0] p-3 mb-4">
           <div className="flex flex-row items-center justify-between gap-4">
             <h1 className="custom-border font-playfair text-lg">Categories</h1>
             <div onClick={() => handleToggle('category')}>
-              {openCategory ? <TiMinus className="mr-3" /> : <TiPlus className="mr-3" />}
+              {openFilters.category ? <TiMinus className="mr-3" /> : <TiPlus className="mr-3" />}
             </div>
           </div>
-          {openCategory && (
+          {openFilters.category && (
             <div className="flex flex-col gap-2 mt-2 w-full max-w-md mx-auto">
               {Object.entries(categoriesData).map(([name, items]) => (
-                <div className="w-full" key={name}>
+                <div key={name} className="w-full">
                   <CategoryDropdown category={{ name, items }} />
                 </div>
               ))}
-
             </div>
           )}
         </div>
       )}
 
-      {/* Era/Period */}
       {filtersToShow.includes('eraPeriod') && (
         <div className="border border-[#EBE9E0] p-3 mb-4">
           <div className="flex flex-row items-center justify-between gap-4">
             <h1 className="custom-border font-playfair text-lg">Era/Period</h1>
             <div onClick={() => handleToggle('eraPeriod')}>
-              {openEraPeriod ? <TiMinus className="mr-3" /> : <TiPlus className="mr-3" />}
+              {openFilters.eraPeriod ? <TiMinus className="mr-3" /> : <TiPlus className="mr-3" />}
             </div>
           </div>
-          {openEraPeriod && (
+          {openFilters.eraPeriod && (
             <div>
               {checkboxlablel.map((item) => (
                 <div key={item} className="flex flex-row items-center gap-3 py-4">
-                  <Checkbox1 name={item} />
+                  <Checkbox1
+                    name={item}
+                    checked={selectedFilters.eraPeriod.includes(item)}
+                    onChange={() => handleCheckboxChange('eraPeriod', item)}
+                  />
                   <label htmlFor={item} className="text-xs">
                     {item}
                   </label>
@@ -90,20 +113,23 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
         </div>
       )}
 
-      {/* Conditions */}
       {filtersToShow.includes('condition') && (
         <div className="border border-[#EBE9E0] p-3 mb-4">
           <div className="flex flex-row items-center justify-between gap-4">
             <h1 className="custom-border font-playfair text-lg">Condition</h1>
             <div onClick={() => handleToggle('condition')}>
-              {openCondition ? <TiMinus className="mr-3" /> : <TiPlus className="mr-3" />}
+              {openFilters.condition ? <TiMinus className="mr-3" /> : <TiPlus className="mr-3" />}
             </div>
           </div>
-          {openCondition && (
+          {openFilters.condition && (
             <div>
               {checkboxlablel1.map((item) => (
                 <div key={item} className="flex flex-row items-center gap-3 py-4">
-                  <Checkbox1 name={item} />
+                  <Checkbox1
+                    name={item}
+                    checked={selectedFilters.condition.includes(item)}
+                    onChange={() => handleCheckboxChange('condition', item)}
+                  />
                   <label htmlFor={item} className="text-xs">
                     {item}
                   </label>
@@ -114,20 +140,23 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
         </div>
       )}
 
-      {/* Seller Location */}
       {filtersToShow.includes('sellerLocation') && (
         <div className="border border-[#EBE9E0] p-3 mb-4">
           <div className="flex flex-row items-center justify-between gap-4">
             <h1 className="custom-border font-playfair text-lg">Seller Location</h1>
             <div onClick={() => handleToggle('sellerLocation')}>
-              {openSellerLocation ? <TiMinus className="mr-3" /> : <TiPlus className="mr-3" />}
+              {openFilters.sellerLocation ? <TiMinus className="mr-3" /> : <TiPlus className="mr-3" />}
             </div>
           </div>
-          {openSellerLocation && (
+          {openFilters.sellerLocation && (
             <div className="flex flex-col gap-2 mt-2">
               {['USA', 'Europe', 'Asia', 'Australia'].map((location) => (
                 <div key={location} className="flex flex-row items-center gap-3">
-                  <Checkbox1 name={location} />
+                  <Checkbox1
+                    name={location}
+                    checked={selectedFilters.sellerLocation.includes(location)}
+                    onChange={() => handleCheckboxChange('sellerLocation', location)}
+                  />
                   <label htmlFor={location} className="text-xs">
                     {location}
                   </label>
@@ -137,7 +166,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

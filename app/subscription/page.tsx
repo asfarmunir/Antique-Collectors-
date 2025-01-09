@@ -8,6 +8,9 @@ import { useSellerAccountDetails } from "@/hooks/useSellerAccount";
 import { Dialog } from "@/components/ui/Dialog";
 import SellerAccountSetting from "@/components/shared/SellerAccountSetting";
 import { SellerData } from "@/hooks/useSellerAccount";
+import SellerAccountFinish from "@/components/shared/sellerAccountFinish";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 
 
@@ -16,10 +19,12 @@ const sub = ['posting', 'feed access', 'scheduled posts', 'account support', 'fo
     'messaging', 'sharing', 'analytics'
 ]
 const Subscription = ({ onClose, sellerData, onUpdate }: { onClose: () => void; sellerData: SellerData, onUpdate: (data: SellerData) => void }) => {
-    const {formData, updateSubscriptionPlan, setStep, step} = useSellerAccountDetails({ initialData: sellerData, onUpdate });
+    const {formData,setFormData, handleNext,  setStep, step, } = useSellerAccountDetails({ initialData: sellerData, onUpdate });
     // const {setHideNavbarFooter} = useContext(LayoutContext);
     const {setHideNavbarFooter}= useContext(LayoutContext);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+    const router = useRouter();
 
     
     
@@ -31,13 +36,15 @@ const Subscription = ({ onClose, sellerData, onUpdate }: { onClose: () => void; 
         return () => setHideNavbarFooter(false);
     }, [setHideNavbarFooter]);
     
-
-    const handlePlanSelect=(plan: string)=>{
-        updateSubscriptionPlan(plan);
-        setStep(5);
-        setIsDialogOpen(!isDialogOpen);
-        
-    }
+   // Method to update the subscription plan
+   const updateSubscriptionPlan = (plan: string) => {
+    setFormData((prev) => ({ ...prev, subscriptionPlan: plan }));
+   
+    toast.success(`Subscription plan updated to ${plan}`);
+    // router.push('/');
+    setIsDialogOpen(!isDialogOpen);
+  
+};
 
     return (
         <>
@@ -91,7 +98,7 @@ const Subscription = ({ onClose, sellerData, onUpdate }: { onClose: () => void; 
                                             </ul>
 
                                             <div className="mt-14 flex justify-center items-center">
-                                                <Button label="Select" onClick={()=>handlePlanSelect(plan.name)} className="py-2  text-xs uppercase text-black bg-white border border-black" />
+                                                <Button label="Select" onClick={()=>updateSubscriptionPlan(plan.name)} className="py-2  text-xs uppercase text-black bg-white border border-black" />
                                             </div>
                                         </div>
                                     </div>
@@ -125,7 +132,7 @@ const Subscription = ({ onClose, sellerData, onUpdate }: { onClose: () => void; 
             </div>
             
             {isDialogOpen && (
-                <SellerAccountSetting onClose={()=> setIsDialogOpen(false)} setStep={setStep} />
+                <SellerAccountFinish onClose={()=> setIsDialogOpen(false)} />
             )}
 
         </>

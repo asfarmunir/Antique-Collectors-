@@ -102,7 +102,7 @@ export const BuyerAccountSetting = ({ onClose }: { onClose: any }) => {
               <form>
                 <div className="py-3">
                   <p className="text-xs pb-2 font-sans uppercase">What is your country of residence?</p>
-                  <div onClick={(e) => e.stopPropagation()}>
+                  <div>
                     <Dropdown
                       label="-Select-"
                       items={sortData}
@@ -117,7 +117,7 @@ export const BuyerAccountSetting = ({ onClose }: { onClose: any }) => {
 
                 <div className="py-3">
                   <p className="text-xs pb-2 font-sans uppercase">Do you have a preference for countries you would like to buy from?</p>
-                  <div onClick={(e) => e.stopPropagation()}>
+                  <div>
                     <Dropdown
                       label="-Select-"
                       items={sortData}

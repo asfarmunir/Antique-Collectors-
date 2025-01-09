@@ -19,7 +19,7 @@ import { SellerData, useSellerAccountDetails } from "@/hooks/useSellerAccount";
 const checkboxlablel = ["Roman - 753 BC - 476 AD", "Elizabethan - 1558 - 1603", "Roman - 753 BC - 476 AD", "Elizabethan - 1558 - 1603", "Roman - 753 BC - 476 AD", "Elizabethan - 1558 - 1603"];
 
 
-const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: any, sellerData: SellerData, onUpdate: (data: SellerData) => void }) => {
+const SellerAccountSetting = ({ onClose, sellerData, onUpdate}: { onClose: any, sellerData: SellerData; onUpdate: (data: SellerData) => void}) => {
 
     const {  step, handleNext,  handleFinish,  formData, setFormData, handleUpdate,handleCheckboxChange, handleImageUpload } = useSellerAccountDetails({ initialData: sellerData, onUpdate })
 
@@ -32,6 +32,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: any,
     };
 
     const handleSubscription = () => {
+        handleUpdate();
         router.push('/subscription');
     }
 
@@ -245,7 +246,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: any,
 
                                 <div className="flex flex-col md:flex-row mt-5 gap-3">
                                     <Button label="I'LL Do IT later" className="w-1/2 font-semibold font-sans bg-white uppercase   flex text-xs text-black flex-row " />
-                                    <Button label="Continue" onClick={handleUpdate} className="w-full font-semibold uppercase font-sans bg-[#F9F8F3]  text-xs flex flex-row text-black " />
+                                    <Button label="Continue" onClick={handleNext} className="w-full font-semibold uppercase font-sans bg-[#F9F8F3]  text-xs flex flex-row text-black " />
                                 </div>
                             </div>
 
@@ -286,7 +287,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: any,
 
 
 
-                        {step === 5 && (
+                        {/* {step === 5 && (
 
                             <div className="px-2 md:px-6">
                                 <h1 className="text-3xl">Stay in the Loop</h1>
@@ -316,7 +317,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: any,
                                     className="uppercase w-full text-xs"
                                 />
                             </div>
-                        )}
+                        )} */}
 
                         <DialogFooter>
 

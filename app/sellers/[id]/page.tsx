@@ -28,7 +28,7 @@ const Seller = () => {
     // const {sellerDetails, error} = useSellerDetails();
     const { products, isFavorite } = useProducts();
     const [gridView, setGridView] = useState(true);
-    const [filterOpen, setFilterOpen] = useState(false);
+    const [filterOpen, setFilterOpen] = useState(true);
     const [openDropdown, setOpenDropdown] = useState<number | null>(null);
     const [visisbleProducts, setVisibleProducts] = useState(24);
     const [showAll, setShowAll] = useState(false);
@@ -180,10 +180,10 @@ const Seller = () => {
                     </div>
                 )}
 
-                <div className={`px-4 md:grid md:grid-cols-${filterOpen ? 4 : 4}`}>
+                <div className={`px-4 md:grid py-6 md:grid-cols-${filterOpen ? 4 : 4}`}>
 
                     {filterOpen && (
-                        <div className="md:col-span-1 py-6 md:block hidden">
+                        <div className="md:col-span-1  md:block hidden">
                             <FilterComponent
                                 checkboxlablel={checkboxLabels}
                                 checkboxlablel1={conditionLabels}
@@ -194,7 +194,7 @@ const Seller = () => {
                     <div className={`col-span-${filterOpen ? 3 : 4} py-2`}>
 
                         {gridView ? (
-                            <div className={`w-full grid grid-cols-1  mt-4 md:grid-cols-2 lg:grid-cols-${filterOpen ? 3 : 3} xl:grid-cols-${filterOpen ? 3 : 3} gap-5 gap-y-2`}>
+                            <div className={`w-full grid grid-cols-1  mt-4 md:grid-cols-2 lg:grid-cols-${filterOpen ? 3 : 4} xl:grid-cols-${filterOpen ? 3 : 4} gap-5 gap-y-2`}>
                                 {products.map((p, index) => {
                                     const columns = 3; // Adjust based on your actual column count for grid view
                                     const isLastRow = Math.floor(index / columns) === Math.floor((products.length - 1) / columns);
@@ -220,7 +220,7 @@ const Seller = () => {
                                                     </button>
                                                 </div>
                                                 <Image
-                                                    src="/images/products/1.png"
+                                                    src="/images/products/p1.png"
                                                     alt="product"
                                                     width={150}
                                                     className=" w-full h-full object-contain object-center hover:scale-105 transition duration-500 ease-in-out"
@@ -249,7 +249,7 @@ const Seller = () => {
                                     <div key={index} className="flex flex-col mb-4 gap-4">
                                         <div className="  bg-red-50 flex items-center justify-center ">
                                             <Image
-                                                src="/images/products/1.png"
+                                                src="/images/products/p1.png"
                                                 alt="product"
                                                 width={150}
                                                 className=" w-full h-full object-contain object-center"

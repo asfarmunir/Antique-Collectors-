@@ -12,84 +12,26 @@ import Link from "next/link";
 import SellerAccountSetting from "./SellerAccountSetting";
 import { BuyerAccountSetting } from "./BuyerAccountSetting";
 import { toast, ToastContainer } from "react-toastify";
+import useSignup from "@/hooks/useSignup";
 
 
 const SignUp = ({ onClose }: { onClose: any }) => {
-    const [formData, setFormData] = useState({
-        email: "",
-        name: "",
-        mobile: "",
-        password: "",
-        confirmPassword: "",
-        terms: false,
-    });
-    const [errors, setErrors] = useState({});
-    const [currentStep, setCurrentStep] = useState(1);
-    const [otp, setOtp] = useState(["", "", "", ""]);
+    const {
+        formData,
+        currentStep,
+        otp,
+        handleInputChange,
+        handleOtpChange,
+        handleSubmit,
+    } = useSignup();
+ 
     const [isBuyerOpen, setIsBuyerOpen] = useState(false);
     const [isSettingOpen, setIsSettingOpen] = useState(false);
 
 
+    const handleSellerAccount = () => setIsSettingOpen(!isSettingOpen);
+    const handleBuyer = () => setIsBuyerOpen(!isBuyerOpen);
 
-    const handleInputChange = (e: any) => {
-        if (!e.target) {
-            console.error("Event target is undefined", e);
-            return;
-        }
-        const { name, value, type, checked } = e.target;
-        // console.log(`'name': ${name}, 'value': ${value}, 'type': ${type}, 'checked': ${checked}`);
-        setFormData({
-            ...formData,
-            [name]: type === "checkbox" ? checked : value,
-        });
-    };
-
-
-
-    const handleOtpChange = (index: any, value: any) => {
-        const updatedOtp = [...otp];
-        updatedOtp[index] = value.slice(0, 1);
-        setOtp(updatedOtp);
-
-        // Auto-move to next step when all OTP fields are filled
-        if (updatedOtp.every((digit) => digit !== "")) {
-            setTimeout(() => setCurrentStep(4), 500);
-        }
-    };
-
-    // Handle form submission
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-
-
-
-
-        if (currentStep === 2) {
-            if (!formData.name || !formData.mobile || !formData.password || !formData.confirmPassword) {
-                toast.error('Please fill all fields');
-            } else if (formData.password !== formData.confirmPassword) {
-                toast.error('Both Passwords cannot be match!');
-            } else {
-                // Submit data and move to OTP verification
-                toast.success('Check You mail!')
-                setCurrentStep(3);
-            }
-
-        } else if (currentStep === 1) {
-            setCurrentStep(2);
-        }
-
-    };
-
-
-    // Handle Buyer or Seller selection
-    const handleSellerAccount = () => {
-        setIsSettingOpen(!isSettingOpen);
-    };
-
-    const handleBuyer = () => {
-        setIsBuyerOpen(!isBuyerOpen);
-    };
 
     return (
         <>
@@ -324,16 +266,8 @@ const SignUp = ({ onClose }: { onClose: any }) => {
             </div>
 
 
-            {isSettingOpen && (
-                <SellerAccountSetting onClose={() => setIsSettingOpen(false)} />
-            )}
-
-
-
-            {isBuyerOpen && (
-                <BuyerAccountSetting onClose={() => setIsBuyerOpen(false)} />
-            )}
-
+            {isSettingOpen && <SellerAccountSetting onClose={() => setIsSettingOpen(false)} />}
+            {isBuyerOpen && <BuyerAccountSetting onClose={() => setIsBuyerOpen(false)} />}
 
             <ToastContainer />
         </>

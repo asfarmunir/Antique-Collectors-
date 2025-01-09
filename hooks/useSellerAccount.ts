@@ -40,7 +40,7 @@ export const useSellerAccountDetails = (initialData: SellerData,) => {
 
 
      // Move to the next step
-     const handleNext = () => setStep((prev) => prev + 1);
+     const handleNext = () => setStep((prev) => prev + 1 );
     // Handle profile image upload
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -56,18 +56,10 @@ export const useSellerAccountDetails = (initialData: SellerData,) => {
         }
     };
 
-      // Method to update the subscription plan
-      const updateSubscriptionPlan = (plan: string) => {
-        setFormData((prev) => ({ ...prev, subscriptionPlan: plan }));
-        toast.success(`Subscription plan updated to ${plan}`);
-    };
+   
 
 
 
-       // Finish the account setup
-       const handleFinish = () => {
-        alert("Account setup complete");
-    };
 
       // Select a field value (e.g., country)
       const handleSelect = (field: string, value: string) => {
@@ -83,21 +75,22 @@ export const useSellerAccountDetails = (initialData: SellerData,) => {
 
     // Update seller account details
     const handleUpdate = async () => {
-        const { name, email, country, description, websiteUrl, etsyShop, profileImage, selectedInterests, subscriptionPlan } = formData;
-        if (!name || !email || !description) {
+        const { name, email, country, description, websiteUrl, etsyShop, profileImage, selectedInterests, subscriptionPlan, enableNotifications } = formData;
+        if (!name || !email || !description || !country) {
             toast.error("All fields are required!");
             return;
-        }
+          }
+          
 
-        handleNext();
+      
         setIsUpdating(true);
         try {
            
-            const updatedData: SellerData = { name, email, description, country, websiteUrl, selectedInterests, subscriptionPlan, etsyShop, profileImage };
+            const updatedData: SellerData = { name, email, description, country, websiteUrl, selectedInterests, subscriptionPlan, etsyShop, profileImage, enableNotifications };
             console.log(updatedData);
           
             toast.success("Account updated successfully!");
-          
+          handleNext();
         } catch (error) {
             toast.error("Failed to update account. Please try again.");
         } finally {
@@ -106,27 +99,32 @@ export const useSellerAccountDetails = (initialData: SellerData,) => {
     };
 
 
-    const handleCheckboxChange = (item: string) => {
-        setFormData(prevData => {
-            const isSelected = prevData.selectedInterests.includes(item);
-            console.log(item);
-            return {
+           // Finish the account setup
+      
+
+
+        const handleCheckboxChange = (item: string) => {
+            setFormData(prevData => {
+              const isSelected = prevData.selectedInterests.includes(item);
+              return {
                 ...prevData,
                 selectedInterests: isSelected
-                    ? prevData.selectedInterests.filter((interest) => interest !== item)  // Deselect if already selected
-                    : [...prevData.selectedInterests, item] // Select if not already selected
-            };
-        });
-    };
+                  ? prevData.selectedInterests.filter((interest) => interest !== item)
+                  : [...prevData.selectedInterests, item],
+              };
+            });
+          };
+          
     
 
     // Handle form field change
     const handleFieldChange = (field: string, value: any) => {
+        console.log(`${value}`);
         
         setFormData(prevData => ({
             ...prevData,
             [field]: value
-
+        
             
         }));
     };
@@ -138,9 +136,8 @@ export const useSellerAccountDetails = (initialData: SellerData,) => {
         handleNext,
         handleSelect,
         toggleNotifications,
-        updateSubscriptionPlan,
+      
         isUpdating,
-        handleFinish,
         setFormData,
         handleCheckboxChange,
         handleFieldChange,

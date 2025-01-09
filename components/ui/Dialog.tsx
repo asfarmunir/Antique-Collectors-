@@ -54,13 +54,13 @@ const DialogContent = React.forwardRef<
         data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 
         data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] 
         data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] 
-        sm:rounded-lg dark:border-slate-800 dark:bg-slate-950`,
+        sm:rounded-md dark:border-slate-800 dark:bg-slate-950`,
         className
       )}
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-4 text-white rounded-lg bg-[#FFFFFF1A] top-4 opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-slate-950 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-slate-100 data-[state=open]:text-slate-500 dark:ring-offset-slate-950 dark:focus:ring-slate-300 dark:data-[state=open]:bg-slate-800 dark:data-[state=open]:text-slate-400">
+      <DialogPrimitive.Close className="absolute right-4 text-white  bg-[#FFFFFF1A] top-4 opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-slate-950 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-slate-100 data-[state=open]:text-slate-500 dark:ring-offset-slate-950 dark:focus:ring-slate-300 dark:data-[state=open]:bg-slate-800 dark:data-[state=open]:text-slate-400">
         <X className="h-9 w-9 p-2" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
