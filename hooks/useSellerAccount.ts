@@ -3,95 +3,44 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-// Define the SellerData type
 export interface SellerData {
     name: string;
     email: string;
-    phone: string;
     description: string;
     profileImage: string | null;
     websiteUrl: string | null;
     etsyShop: string | null;
-    selectedInterests: any;
-    enableNotifications: boolean
+    country: string;
+    selectedInterests: [];
+    enableNotifications: boolean;
+    subscriptionPlan: string | null; // Add this field
 }
-
-// Hook for multi-step seller account setup
-export const useSellerAccountSetup = ({
-    initialData,
-    onUpdate,
-}: {
-    initialData: SellerData;
-    onUpdate: (data: SellerData) => void;
-}) => {
-    const [step, setStep] = useState(1);
-    const [formData, setFormData] = useState({
-        country: '',
-        selectedInterests: [] as string[],
-        enableNotifications: false,
-    });
-
-    // Move to the next step
-    const handleNext = () => setStep((prev) => prev + 1);
-
-    // Select a field value (e.g., country)
-    const handleSelect = (field: string, value: string) => {
-        setFormData((prev) => ({ ...prev, [field]: value }));
-    };
-
-    // Toggle interest selection
-    const handleCheckboxChange = (interest: string) => {
-        setFormData((prev) => {
-            const selected = prev.selectedInterests.includes(interest)
-                ? prev.selectedInterests.filter((i) => i !== interest)
-                : [...prev.selectedInterests, interest];
-            return { ...prev, selectedInterests: selected };
-        });
-    };
-
-    // Toggle notification preference
-    const toggleNotifications = () => {
-        setFormData((prev) => ({ ...prev, enableNotifications: !prev.enableNotifications }));
-    };
-
-    // Finish the account setup
-    const handleFinish = () => {
-        alert("Account setup complete");
-    };
-
-    return {
-        step,
-        formData,
-        handleNext,
-        handleSelect,
-        handleCheckboxChange,
-        toggleNotifications,
-        handleFinish,
-    };
-};
 
 
 
 
 // Hook for managing seller account details
-export const useSellerAccountDetails = (
-    initialData: SellerData,
-    onUpdate: (data: SellerData) => void
-) => {
+export const useSellerAccountDetails = (initialData: SellerData,) => {
+
+    const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         name: initialData.name || "",
         email: initialData.email || "",
-        phone: initialData.phone || "",
+        country: initialData.country || "",
         description: initialData.description || "",
         profileImage: initialData.profileImage || "",
         websiteUrl: initialData.websiteUrl || "",
         etsyShop: initialData.etsyShop || "",
         selectedInterests: initialData.selectedInterests || [],
         enableNotifications: initialData.enableNotifications || false,
+        subscriptionPlan: initialData.subscriptionPlan || null, // Initialize subscription plan
     });
 
     const [isUpdating, setIsUpdating] = useState(false);
 
+
+     // Move to the next step
+     const handleNext = () => setStep((prev) => prev + 1);
     // Handle profile image upload
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -107,19 +56,48 @@ export const useSellerAccountDetails = (
         }
     };
 
+      // Method to update the subscription plan
+      const updateSubscriptionPlan = (plan: string) => {
+        setFormData((prev) => ({ ...prev, subscriptionPlan: plan }));
+        toast.success(`Subscription plan updated to ${plan}`);
+    };
+
+
+
+       // Finish the account setup
+       const handleFinish = () => {
+        alert("Account setup complete");
+    };
+
+      // Select a field value (e.g., country)
+      const handleSelect = (field: string, value: string) => {
+        setFormData((prev) => ({ ...prev, [field]: value }));
+    };
+
+
+    
+    // Toggle notification preference
+    const toggleNotifications = () => {
+        setFormData((prev) => ({ ...prev, enableNotifications: !prev.enableNotifications }));
+    };
+
     // Update seller account details
     const handleUpdate = async () => {
-        const { name, email, phone, description, websiteUrl, etsyShop, profileImage } = formData;
+        const { name, email, country, description, websiteUrl, etsyShop, profileImage, selectedInterests, subscriptionPlan } = formData;
         if (!name || !email || !description) {
             toast.error("All fields are required!");
             return;
         }
 
+        handleNext();
         setIsUpdating(true);
         try {
-            const updatedData: SellerData = { name, email, description, phone, websiteUrl, etsyShop, profileImage };
-            onUpdate(updatedData); // Call parent-provided update function
+           
+            const updatedData: SellerData = { name, email, description, country, websiteUrl, selectedInterests, subscriptionPlan, etsyShop, profileImage };
+            console.log(updatedData);
+          
             toast.success("Account updated successfully!");
+          
         } catch (error) {
             toast.error("Failed to update account. Please try again.");
         } finally {
@@ -127,18 +105,44 @@ export const useSellerAccountDetails = (
         }
     };
 
+
+    const handleCheckboxChange = (item: string) => {
+        setFormData(prevData => {
+            const isSelected = prevData.selectedInterests.includes(item);
+            console.log(item);
+            return {
+                ...prevData,
+                selectedInterests: isSelected
+                    ? prevData.selectedInterests.filter((interest) => interest !== item)  // Deselect if already selected
+                    : [...prevData.selectedInterests, item] // Select if not already selected
+            };
+        });
+    };
+    
+
     // Handle form field change
     const handleFieldChange = (field: string, value: any) => {
+        
         setFormData(prevData => ({
             ...prevData,
             [field]: value
+
+            
         }));
     };
 
     return {
+        step,
+        setStep,
         formData,
+        handleNext,
+        handleSelect,
+        toggleNotifications,
+        updateSubscriptionPlan,
         isUpdating,
+        handleFinish,
         setFormData,
+        handleCheckboxChange,
         handleFieldChange,
         handleImageUpload,
         handleUpdate,

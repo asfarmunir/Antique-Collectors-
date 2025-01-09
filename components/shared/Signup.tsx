@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 import Checkbox1 from "../ui/tickbox";
 import Link from "next/link";
+// import SellerAccountSetting from "./SellerAccountSetting";
 import SellerAccountSetting from "./SellerAccountSetting";
 import { BuyerAccountSetting } from "./BuyerAccountSetting";
 import { toast, ToastContainer } from "react-toastify";

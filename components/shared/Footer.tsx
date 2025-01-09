@@ -1,19 +1,34 @@
+'use client';
+import { useState } from "react";
 import Button from "@/components/ui/Button";
 import InputField from "@/components/ui/InputField";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
+import { productsLink, sellersLink, forumLink, myaccountLink } from "@/lib/constants";
 
-
-const productsLink = ['View All', 'Most Popular', 'Featured Products', 'Most Recent', 'By Category', 'By Collections', 'By Period', 'Live Presentation']
-
-const sellersLink = ['View All', 'Featured Sellers', 'Sellers List A to Z', 'Followed Sellers']
-const forumLink = ['Fairs & Events', 'Blog', 'About Us', 'Contact Us'];
-
-const myaccountLink = ['My Favorites', 'Help & Support', 'BECOME A SELLER']
 
 const Footer = () => {
+      const [subEmail, setSubEmail] = useState();
+
+
+      
+  const handleSubscribe = () => {
+    if (!subEmail) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+
+    // Perform your subscription logic here
+    console.log('Subscribed with email:', subEmail);
+    alert('Thank you for subscribing!');
+
+    // Clear the input field after subscription
+    setSubEmail('');
+
+  }
     return (
         <>
             <section className="py-5 px-4">
@@ -22,8 +37,8 @@ const Footer = () => {
                     <h1 className="text-2xl font-playfair py-6">Subscribe to our Newsletter</h1>
 
                     <div className="flex flex-row items-center justify-center">
-                        <InputField placeholder="Your Email Address" className="border border-[#EBE9E0] text-[#919089] placeholder:text-[#919089] p-2 " />
-                        <Button label="Subscribe" className="uppercase text-xs" />
+                        <InputField placeholder="Your Email Address" className="border border-[#EBE9E0] text-[#919089] placeholder:text-[#919089] p-2 " type="email" value={subEmail} onChange={(e)=> setSubEmail(e.target.value)} />
+                        <Button onClick={handleSubscribe} label="Subscribe" className="uppercase text-xs" />
                     </div>
 
 
@@ -37,10 +52,10 @@ const Footer = () => {
 
                         <div className="flex flex-row gap-2 py-3">
 
-                            <FaFacebookF className="bg-[#EBE9E0] text-xl text-[#919089] p-1" />
+                            <FaFacebookF className="bg-[#EBE9E0] text-xl text-[#919089] p-1 cursor-pointer" href="#" />
                             
                             
-                             <AiFillInstagram className="bg-[#EBE9E0] text-xl text-[#919089] p-1" />
+                             <AiFillInstagram className="bg-[#EBE9E0] text-xl text-[#919089] p-1 cursor-pointer" href="#" />
                              
                               </div>
                     </div>
@@ -51,7 +66,7 @@ const Footer = () => {
                             {productsLink.map((items) => (
 
                                 <div className="text-xs ">
-                                    <Link key={items} href="" className="text-[#919089] text-[10px]">{items}</Link>
+                                    <Link key={items.label} href={items.href} className="text-[#919089] text-[10px]">{items.label}</Link>
                                 </div>
                             ))}
                         </div>
@@ -63,7 +78,7 @@ const Footer = () => {
                             {sellersLink.map((items) => (
 
                                 <div className="text-xs ">
-                                    <Link key={items} href="" className="text-[#919089] text-[10px]">{items}</Link>
+                                    <Link key={items.label} href={items.href} className="text-[#919089] text-[10px]">{items.label}</Link>
                                 </div>
                             ))}
                         </div>
@@ -77,7 +92,7 @@ const Footer = () => {
                             {forumLink.map((items) => (
 
                                 <div className="text-xs ">
-                                    <Link key={items} href="" className="text-[#0D0106] uppercase text-[10px]">{items}</Link>
+                                    <Link key={items.label} href={items.href} className="text-[#0D0106] uppercase text-[10px]">{items.label}</Link>
                                 </div>
                             ))}
                         </div>
@@ -89,7 +104,7 @@ const Footer = () => {
                             {myaccountLink.map((items) => (
 
                                 <div className="text-xs ">
-                                    <Link key={items} href="" className="text-[#919089] text-[10px]">{items}</Link>
+                                    <Link key={items.label} href={items.href} className="text-[#919089] text-[10px]">{items.label}</Link>
                                 </div>
                             ))}
                         </div>

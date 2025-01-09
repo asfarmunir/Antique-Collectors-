@@ -14,17 +14,14 @@ import { intrests } from "@/lib/data";
 import Subscription from "./Subscription";
 import { useRouter } from "next/navigation";
 import { sortOptions } from "@/lib/constants";
-import { SellerData, useSellerAccountDetails, useSellerAccountSetup } from "@/hooks/useSellerAccount";
+import { SellerData, useSellerAccountDetails } from "@/hooks/useSellerAccount";
 
 const checkboxlablel = ["Roman - 753 BC - 476 AD", "Elizabethan - 1558 - 1603", "Roman - 753 BC - 476 AD", "Elizabethan - 1558 - 1603", "Roman - 753 BC - 476 AD", "Elizabethan - 1558 - 1603"];
 
 
-const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: () => void; sellerData: SellerData, onUpdate: (data: SellerData) => void }) => {
-    const { step, handleNext, handleFinish, handleSelect, handleCheckboxChange, toggleNotifications } = useSellerAccountSetup({
-        initialData: sellerData,
-        onUpdate
-    });
-    const {formData, setFormData, handleUpdate, handleImageUpload}= useSellerAccountDetails({ initialData: sellerData, onUpdate })
+const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: any, sellerData: SellerData, onUpdate: (data: SellerData) => void }) => {
+
+    const {  step, handleNext,  handleFinish,  formData, setFormData, handleUpdate,handleCheckboxChange, handleImageUpload } = useSellerAccountDetails({ initialData: sellerData, onUpdate })
 
     const router = useRouter();
 
@@ -38,9 +35,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: () =
         router.push('/subscription');
     }
 
-    const returnToStep5 = () => {
-        handleNext();
-    }
+
 
     return (
         <>
@@ -93,16 +88,17 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: () =
 
                                 <div className="py-3 font-sans">
                                     <p className="text-xs text-[#0D0106] font-sans pb-2">What is you Country of residence?</p>
+
                                     <div className="w-full">
                                         <Dropdown
-                                            label="Sort it"
+                                            label={formData.country || "Select your country"}
                                             items={sortOptions}
-                                            onSelect={(value) => handleSelect("country", value)}
+                                            onSelect={(country) => setFormData((prev) => ({ ...prev, country }))}
                                             isOpen={openDropdown === 1}
                                             toggleDropdown={() => toggleDropdown(1)}
                                             className="bg-white border border-[#EBE9E0]"
-
                                         />
+
                                     </div>
                                 </div>
 
@@ -161,12 +157,20 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: () =
                                     <div className="flex my-3 px-5  py-6 flex-row flex-wrap gap-8 bg-[#F9F8F3] h-40 md:h-32 overflow-y-auto">
                                         <div>
                                             {checkboxlablel.map((item) => (
-                                                <div key={item} onClick={() => handleCheckboxChange(item)} className="flex flex-row items-center gap-3 py-2">
-                                                    <Checkbox1 label={item} name={item} />
-
+                                                <div
+                                                    key={item}
+                                                    className="flex flex-row items-center gap-3 py-2"
+                                                >
+                                                    <Checkbox1
+                                                        label={item}
+                                                        name={item}
+                                                        onChange={() => handleCheckboxChange(item)}
+                                                        checked={formData.selectedInterests.includes(item)}
+                                                    />
                                                 </div>
                                             ))}
                                         </div>
+
                                     </div>
 
                                 </div>
@@ -189,34 +193,34 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: () =
 
                                 <div>
 
-                                    <form onSubmit={handleUpdate}>
+                                    <form>
                                         <div className="mt-4">
                                             <label className="block text-xs pb-2 uppercase font-sans">company name</label>
-                                            <InputField className="text-sm font-sans placeholder:text-sm text-[#919089] w-1/2 border border-[#EBE9E0]" type="text" name="name" value={formData.name} onChange={(e)=> setFormData({...formData, name: e.target.value})} />
+                                            <InputField className="text-sm font-sans placeholder:text-sm text-[#919089] w-full md:w-1/2 border border-[#EBE9E0]" type="text" name="name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
 
                                         </div>
 
                                         <div className="mt-4">
                                             <label className="block text-xs pb-2 uppercase font-sans">describe you business</label>
-                                            <InputField className="text-sm font-sans placeholder:text-sm text-[#919089] w-1/2 border border-[#EBE9E0]" type="text" value={formData.description} onChange={(e)=> setFormData({...formData, description:e.target.value})}  />
+                                            <InputField className="text-sm font-sans placeholder:text-sm text-[#919089] w-full md:w-1/2 border border-[#EBE9E0]" type="text" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
 
                                         </div>
 
                                         <div className="mt-4">
                                             <label className="block text-xs pb-2 uppercase font-sans">email</label>
-                                            <InputField className="text-sm font-sans placeholder:text-sm text-[#919089] w-1/2  border border-[#EBE9E0]" placeholder="email@address.com" type="email" value={formData.email} onChange={(e)=> setFormData({...formData, email: e.target.value})} />
+                                            <InputField className="text-sm font-sans placeholder:text-sm text-[#919089] w-full md:w-1/2  border border-[#EBE9E0]" placeholder="email@address.com" type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
 
                                         </div>
 
                                         <div className="mt-4">
                                             <label className="block text-xs pb-2 uppercase font-sans">website</label>
-                                            <InputField className="text-sm font-sans placeholder:text-sm text-[#919089] w-1/2  border border-[#EBE9E0]" placeholder="www.website.com" type="text" value={formData.websiteUrl} onChange={(e)=> setFormData({...formData, websiteUrl: e.target.value})} />
+                                            <InputField className="text-sm font-sans placeholder:text-sm text-[#919089] w-full md:w-1/2  border border-[#EBE9E0]" placeholder="www.website.com" type="text" value={formData.websiteUrl} onChange={(e) => setFormData({ ...formData, websiteUrl: e.target.value })} />
 
                                         </div>
 
                                         <div className="mt-4">
                                             <label className="block text-xs pb-2 uppercase font-sans">etsy shop name</label>
-                                            <InputField className="text-sm font-sans placeholder:text-sm text-[#919089] w-1/2  border border-[#EBE9E0]" placeholder="Name" type="text" value={formData.etsyShop} onChange={(e)=> setFormData({...formData, etsyShop: e.target.value})} />
+                                            <InputField className="text-sm font-sans placeholder:text-sm text-[#919089] w-full md:w-1/2  border border-[#EBE9E0]" placeholder="Name" type="text" value={formData.etsyShop} onChange={(e) => setFormData({ ...formData, etsyShop: e.target.value })} />
 
                                         </div>
 
@@ -229,7 +233,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: () =
                                                         <p className="mb-2 text-sm text-[#919089]">ATTACH FILES</p>
                                                         <p className="text-xs text-[#919089]">JPG, PNG FORMAT ACCEPTED</p>
                                                     </div>
-                                                    <input id="dropzone-file" type="file" className="hidden" onChange={handleImageUpload}  accept="image/*" />
+                                                    <input id="dropzone-file" type="file" className="hidden" onChange={handleImageUpload} accept="image/*" />
                                                 </label>
                                             </div>
 
@@ -241,7 +245,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: () =
 
                                 <div className="flex flex-col md:flex-row mt-5 gap-3">
                                     <Button label="I'LL Do IT later" className="w-1/2 font-semibold font-sans bg-white uppercase   flex text-xs text-black flex-row " />
-                                    <Button label="Continue" onClick={handleUpdate}  className="w-full font-semibold uppercase font-sans bg-[#F9F8F3]  text-xs flex flex-row text-black " />
+                                    <Button label="Continue" onClick={handleUpdate} className="w-full font-semibold uppercase font-sans bg-[#F9F8F3]  text-xs flex flex-row text-black " />
                                 </div>
                             </div>
 
@@ -290,6 +294,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: () =
 
                                 <div className="flex items-center gap-2 py-7">
                                     <Checkbox1
+                                        id="notifications" // Added ID for accessibility
                                         name="notifications"
                                         checked={formData.enableNotifications}
                                         onChange={() =>
@@ -299,10 +304,11 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate }: { onClose: () =
                                             }))
                                         }
                                     />
-                                    <label className="text-[10px] uppercase font-sans">
+                                    <label htmlFor="notifications" className="text-[10px] uppercase font-sans">
                                         Enable email notifications to get updates on items matching your preferences.
                                     </label>
                                 </div>
+
 
                                 <Button
                                     label="Finish Setting Up My Account"

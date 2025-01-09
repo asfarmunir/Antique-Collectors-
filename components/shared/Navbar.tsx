@@ -102,7 +102,7 @@ const Navbar = () => {
               className="cursor-pointer"
             />
           </div>
-         <div className=""> <button onClick={handleLogin} className="py-2 px-4 bg-black text-white text-sm w-full text-left">
+         <div className="w-full"> <button onClick={handleLogin} className="py-2 px-4 bg-black text-white text-sm w-full text-left">
             LOG IN
           </button>
           </div>

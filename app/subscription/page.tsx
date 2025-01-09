@@ -4,13 +4,25 @@ import { IoClose } from "react-icons/io5";
 import { subscriptionPlans } from "@/lib/data";
 import Button from "@/components/ui/Button";
 import { LayoutContext } from "../layout";
+import { useSellerAccountDetails } from "@/hooks/useSellerAccount";
+import { Dialog } from "@/components/ui/Dialog";
+import SellerAccountSetting from "@/components/shared/SellerAccountSetting";
+import { SellerData } from "@/hooks/useSellerAccount";
+
+
+
 
 const sub = ['posting', 'feed access', 'scheduled posts', 'account support', 'forum access', 'pop-Up ads',
     'messaging', 'sharing', 'analytics'
 ]
-const Subscription = () => {
+const Subscription = ({ onClose, sellerData, onUpdate }: { onClose: () => void; sellerData: SellerData, onUpdate: (data: SellerData) => void }) => {
+    const {formData, updateSubscriptionPlan, setStep, step} = useSellerAccountDetails({ initialData: sellerData, onUpdate });
     // const {setHideNavbarFooter} = useContext(LayoutContext);
     const {setHideNavbarFooter}= useContext(LayoutContext);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+    
+    
 
     React.useEffect(() => {
         setHideNavbarFooter(true);
@@ -20,6 +32,13 @@ const Subscription = () => {
     }, [setHideNavbarFooter]);
     
 
+    const handlePlanSelect=(plan: string)=>{
+        updateSubscriptionPlan(plan);
+        setStep(5);
+        setIsDialogOpen(!isDialogOpen);
+        
+    }
+
     return (
         <>
 
@@ -27,7 +46,7 @@ const Subscription = () => {
             <div className="absolute top-0 w-full">
                 <div className="border-b border-[#EBE9E0] flex flex-row justify-between gap-6 px-4 items-center">
                     <h1 className="text-xl py-4 uppercase font-playfair">Setting up your account </h1>
-                    <IoClose className="text-xl" />
+                    <IoClose className="text-xl" onClick={onClose} />
                 </div>
 
                 <div >
@@ -71,11 +90,8 @@ const Subscription = () => {
                                                 ))}
                                             </ul>
 
-
-
-
                                             <div className="mt-14 flex justify-center items-center">
-                                                <Button label="Select" className="py-2  text-xs uppercase text-black bg-white border border-black" />
+                                                <Button label="Select" onClick={()=>handlePlanSelect(plan.name)} className="py-2  text-xs uppercase text-black bg-white border border-black" />
                                             </div>
                                         </div>
                                     </div>
@@ -107,7 +123,10 @@ const Subscription = () => {
 
 
             </div>
-
+            
+            {isDialogOpen && (
+                <SellerAccountSetting onClose={()=> setIsDialogOpen(false)} setStep={setStep} />
+            )}
 
         </>
     )

@@ -19,13 +19,14 @@ import { sellers } from "@/lib/data";
 import useProducts from "@/hooks/useProducts";
 import { useSellerDetails } from "@/hooks/useSellers";
 import { useRouter } from "next/navigation";
+import { FaHeart } from "react-icons/fa";
 
 
 
 
 const Seller = () => {
     // const {sellerDetails, error} = useSellerDetails();
-    const {products, isFavorite}=useProducts();
+    const { products, isFavorite } = useProducts();
     const [gridView, setGridView] = useState(true);
     const [filterOpen, setFilterOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<number | null>(null);
@@ -33,6 +34,7 @@ const Seller = () => {
     const [showAll, setShowAll] = useState(false);
     const router = useRouter();
 
+    const { toggleFavorite } = useProducts();
     const handleSelect = (item: string) => {
         console.log('Selected:', item);
     };
@@ -41,7 +43,7 @@ const Seller = () => {
         setOpenDropdown(openDropdown === index ? null : index);
     };
 
-    
+
     const handleViewMore = () => {
         if (showAll) {
             setVisibleProducts(24);
@@ -55,7 +57,7 @@ const Seller = () => {
 
     const handleProductDetails = (id: any) => {
         router.push(`/products/${id}`);
-      }
+    }
 
 
     return (
@@ -122,7 +124,7 @@ const Seller = () => {
                             <p className="text-xs text-[#0D0106] ">FILTER</p>
 
                         </div>
-                         <p className="uppercase text-xs md:hidden">Showing 23 Results</p>
+                        <p className="uppercase text-xs md:hidden">Showing 23 Results</p>
 
                         <div className="w-full md:w-auto flex flex-row justify-between gap-8 items-center">
                             <div className="lg:flex flex-row items-center gap-4 md:block hidden">
@@ -169,7 +171,7 @@ const Seller = () => {
                 {filterOpen && (
                     <div className="bg-white p-4 md:hidden">
                         <FilterComponent
-                          
+
                             checkboxlablel={["Roman - 753 BC - 476 AD", "Elizabethan - 1558 - 1603"]}
                             checkboxlablel1={["Excellent Condition", "Very Good Condition"]}
                             filtersToShow={['category', 'eraPeriod', 'condition', 'sellerLocation']}
@@ -178,7 +180,7 @@ const Seller = () => {
                     </div>
                 )}
 
-                <div className={`px-6 md:grid md:grid-cols-${filterOpen ? 4 : 4}`}>
+                <div className={`px-4 md:grid md:grid-cols-${filterOpen ? 4 : 4}`}>
 
                     {filterOpen && (
                         <div className="md:col-span-1 py-6 md:block hidden">
@@ -189,35 +191,53 @@ const Seller = () => {
                             />
                         </div>
                     )}
-                    <div className={`col-span-${filterOpen ? 3 : 4} py-6`}>
+                    <div className={`col-span-${filterOpen ? 3 : 4} py-2`}>
 
                         {gridView ? (
-                            <div className={`w-full grid grid-cols-1 px-6  md:grid-cols-2 lg:grid-cols-${filterOpen ? 3 : 3} xl:grid-cols-${filterOpen ? 3 : 3} gap-5 gap-y-2`}>
-                                {products.map((_, index) => { 
-                                    const isLastRow = Math.floor(index/4) === Math.floor((products.length -1 )/4);
-                                    const isLastColumn = (index + 1) % 4 === 0;
-                                    const isFavorited = isFavorite(products.id);
-                                    return (
-                                    <div key={index} className="flex flex-col mb-4  gap-4" onClick={()=> handleProductDetails(p.id)}>
-                                        <div className="  flex items-center justify-center ">
-                                            <Image
-                                                src="/images/products/1.png"
-                                                alt="product"
-                                                width={150}
-                                                className=" w-full h-full object-contain object-center hover:scale-105 transition duration-500 ease-in-out"
-                                                height={150}
-                                            />
-                                        </div>
-                                        <div className=" w-full flex flex-col  justify-between">
-                                            <div className="text-xs flex flex-row justify-between gap-4">
-                                                <p className="text-[#919089] mb-1 ">Seller Name</p>
-                                                <p className="text-[#919089] ">FOLLOW</p>
+                            <div className={`w-full grid grid-cols-1  mt-4 md:grid-cols-2 lg:grid-cols-${filterOpen ? 3 : 3} xl:grid-cols-${filterOpen ? 3 : 3} gap-5 gap-y-2`}>
+                                {products.map((p, index) => {
+                                    const columns = 3; // Adjust based on your actual column count for grid view
+                                    const isLastRow = Math.floor(index / columns) === Math.floor((products.length - 1) / columns);
+                                    const isLastColumn = (index + 1) % columns === 0;
+                                    const isFavorited = isFavorite(p.id);
 
+                                    return (
+                                        <div key={index} className={`flex  gap-4 md:gap-0 flex-col stroke-black md:py-6 px-6 cursor-pointer border-[#EBE9E0]
+                                        ${!isLastRow ? 'md:border-b' : ''} 
+                                        ${!isLastColumn ? 'md:border-r -mr-[3px]' : ''}`} onClick={() => handleProductDetails(p.id)}>
+                                            <div className="  flex items-center justify-center relative">
+                                                <div className="absolute top-2 right-4 z-20">
+                                                    <button
+                                                        onClick={() => toggleFavorite(p.id)}
+                                                        aria-label={`Add ${p.title} to favorites`}
+                                                        className="text-xl font-semibold focus:outline-none"
+                                                    >
+                                                        {isFavorited ? (
+                                                            <FaHeart className="text-red-500" /> // Filled heart for favorited
+                                                        ) : (
+                                                            <CiHeart className="text-gray-500" /> // Outline heart for non-favorited
+                                                        )}
+                                                    </button>
+                                                </div>
+                                                <Image
+                                                    src="/images/products/1.png"
+                                                    alt="product"
+                                                    width={150}
+                                                    className=" w-full h-full object-contain object-center hover:scale-105 transition duration-500 ease-in-out"
+                                                    height={150}
+                                                />
                                             </div>
-                                            <h2 className="text-xs md:text-sm">NATIVE IRON CHAIR</h2>
+                                            <div className=" w-full pt-4 flex flex-col  justify-between">
+                                                <div className="text-xs flex flex-row justify-between gap-4">
+                                                    <p className="text-[#919089] mb-1 ">Seller Name</p>
+                                                    <p className="text-[#919089] ">FOLLOW</p>
+
+                                                </div>
+                                                <h2 className="text-xs md:text-sm">NATIVE IRON CHAIR</h2>
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
+                                    )
+                                }
                                 )}
 
                             </div>

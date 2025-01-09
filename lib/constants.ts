@@ -22,3 +22,36 @@ export  const sortOptions = [
     "Higher to Low Price",
     "Highest Sale Products"
   ];
+
+
+  export const productsLink = [
+    { label: "View All", href: "#" },
+    { label: "Most Popular", href:"#"},
+    { label: "Featured Products", href: "#" },
+    { label: "Most Recent", href: "#" },
+    { label: "By Category", href: "#" },
+    { label: "By Collections", href:"#" },
+    { label: "By Period", href: "#"},
+    { label: "Live Presentation", href: "/presentation" }
+  ];
+  
+  export const sellersLink = [
+    { label: "View All", href: "#" },
+    { label: "Featured Sellers", href: "#" },
+    { label: "Sellers List A to Z", href: "#" },
+    { label: "Followed Sellers", href: "#" }
+  ];
+  
+  export const forumLink = [
+    { label: "Fairs & Events", href: "#"},
+    { label: "Blog", href: "/blog" },
+    { label: "About Us", href: "/aboutus" },
+    { label: "Contact Us", href: "#" }
+  ];
+  
+  export const myaccountLink = [
+    { label: "My Favorites", href:"#" },
+    { label: "Help & Support", href: "#"},
+    { label: "BECOME A SELLER", href: "#"}
+  ];
+  

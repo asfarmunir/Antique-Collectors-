@@ -179,8 +179,8 @@ const Product = () => {
                     <div
                       key={p.id}
                       className={`flex flex-col stroke-black md:py-6 px-6 cursor-pointer border-[#EBE9E0]
-        ${!isLastRow ? 'border-b' : ''} 
-        ${!isLastColumn ? 'border-r -mr-[3px]' : ''}`}
+                  ${!isLastRow ? 'border-b' : ''} 
+                  ${!isLastColumn ? 'border-r -mr-[3px]' : ''}`}
                       onClick={() => handleProductDetails(p.id)}
                     >
                       <div className="bg-red-50 flex items-center justify-center relative">
@@ -205,7 +205,7 @@ const Product = () => {
                           className="w-full h-full object-contain object-center transform hover:scale-105 transition duration-500 ease-in-out"
                         />
                       </div>
-                      <div className="w-full flex flex-col justify-between">
+                      <div className="w-full pt-4 flex flex-col justify-between">
                         <div className="text-sm flex flex-row justify-between gap-4">
                           <p className="text-[#919089] mb-1">{p.brand}</p>
                           <p className="text-[#aa994c]">FOLLOW</p>
@@ -312,16 +312,36 @@ const Product = () => {
 
           </div>
 
-          <div className={`col-span-3 py-6`}>
+          <div className={`col-span-3 py-2`}>
             {isGridView ? (
-              <div className="grid grid-cols-1   px-6 py-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 gap-y-12">
-                {products.slice(0, gridProductCount).map((p) => {
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ">
+                {products.slice(0, gridProductCount).map((p, index) => {
+                  const columns = 3; // Adjust based on your actual column count for grid view
+                  const isLastRow = Math.floor(index / columns) === Math.floor((products.length - 1) / columns);
+                  const isLastColumn = (index + 1) % columns === 0;
                   const isFavorited = isFavorite(p.id);
+
                   return (
-                    <div key={p.id} className="flex flex-col gap-4" onClick={() => handleProductDetails(p.id)}>
+                    <div
+                      key={p.id}
+                      className={`flex flex-col stroke-black md:py-6 px-6 cursor-pointer border-[#EBE9E0]
+                ${!isLastRow ? 'border-b' : ''} 
+                ${!isLastColumn ? 'border-r -mr-[3px]' : ''}`}
+                      onClick={() => handleProductDetails(p.id)}
+                    >
                       <div className="bg-red-50 flex items-center justify-center relative">
-                        <div className="absolute top-2 right-4">
-                          <CiHeart className="text-xl font-semibold" />
+                        <div className="absolute top-2 right-4 z-20">
+                          <button
+                            onClick={() => toggleFavorite(p.id)}
+                            aria-label={`Add ${p.title} to favorites`}
+                            className="text-xl font-semibold focus:outline-none"
+                          >
+                            {isFavorited ? (
+                              <FaHeart className="text-red-500" /> // Filled heart for favorited
+                            ) : (
+                              <CiHeart className="text-gray-500" /> // Outline heart for non-favorited
+                            )}
+                          </button>
                         </div>
                         <Image
                           src="/images/products/1.png"
@@ -331,7 +351,7 @@ const Product = () => {
                           className="w-full h-full object-contain object-center transform  hover:scale-105 transition duration-500 ease-in-out"
                         />
                       </div>
-                      <div className="w-full flex flex-col justify-between">
+                      <div className="w-full pt-4 flex flex-col justify-between">
                         <div className="text-sm flex flex-row justify-between gap-4">
                           <p className="text-[#919089] mb-1">{p.brand}</p>
                           <p className="text-[#aa994c]">FOLLOW</p>
