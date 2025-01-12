@@ -33,6 +33,7 @@ export const useLogin=()=>{
             toast.success('Successfully logged in!');
             alert(`Login Successful!\nEmail: ${email}\nPassword: ${password}`);
             router.push('/');
+          
           } else {
             toast.error("Authentication failed. Please check your credentials.");
           }

@@ -10,25 +10,25 @@ import { productsLink, sellersLink, forumLink, myaccountLink } from "@/lib/const
 
 
 const Footer = () => {
-      const [subEmail, setSubEmail] = useState();
+    const [subEmail, setSubEmail] = useState();
 
 
-      
-  const handleSubscribe = () => {
-    if (!subEmail) {
-      alert('Please enter a valid email address.');
-      return;
+
+    const handleSubscribe = () => {
+        if (!subEmail) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+
+        // Perform your subscription logic here
+        console.log('Subscribed with email:', subEmail);
+        alert('Thank you for subscribing!');
+
+        // Clear the input field after subscription
+        setSubEmail('');
+
     }
-
-
-    // Perform your subscription logic here
-    console.log('Subscribed with email:', subEmail);
-    alert('Thank you for subscribing!');
-
-    // Clear the input field after subscription
-    setSubEmail('');
-
-  }
     return (
         <>
             <section className="py-5 px-4">
@@ -37,7 +37,7 @@ const Footer = () => {
                     <h1 className="text-2xl font-playfair py-6">Subscribe to our Newsletter</h1>
 
                     <div className="flex flex-row items-center justify-center">
-                        <InputField placeholder="Your Email Address" className="border border-[#EBE9E0] text-[#919089] placeholder:text-[#919089] p-2 " type="email" value={subEmail} onChange={(e)=> setSubEmail(e.target.value)} />
+                        <InputField placeholder="Your Email Address" className="border border-[#EBE9E0] text-[#919089] placeholder:text-[#919089] p-2 " type="email" value={subEmail} onChange={(e) => setSubEmail(e.target.value)} />
                         <Button onClick={handleSubscribe} label="Subscribe" className="uppercase text-xs" />
                     </div>
 
@@ -51,13 +51,18 @@ const Footer = () => {
                         <p className="text-[#919089] text-[10px] w-60">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam mauris sed ma</p>
 
                         <div className="flex flex-row gap-2 py-3">
+                            <FaFacebookF
+                                key="facebook"
+                                className="bg-[#EBE9E0] text-xl text-[#919089] p-1 cursor-pointer"
+                                href="#"
+                            />
+                            <AiFillInstagram
+                                key="instagram"
+                                className="bg-[#EBE9E0] text-xl text-[#919089] p-1 cursor-pointer"
+                                href="#"
+                            />
+                        </div>
 
-                            <FaFacebookF className="bg-[#EBE9E0] text-xl text-[#919089] p-1 cursor-pointer" href="#" />
-                            
-                            
-                             <AiFillInstagram className="bg-[#EBE9E0] text-xl text-[#919089] p-1 cursor-pointer" href="#" />
-                             
-                              </div>
                     </div>
                     <div className="md:block hidden">
                         <p className="text-[#0D0106] text-xs uppercase pb-2">Products</p>
@@ -65,8 +70,8 @@ const Footer = () => {
                         <div className="space-y-2">
                             {productsLink.map((items) => (
 
-                                <div key={items.href} className="text-xs ">
-                                    <Link key={items.label} href={items.href} className="text-[#919089] text-[10px]">{items.label}</Link>
+                                <div key={items.label} className="text-xs ">
+                                    <Link href={items.label} className="text-[#919089] text-[10px]">{items.label}</Link>
                                 </div>
                             ))}
                         </div>
@@ -77,8 +82,8 @@ const Footer = () => {
                         <div className="space-y-2">
                             {sellersLink.map((items) => (
 
-                                <div key={items.href} className="text-xs ">
-                                    <Link key={items.label} href={items.href} className="text-[#919089] text-[10px]">{items.label}</Link>
+                                <div key={items.label} className="text-xs ">
+                                    <Link href={items.label} className="text-[#919089] text-[10px]">{items.label}</Link>
                                 </div>
                             ))}
                         </div>
@@ -91,8 +96,8 @@ const Footer = () => {
                         <div className="space-y-2">
                             {forumLink.map((items) => (
 
-                                <div key={items.href} className="text-xs ">
-                                    <Link key={items.label} href={items.href} className="text-[#0D0106] uppercase text-[10px]">{items.label}</Link>
+                                <div key={items.label} className="text-xs ">
+                                    <Link href={items.label} className="text-[#0D0106] uppercase text-[10px]">{items.label}</Link>
                                 </div>
                             ))}
                         </div>
@@ -103,8 +108,8 @@ const Footer = () => {
                         <div className="space-y-2">
                             {myaccountLink.map((items) => (
 
-                                <div key={items.href} className="text-xs ">
-                                    <Link key={items.label} href={items.href} className="text-[#919089] text-[10px]">{items.label}</Link>
+                                <div key={items.label} className="text-xs ">
+                                    <Link href={items.label} className="text-[#919089] text-[10px]">{items.label}</Link>
                                 </div>
                             ))}
                         </div>

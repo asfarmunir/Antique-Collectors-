@@ -69,42 +69,42 @@ const Blog = () => {
     return (
         <>
             <div>
-                <div className="flex relative flex-col-reverse gap-5 md:flex-row h-[480px] md:h-[300px] border-b border-[#EBE9E0]">
+                <div className="flex relative flex-col-reverse gap-5 md:flex-row h-[480px] md:h-[400px] border-b border-[#EBE9E0]">
                     {/* Text Section */}
                     <div className="w-full px-6 md:px-12 flex flex-col my-auto justify-center h-full">
-                        <h1 className="text-3xl md:text-4xl font-playfair">Blog Post Title</h1>
-                        <p className="text-sm md:text-base text-justify py-2">
+                        <h1 className="text-3xl md:text-5xl font-playfair">Blog Post Title</h1>
+                        <p className="text-sm md:text-[16px]  text-justify py-4">
                             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque alias, beatae, iste totam molestias placeat molestiae laudantium hic consequuntur possimus explicabo voluptatum! Error consequuntur eaque harum blanditiis sequi. Ratione, similique!
                         </p>
-                        <Button label="Read article" className="w-1/2 md:w-1/2 lg:w-1/3 text-sm text-white mt-4 uppercase py-3" />
+                        <Button label="Read article" className="w-1/2 md:w-1/2 lg:w-1/3 text-sm text-white hover:opacity-80 mt-4 uppercase py-4" />
                     </div>
 
                     {/* Image Section */}
                     <div className="w-full relative h-full md:h-auto px-4 md:px-8">
                         {/* Top Image */}
-                        <div className="absolute top-0 right-0 w-[150px] md:max-w-[280px]">
-                            <Image src="/images/blogs/bt.png" alt="top left" width={0} height={0} layout="responsive" className="w-full h-auto" />
+                        <div className="absolute top-0 right-0 w-[150px] md:min-w-[250px]">
+                            <Image src="/images/blogs/bt.png" alt="top left" width={250} height={0}  className="w-full h-auto" />
                         </div>
 
                         {/* Center Image */}
-                        <div className="absolute top-1/3 md:top-1/3 lg:top-1/2 left-0 md:left-10 lg:left-32 transform -translate-y-1/2 w-[120px] md:max-w-[180px]">
-                            <Image src="/images/blogs/bm.png" alt="center left" width={0} height={0} layout="responsive" className="w-full h-auto" />
+                        <div className="absolute top-1/3 md:top-1/3 lg:top-1/2 left-0 md:left-10 lg:left-32 transform -translate-y-1/2 w-[120px] md:min-w-[180px]">
+                            <Image src="/images/blogs/bm.png" alt="center left" width={180} height={0}  className="w-full h-auto" />
                         </div>
 
                         {/* Bottom Image */}
-                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 transform w-[120px] md:max-w-[300px]">
-                            <Image src="/images/blogs/bb.png" alt="bottom center" width={0} height={0} layout="responsive" className="w-full h-auto" />
+                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 transform w-[120px] md:min-w-[200px]">
+                            <Image src="/images/blogs/bb.png" alt="bottom center" width={200} height={0}  className="w-full h-auto" />
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <div className="py-4 px-8">
+                    <div className="py-4 px-6 md:px-12">
                         <h1 className="text-xs">Home / Products / New Arrivals</h1>
                         <h1 className="font-playfair pt-4 uppercase text-xl ">Blog</h1>
                     </div>
 
-                    <section className="bg-[#F9F8F3] py-4 px-8">
+                    <section className="bg-[#F9F8F3] py-4 px-6 md:px-12">
                         <div className="flex flex-row flex-wrap justify-between gap-4 items-center">
                             <div onClick={() => setFilterOpen(!filterOpen)} className="inline-flex flex-row items-center gap-2 py-3 px-8 bg-[#EBE9E0]">
                                 <BiCandles className="text-lg text-[#0D0106]" />
@@ -143,22 +143,22 @@ const Blog = () => {
                     )}
 
                     {/* Main content start from here */}
-                    <div className="py-4 px-5 md:px-6 md:grid md:grid-cols-5">
+                    <div className="py-4 px-4 md:px-12 md:grid md:grid-cols-5">
                         <div className="md:col-span-1 py-6">
                             <div className="md:block hidden">
                                 <FilterComponent checkboxlablel={checkboxLabels} checkboxlablel1={conditionLabels} filtersToShow={['category']} />
                             </div>
 
-                            <div className="md:block hidden">
-                                <h2 className="text-xl font-playfair">Recent Posts</h2>
+                            <div className="md:block hidden mt-2">
+                                <h2 className="text-[24px] font-playfair">Recent Posts</h2>
                                 {post.map((p) => (
-                                    <div key={p.title} className="flex flex-row items-center gap-4 mt-4">
+                                    <div key={p.title} className="flex flex-row items-center  gap-4 mt-3 text-[16px]">
                                         <div className="w-20 h-12 bg-[#7C7C7C] overflow-hidden">
                                             <Image src={p.src} alt={p.title} width={80} height={80} className="object-cover w-full h-full" />
                                         </div>
                                         <div>
                                             <Link href="#" className="text-sm font-playfair">{p.title}</Link>
-                                            <p className="font-light text-xs mt-2 text-[#9F9F9F]">{p.date}</p>
+                                            <p className="font-light text-xs mt-2 text-[#9F9F9F]">{p.date }</p>
                                         </div>
                                     </div>
                                 ))}
@@ -179,19 +179,19 @@ const Blog = () => {
                                         </div>
 
                                         <div className="text-xs text-[#9F9F9F] flex flex-row justify-between gap-6 mt-2">
-                                            <p>{blogs.date}</p>
+                                            <p>{blogs.date || "03 AUG 2002"}</p>
                                             <p>Writer Name</p>
                                         </div>
 
-                                        <h1 className="text-xl font-playfair mt-2">{blogs.title}</h1>
-                                        <p className="mt-2 text-[#919089] text-sm lime-clamp-5">
+                                        <h1 className="text-[24px] font-playfair mt-2">{blogs.title}</h1>
+                                        <p className="mt-2 text-[#919089] text-[14px] lime-clamp-5">
                                             {blogs.body}
                                         </p>
 
                                         <Button
                                             label="Read More"
                                             onClick={() => handleReadMore(blogs.id)}
-                                            className="uppercase bg-transparent text-[#0D0106] text-sm mt-2 p-0"
+                                            className="uppercase bg-transparent text-[#0D0106] text-sm mt-4 p-0"
                                         />
                                     </div>
                                 </div>
@@ -201,7 +201,7 @@ const Blog = () => {
                                 <Button
                                     onClick={handleViewMoreOrLess}
                                     label={showAll ? "View Less" : "View More"}
-                                    className="uppercase border border-[#0D0106] py-2 px-8 bg-white text-[#0D0106]"
+                                    className="uppercase border border-[#0D0106] hover:bg-black hover:text-white py-2 px-8 bg-white text-[#0D0106]"
                                 />
                             </div>
                         </div>

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BiCandles } from "react-icons/bi";
 import { HiViewGrid } from "react-icons/hi";
 import { TbLayoutDistributeHorizontal } from "react-icons/tb";
@@ -44,6 +44,25 @@ const Seller = () => {
     };
 
 
+    // Open filter sidebar by default on large screens
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                setFilterOpen(true);
+            } else {
+                setFilterOpen(false);
+            }
+        };
+
+        handleResize(); // Set initial state based on screen size
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
+
     const handleViewMore = () => {
         if (showAll) {
             setVisibleProducts(24);
@@ -68,8 +87,8 @@ const Seller = () => {
                     <h1 className="font-playfair pt-4 uppercase text-xl ">Antique Animal Jewelry</h1>
                 </div>
 
-                <div className="relative px-6 pb-4">
-                    <div className="relative z-30 top-8 flex items-center justify-center md:justify-start md:left-4">
+                <div className="relative md:px-6 pb-4">
+                    <div className="relative z-10 top-8 flex items-center justify-center md:justify-start md:left-4">
                         <Image
                             src="/images/sellers/s1.png"
                             alt="seller logo"
@@ -78,9 +97,9 @@ const Seller = () => {
                         />
                     </div>
 
-                    <div className="bg-[#F9F8F3] text-[#0D0106] w-full capitalize p-4 relative pt-10 z-10">
+                    <div className="bg-[#F9F8F3] text-[#0D0106] w-full capitalize p-4 relative pt-10 ">
                         <div className="flex flex-col items-center text-center md:items-start md:text-left gap-2 pt-1">
-                            <h1 className="font-playfair text-lg font-semibold">
+                            <h1 className="font-playfair text-[32xl]">
                                 Antique Animal Jewelry
                             </h1>
 
@@ -106,7 +125,7 @@ const Seller = () => {
                         </p>
                         <Link
                             href={"#"}
-                            className="text-xs lowercase text-[#463F3A] text-center md:text-left"
+                            className="text-sm lowercase text-[#463F3A] text-center md:text-left"
                         >
                             https://www.antiqueanimaljewelry.com                        </Link>
                     </div>
@@ -115,7 +134,7 @@ const Seller = () => {
 
 
 
-                <section className="bg-[#F9F8F3] py-4 px-8">
+                <section className="bg-[#F9F8F3] py-4 px-4 md:px-6 lg:px-12 ">
                     <div className="flex flex-wrap gap-5 flex-row justify-between items-center">
 
                         {/* Filter button */}
@@ -180,7 +199,7 @@ const Seller = () => {
                     </div>
                 )}
 
-                <div className={`px-4 md:grid py-6 md:grid-cols-${filterOpen ? 4 : 4}`}>
+                <div className={`px-4 md:px-6 lg:px-12 md:grid py-6 md:grid-cols-${filterOpen ? 4 : 4}`}>
 
                     {filterOpen && (
                         <div className="md:col-span-1  md:block hidden">
@@ -191,87 +210,122 @@ const Seller = () => {
                             />
                         </div>
                     )}
-                    <div className={`col-span-${filterOpen ? 3 : 4} py-2`}>
+                    <div className={`col-span-${filterOpen ? 3 : 4} `}>
 
                         {gridView ? (
-                            <div className={`w-full grid grid-cols-1  mt-4 md:grid-cols-2 lg:grid-cols-${filterOpen ? 3 : 4} xl:grid-cols-${filterOpen ? 3 : 4} gap-5 gap-y-2`}>
-                                {products.map((p, index) => {
-                                    const columns = 3; // Adjust based on your actual column count for grid view
-                                    const isLastRow = Math.floor(index / columns) === Math.floor((products.length - 1) / columns);
-                                    const isLastColumn = (index + 1) % columns === 0;
-                                    const isFavorited = isFavorite(p.id);
+                            <>
+                                <div className={` grid grid-cols-1  md:grid-cols-${filterOpen ? 3 : 4}   gap-5 `}>
+                                    {products.map((p, index) => {
+                                        const columns = 3; // Adjust based on your actual column count for grid view
+                                        const isLastRow = Math.floor(index / columns) === Math.floor((products.length - 1) / columns);
+                                        const isLastColumn = (index + 1) % columns === 0;
+                                        const isFavorited = isFavorite(p.id);
 
-                                    return (
-                                        <div key={index} className={`flex  gap-4 md:gap-0 flex-col stroke-black md:py-6 px-6 cursor-pointer border-[#EBE9E0]
+                                        return (
+                                            <div key={index} className={`flex  gap-4 md:gap-0 flex-col stroke-black  px-6 cursor-pointer border-[#EBE9E0]
                                         ${!isLastRow ? 'md:border-b' : ''} 
                                         ${!isLastColumn ? 'md:border-r -mr-[3px]' : ''}`} onClick={() => handleProductDetails(p.id)}>
-                                            <div className="  flex items-center justify-center relative">
-                                                <div className="absolute top-2 right-4 z-20">
-                                                    <button
-                                                        onClick={() => toggleFavorite(p.id)}
-                                                        aria-label={`Add ${p.title} to favorites`}
-                                                        className="text-xl font-semibold focus:outline-none"
-                                                    >
-                                                        {isFavorited ? (
-                                                            <FaHeart className="text-red-500" /> // Filled heart for favorited
-                                                        ) : (
-                                                            <CiHeart className="text-gray-500" /> // Outline heart for non-favorited
-                                                        )}
-                                                    </button>
-                                                </div>
-                                                <Image
-                                                    src="/images/products/p1.png"
-                                                    alt="product"
-                                                    width={150}
-                                                    className=" w-full h-full object-contain object-center hover:scale-105 transition duration-500 ease-in-out"
-                                                    height={150}
-                                                />
-                                            </div>
-                                            <div className=" w-full pt-4 flex flex-col  justify-between">
-                                                <div className="text-xs flex flex-row justify-between gap-4">
-                                                    <p className="text-[#919089] mb-1 ">Seller Name</p>
-                                                    <p className="text-[#919089] ">FOLLOW</p>
+                                                <div className="  flex items-center justify-center relative group">
+                                                    <div className="absolute top-2 right-4 z-20">
+                                                        <button
+                                                            onClick={() => toggleFavorite(p.id)}
+                                                            aria-label={`Add ${p.title} to favorites`}
+                                                            className="text-xl font-semibold focus:outline-none"
+                                                        >
+                                                            {isFavorited ? (
+                                                                <FaHeart className="text-red-500" /> // Filled heart for favorited
+                                                            ) : (
+                                                                <CiHeart className="text-gray-500" /> // Outline heart for non-favorited
+                                                            )}
+                                                        </button>
+                                                    </div>
+                                                    <Image
+                                                        src="/images/products/p1.png"
+                                                        alt="product"
+                                                        width={150}
+                                                        className=" w-full h-full object-contain object-center hover:scale-105 transition duration-500 ease-in-out"
+                                                        height={150}
+                                                    />
 
+                                                    {/* Likes and Comments Overlay on Hover */}
+                                                    <div className="absolute inset-0 bg-white bg-opacity-80   flex flex-row gap-4 items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                        <p className="text-sm text-black flex items-center gap-4"><CiHeart className="text-lg" /> {p.likes || 34}</p>
+                                                        <p className="text-sm text-black flex items-center gap-4"><FaRegCommentDots className="text-lg" /> {p.comments || 34}</p>
+                                                    </div>
                                                 </div>
-                                                <h2 className="text-xs md:text-sm">NATIVE IRON CHAIR</h2>
-                                            </div>
-                                        </div>
-                                    )
-                                }
-                                )}
+                                                <div className=" w-full pt-4 flex flex-col  justify-between">
+                                                    <div className="text-xs flex flex-row justify-between gap-4">
+                                                        <p className="text-[#919089] mb-1 ">Seller Name</p>
+                                                        <p className="text-[#919089] ">FOLLOW</p>
 
-                            </div>
+                                                    </div>
+                                                    <h2 className="text-xs md:text-sm">NATIVE IRON CHAIR</h2>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                    )}
+
+                                </div>
+                            </>
 
                         ) : (
 
-                            <div className={`w-full grid grid-cols-1 px-6  md:grid-cols-2 lg:grid-cols-${filterOpen ? 3 : 4} xl:grid-cols-${filterOpen ? 3 : 4} gap-5 gap-y-2`}>
-                                {Array.from({ length: 30 }).map((_, index) => (
-                                    <div key={index} className="flex flex-col mb-4 gap-4">
-                                        <div className="  bg-red-50 flex items-center justify-center ">
-                                            <Image
-                                                src="/images/products/p1.png"
-                                                alt="product"
-                                                width={150}
-                                                className=" w-full h-full object-contain object-center"
-                                                height={150}
-                                            />
-                                        </div>
-                                        <div className=" w-full flex flex-col  justify-between">
-                                            <div className="text-xs flex flex-row justify-between gap-4">
-                                                <p className="text-[#919089] mb-1 ">John</p>
-                                                <p className="text-[#919089] ">FOLLOW</p>
+                            <>
+                                <div className={` grid grid-cols-1  md:grid-cols-${filterOpen ? 3 : 4}   gap-5 `}>
+                                    {products.map((p, index) => {
+                                        const columns = 3; // Adjust based on your actual column count for grid view
+                                        const isLastRow = Math.floor(index / columns) === Math.floor((products.length - 1) / columns);
+                                        const isLastColumn = (index + 1) % columns === 0;
+                                        const isFavorited = isFavorite(p.id);
 
+                                        return (
+                                            <div key={index} className={`flex  gap-4 md:gap-0 flex-col stroke-black  px-6 cursor-pointer border-[#EBE9E0]
+                                        ${!isLastRow ? 'md:border-b' : ''} 
+                                        ${!isLastColumn ? 'md:border-r -mr-[3px]' : ''}`} onClick={() => handleProductDetails(p.id)}>
+                                                <div className="  flex items-center justify-center relative group">
+                                                    <div className="absolute top-2 right-4 z-20">
+                                                        <button
+                                                            onClick={() => toggleFavorite(p.id)}
+                                                            aria-label={`Add ${p.title} to favorites`}
+                                                            className="text-xl font-semibold focus:outline-none"
+                                                        >
+                                                            {isFavorited ? (
+                                                                <FaHeart className="text-red-500" /> // Filled heart for favorited
+                                                            ) : (
+                                                                <CiHeart className="text-gray-500" /> // Outline heart for non-favorited
+                                                            )}
+                                                        </button>
+                                                    </div>
+                                                    <Image
+                                                        src="/images/products/p1.png"
+                                                        alt="product"
+                                                        width={150}
+                                                        className=" w-full h-full object-contain object-center hover:scale-105 transition duration-500 ease-in-out"
+                                                        height={150}
+                                                    />
+
+                                                    {/* Likes and Comments Overlay on Hover */}
+                                                    <div className="absolute inset-0 bg-white bg-opacity-80   flex flex-row gap-4 items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                        <p className="text-sm text-black flex items-center gap-4"><CiHeart className="text-lg" /> {p.likes || 34}</p>
+                                                        <p className="text-sm text-black flex items-center gap-4"><FaRegCommentDots className="text-lg" /> {p.comments || 34}</p>
+                                                    </div>
+                                                </div>
+                                                <div className=" w-full pt-4 flex flex-col  justify-between">
+                                                    <div className="text-xs flex flex-row justify-between gap-4">
+                                                        <p className="text-[#919089] mb-1 ">Seller Name</p>
+                                                        <p className="text-[#919089] ">FOLLOW</p>
+
+                                                    </div>
+                                                    <h2 className="text-xs md:text-sm">NATIVE IRON CHAIR</h2>
+                                                </div>
                                             </div>
-                                            <h2 className="text-xs md:text-sm">XYZ Product</h2>
-                                        </div>
-                                    </div>
-                                ))}
+                                        )
+                                    }
+                                    )}
 
-
-
-
-
-                            </div>
+                                </div>
+                            </>
 
                         )}
 
@@ -282,6 +336,28 @@ const Seller = () => {
 
 
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 <div className="mt-6">
                     <div className="flex flex-row justify-center items-center py-6">

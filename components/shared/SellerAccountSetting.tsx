@@ -58,7 +58,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate}: { onClose: any, 
 
                                 <h1 className="text-xl md:text-3xl  font-playfair">Become a Seller on The Antique Collector</h1>
 
-                                <p className="text-xs py-2 md:py-4 font-sans">
+                                <p className="text-xs py-4 md:py-6 font-sans">
                                     Creating a seller profile on The Antique Collector is completely free, allowing you to showcase your unique pieces to a community of antique enthusiasts without any upfront cost. To ensure a rich experience for our buyers, each seller profile must include a minimum of 10 product listings, giving collectors the opportunity to truly explore the breadth of your collection.
                                 </p>
 
@@ -88,7 +88,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate}: { onClose: any, 
                                 </p>
 
                                 <div className="py-3 font-sans">
-                                    <p className="text-xs text-[#0D0106] font-sans pb-2">What is you Country of residence?</p>
+                                    <p className="text-xs text-[#0D0106] font-sans pb-2 uppercase">What is you Country of residence?</p>
 
                                     <div className="w-full">
                                         <Dropdown
@@ -97,7 +97,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate}: { onClose: any, 
                                             onSelect={(country) => setFormData((prev) => ({ ...prev, country }))}
                                             isOpen={openDropdown === 1}
                                             toggleDropdown={() => toggleDropdown(1)}
-                                            className="bg-white border border-[#EBE9E0]"
+                                            className="bg-white border border-[#EBE9E0] "
                                         />
 
                                     </div>
@@ -203,7 +203,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate}: { onClose: any, 
 
                                         <div className="mt-4">
                                             <label className="block text-xs pb-2 uppercase font-sans">describe you business</label>
-                                            <InputField className="text-sm font-sans placeholder:text-sm text-[#919089] w-full md:w-1/2 border border-[#EBE9E0]" type="text" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
+                                            <InputField placeholder="Write a short description of your business." className="text-sm font-sans placeholder:text-sm text-[#919089] w-full md:w-1/2 border border-[#EBE9E0]" type="text" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
 
                                         </div>
 
@@ -258,12 +258,12 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate}: { onClose: any, 
                         {step === 4 && (
                             <div className="">
 
-                                <h1 className="text-3xl">Application Submitted Successfully!</h1>
+                                <h1 className="text-[44px]">Application Submitted Successfully!</h1>
 
-                                <p className="text-xs py-4"> Thank you for applying to become a seller. Our team will review your application and get back to you within a few business days.</p>
+                                <p className="text-[16px] py-4"> Thank you for applying to become a seller. Our team will review your application and get back to you within a few business days.</p>
 
 
-                                <div className="bg-[#F9F8F3] px-3 py-5 font-sans">
+                                <div className="bg-[#F9F8F3] px-3 py-3 font-sans">
                                     <p className="text-sm pb-2">Please note:</p>
 
                                     <div className="px-2 space-y-2">
@@ -272,7 +272,7 @@ const SellerAccountSetting = ({ onClose, sellerData, onUpdate}: { onClose: any, 
                                     </div>
                                 </div>
 
-                                <p className="text-xs font-sans py-4">
+                                <p className="text-sm font-sans py-4">
                                     We’re excited to have you join The Antique Collector community!
                                 </p>
 

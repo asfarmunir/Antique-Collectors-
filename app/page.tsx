@@ -19,6 +19,8 @@ import { slides } from "@/lib/data";
 import { FaHeart } from "react-icons/fa";
 import useProducts from "@/hooks/useProducts";
 import usePosts from "@/hooks/usePosts";
+import { FaRegCommentDots } from "react-icons/fa";
+
 
 
 
@@ -26,13 +28,14 @@ const page = () => {
   const [subEmail, setSubEmail] = useState();
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const { products, isFavorite, toggleFavorite } = useProducts();
   const post = usePosts();
   const router = useRouter();
 
   const posts = post.slice(0, 3);
   const product = products.slice(0, 8);
+  // console.log(product);
 
   const handleLogin = () => {
     setIsLogin(!isLogin);
@@ -90,27 +93,27 @@ const page = () => {
       <main>
         <section className="w-full h-[600px]  lg:h-screen flex items-center justify-center flex-col  relative">
 
-          <div className="w-[150px] h-[140px] md:max-w-[210px] md:max-h-[200px] absolute top-0">
+          <div className="w-[150px] h-[140px] md:min-w-[220px] md:min-h-[250px] absolute top-0 ,">
             <Image
               src="/images/hero1.svg"
               alt="hero"
-              width={0}
-              height={0}
-              layout="responsive"
+              width={250}
+              height={270}
+
               className=" "
             />
           </div>
-          <div className="absolute top-32 md:top-20 w-[90px] h-[90px] md:w-[120px] md:h-[120px] md:max-w-[150px] md:max-h-[150px] left-0 md:left-12 ">
+          <div className="absolute top-32 md:top-20 w-[90px] h-[90px] md:w-[120px] md:h-[120px] md:min-w-[150px] md:min-h-[150px] left-0 md:left-8 ">
             <Image
               src="/images/hero2.svg"
               alt="hero"
-              width={0}
-              height={0}
+              width={150}
+              height={150}
               layout="responsive"
               className=" "
             />
           </div>
-          <div className=" absolute w-[100px] h-[100px] top-24 md:max-w-[150px] md:max-h-[150px] right-0 md:right-10 ">
+          <div className=" absolute w-[100px] h-[100px] top-24 md:min-w-[150px] md:min-h-[150px] right-0 md:right-10 ">
 
             <Image
               src="/images/hero3.svg"
@@ -125,19 +128,19 @@ const page = () => {
           </div>
 
 
-          <div className=" absolute -bottom-16 md:bottom-6  left-6 md:left-0 w-[170px] h-[180px] md:max-h-[220px] md:max-w-[260px]">
+          <div className=" absolute bottom-0 md:bottom-16   left-0 h-[160px] w-[170px] md:min-w-[270px] md:min-h-[250px]">
 
             <Image
               src="/images/hero4.svg"
               alt="hero"
-              width={0}
-              height={0}
-              layout="responsive"
+              width={340}
+              height={340}
+
               className=" "
             />
           </div>
 
-          <div className=" absolute bottom-16 right-0 w-[120px] h-[120px] md:max-w-[150px] md:max-h-[150px]">
+          <div className=" absolute right-0 bottom-16 md:bottom-36 w-[120px] h-[120px] md:min-w-[150px] md:min-h-[150px]">
             <Image
               src="/images/hero6.svg"
               alt="hero"
@@ -150,7 +153,7 @@ const page = () => {
           </div>
 
 
-          <div className=" absolute sm:block hidden  bottom-0 right-72 2xl:right-80 max-h-[200px] max-w-[200px]">
+          <div className=" absolute sm:block hidden  bottom-0 right-72 2xl:right-80 min-h-[200px] min-w-[200px]">
             <Image
               src="/images/hero5.svg"
               alt="hero"
@@ -163,7 +166,7 @@ const page = () => {
 
           </div>
 
-          <h2 className="text-3xl md:text-5xl text-center font-playfair ">
+          <h2 className="text-3xl md:text-5xl leading-normal text-center font-playfair ">
             Welcome to <br />{" "}
             <span className=" italic">The Antique Collector</span>
           </h2>
@@ -180,7 +183,7 @@ const page = () => {
 
 
         <section className=" bg-[#F9F8F3]">
-          <div className="py-8 border-b border-[#EBE9E0] px-4 md:px-6 lg:px-12 flex items-center font-playfair justify-between">
+          <div className="py-6 border-b border-[#EBE9E0] px-4 md:px-6 lg:px-16 flex items-center font-playfair justify-between">
             <h2 className="text-lg 2xl:text-2xl  ">SELLERS</h2>
             <Link href={"/sellers"} className="text-sm font-sans">
               VIEW ALL
@@ -192,8 +195,8 @@ const page = () => {
 
 
 
-          <div className=" w-full flex flex-col-reverse md:flex-row flex-wrap">
-            <div className=" w-full md:w-[50%] px-6 md:px-12  py-6 md:pt-10 border-r border-[#EBE9E0]">
+          <div className=" w-full flex flex-col-reverse md:flex-row flex-wrap ">
+            <div className=" w-full md:w-[50%] px-6 md:px-16  py-6 md:pt-10 border-r border-[#EBE9E0]">
 
               <div className=" relative overflow-hidden">
 
@@ -226,11 +229,11 @@ const page = () => {
                         <h2 className=" text-lg md:text-2xl lg:text-3xl font-playfair">
                           {slide.title}
                         </h2>
-                        <Link href={"#"} className="text-sm">
+                        <Link href={"#"} className="text-[12px]">
                           FOLLOW
                         </Link>
                       </div>
-                      <p className="text-sm">
+                      <p className="text-[12px] text-[#463F3A]">
                         {slide.description}
                       </p>
                     </div>
@@ -240,10 +243,10 @@ const page = () => {
 
               </div>
 
-              <div className="flex flex-row justify-center mt-4">
+              <div className="flex flex-row justify-center mt-8">
                 {slides.map((_, index) => (
                   <div key={index} onClick={() => handleDotClick(index)}
-                    className={`w-5 rounded-sm h-1 mx-2 cursor-pointer ${currentIndex === index ? "bg-[#919089]" : "bg-[#EBE9E0]"}`}
+                    className={`w-8 rounded-sm h-1 mx-2 cursor-pointer ${currentIndex === index ? "bg-[#919089]" : "bg-[#EBE9E0]"}`}
                   ></div>
 
                 ))}
@@ -264,14 +267,14 @@ const page = () => {
               <h2 className="text-2xl md:text-4xl lg:text-6xl   text-center font-playfair ">
                 Featured Sellers
               </h2>
-              <p className="text-center max-w-xl px-6 text-sm 2xl:text-base my-6">
+              <p className="text-center max-w-xl px-6 text-sm text-[#463F3A] text-[14px] 2xl:text-base my-6">
                 Lorem ipsum dolor sit amet consectetur. Ullamcorper habitasse eget
                 elit sit magna et diam faucibus elit. Scelerisque nec in semper ac
                 pellentesque arcu iaculis mauris sed. Nunc arcu scelerisque tellus
                 erat purus. Dui scelerisque semper aliquam risus lacinia sit amet
                 a.
               </p>
-              <button className=" py-3 2xl:py-4 px-16  bg-black text-xs 2xl:text-sm text-white ">
+              <button className=" py-3 2xl:py-4 px-16 hover:opacity-80 bg-black text-xs 2xl:text-sm text-white ">
                 BECOME A SELLER
               </button>
               <Table className=" w-full mt-12">
@@ -282,10 +285,10 @@ const page = () => {
                         <div className="bg-[#919089] p-2 rounded-full w-8 h-8 flex items-center justify-center">
                           <Image src="/" width={10} height={10} className="rounded-full" alt="" />
                         </div>
-                        <p>Antique Animal Jewelry</p>
+                        <p className="text-[20px]">Antique Animal Jewelry</p>
                       </div>
                     </TableCell>
-                    <TableCell className="text-center text-lg border-y border-[#EBE9E0] text-[#0D0106]">
+                    <TableCell className="text-center text-sm border-y border-[#EBE9E0] text-[#0D0106]">
                       Follow
                     </TableCell>
                   </TableRow>
@@ -295,10 +298,10 @@ const page = () => {
                         <div className="bg-[#EBE9E0] p-2 rounded-full w-8 h-8 flex items-center justify-center">
                           <Image src="/" width={10} height={10} className="rounded-full" alt="" />
                         </div>
-                        <p>Patrick Boyd Carpenter</p>
+                        <p className="text-[20px]">Patrick Boyd Carpenter</p>
                       </div>
                     </TableCell>
-                    <TableCell className="text-center text-lg border-y border-[#EBE9E0] text-[#0D0106]">
+                    <TableCell className="text-center text-sm border-y border-[#EBE9E0] text-[#0D0106]">
                       Follow
                     </TableCell>
                   </TableRow>
@@ -308,10 +311,10 @@ const page = () => {
                         <div className="bg-[#EBE9E0] p-2 rounded-full w-8 h-8 flex items-center justify-center">
                           <Image src="/" width={10} height={10} className="rounded-full" alt="" />
                         </div>
-                        <p>Inezstodel Cloth House</p>
+                        <p className="text-[20px]">Inezstodel Cloth House</p>
                       </div>
                     </TableCell>
-                    <TableCell className="text-center text-lg  border-y border-[#EBE9E0] text-[#0D0106]">
+                    <TableCell className="text-center text-sm  border-y border-[#EBE9E0] text-[#0D0106]">
                       Follow
                     </TableCell>
                   </TableRow>
@@ -321,10 +324,10 @@ const page = () => {
                         <div className="bg-[#EBE9E0] p-2 rounded-full w-8 h-8 flex items-center justify-center">
                           <Image src="/" width={10} height={10} className="rounded-full" alt="" />
                         </div>
-                        <p>Inezstodel Cloth House</p>
+                        <p className="text-[20px]">Inezstodel Cloth House</p>
                       </div>
                     </TableCell>
-                    <TableCell className="text-center text-lg  border-y border-[#EBE9E0] text-[#0D0106]">
+                    <TableCell className="text-center text-sm  border-y border-[#EBE9E0] text-[#0D0106]">
                       Follow
                     </TableCell>
                   </TableRow>
@@ -339,50 +342,63 @@ const page = () => {
 
 
         <section className="pb-12">
-          <div className="py-8 px-4 md:px-6 lg:px-12 border-b border-[#EBE9E0]  flex items-center font-playfair justify-between">
-            <h2 className="text-lg 2xl:text-2xl">LATEST PRODUCTS</h2>
+          <div className="py-6 px-4 md:px-6 lg:px-16 border-b border-[#EBE9E0]  flex items-center font-playfair justify-between">
+            <h2 className="text-lg md:text-[24px]">LATEST PRODUCTS</h2>
             <Link className="text-sm font-sans" href={"/products"}>VIEW ALL</Link>
 
           </div>
           <div className="flex flex-row flex-nowrap md:flex-wrap overflow-x-auto py-6 md:py-10 px-4 md:px-6 lg:px-10">
             {product.map((p, index) => {
-              const isLastRow = Math.floor(index / 4) === Math.floor((products.length - 1) / 4); // Check if the product is in the last row
-              const isLastColumn = (index + 1) % 4 === 0; // Check if the product is in the last column
+              const isLastRow = Math.floor(index / 4) === Math.floor((product.length - 1) / 4);
+              const isLastColumn = (index + 1) % 4 === 0;
               const isFavorited = isFavorite(p.id);
+
               return (
                 <div
                   key={p.id}
-                  className={`flex-shrink-0 w-full md:w-1/4 flex flex-col md:py-6   relative ${!isLastRow ? ' md:border-b md:border-[#EBE9E0]' : ''
-                    } ${!isLastColumn ? 'border-r border-[#EBE9E0]' : ''} px-6`}
-                  onClick={() => handleProductDetails(p.id)}>
-                  <div className=" flex items-center justify-center relative">
-                    <div className="absolute top-2 right-4 z-20">
+                  className={`flex-shrink-0 w-full md:w-1/4 flex flex-col md:py-6 relative px-6 ${!isLastRow ? 'md:border-b md:border-[#EBE9E0]' : ''} ${!isLastColumn ? 'border-r border-[#EBE9E0]' : ''}`}
+                  onClick={() => handleProductDetails(p.id)}
+                >
+                  {/* Product Image Container */}
+                  <div className="relative group">
+                    {/* Favorite Button */}
+                    <div className="absolute top-2 right-4 z-10">
                       <button
                         onClick={() => toggleFavorite(p.id)}
                         aria-label={`Add ${p.title} to favorites`}
                         className="text-xl font-semibold focus:outline-none"
                       >
                         {isFavorited ? (
-                          <FaHeart className="text-red-500" /> // Filled heart for favorited
+                          <FaHeart className="text-red-500" />
                         ) : (
-                          <CiHeart className="text-gray-500" /> // Outline heart for non-favorited
+                          <CiHeart className="text-gray-500" />
                         )}
                       </button>
                     </div>
+
+                    {/* Product Image */}
                     <Image
                       src="/images/products/p1.png"
                       alt={p.title}
                       width={150}
-                      className="w-full h-full object-contain object-center transform hover:scale-105 transition duration-500 ease-in-out"
+                      className="w-full h-full object-contain object-center transform hover:scale-105 hover:blur-md transition duration-500 ease-in-out"
                       height={150}
                     />
+
+                    {/* Likes and Comments Overlay on Hover */}
+                    <div className="absolute inset-0 bg-white bg-opacity-80   flex flex-row gap-4 items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <p className="text-sm text-black flex items-center gap-4"><CiHeart className="text-lg" /> {p.likes || 34}</p>
+                      <p className="text-sm text-black flex items-center gap-4"><FaRegCommentDots className="text-lg" /> {p.comments || 34}</p>
+                    </div>
                   </div>
+
+                  {/* Product Details */}
                   <div className="w-full mt-4">
                     <div className="flex flex-row gap-4 justify-between">
-                      <p className="text-[#919089] mb-1 text-sm">{p.brand}</p>
-                      <Link href={"#"} className="text-[#919089] text-sm">FOLLOW</Link>
+                      <p className="text-[#919089] mb-1 text-[12px]">{p.brand}</p>
+                      <Link href={"#"} className="text-[#919089] text-[12px]">FOLLOW</Link>
                     </div>
-                    <h2 className="text-sm md:text-base">{p.title}</h2>
+                    <h2 className="text-[14px] md:text-base">{p.title}</h2>
                   </div>
                 </div>
               );
@@ -415,13 +431,13 @@ const page = () => {
           <h2 className=" text-3xl lg:text-5xl text-white mt-6  text-center font-playfair ">
             Live Presentations
           </h2>
-          <p className="text-center px-6 max-w-xl 2xl:max-w-3xl text-white text-sm 2xl:text-base my-6">
+          <p className="text-center px-6 max-w-xl 2xl:max-w-3xl text-[#FFFFFF] text-sm 2xl:text-base my-6">
             Lorem ipsum dolor sit amet consectetur. Sed amet bibendum at venenatis
             faucibus mi fringilla viverra. In nulla aliquam magna orci neque
             penatibus neque eget. Commodo scelerisque cursus purus id fermentum
             lorem nisi sit malesuada.
           </p>
-          <button onClick={handleLiveShows} className=" py-3 uppercase 2xl:py-4 px-16  bg-white text-xs 2xl:text-sm text-black ">
+          <button onClick={handleLiveShows} className=" py-3 uppercase 2xl:py-4 px-16  bg-white hover:bg-gray-900 text-xs 2xl:text-sm hover:text-white text-black ">
             see upcoming live shows
           </button>
 
@@ -430,8 +446,8 @@ const page = () => {
 
 
         <section className="bg-white">
-          <div className=" py-8 border-b border-[#EBE9E0] px-4 md:px-6 lg:px-12 flex items-center font-playfair justify-between">
-            <h2 className="text-lg 2xl:text-2xl  ">CATEGORIES</h2>
+          <div className=" py-6 border-b border-[#EBE9E0] px-4 md:px-6 lg:px-16 flex items-center font-playfair justify-between">
+            <h2 className="text-lg md:text-[24px] ">CATEGORIES</h2>
             <Link href={"#"} className="text-sm font-sans">
               VIEW ALL
             </Link>
@@ -440,13 +456,13 @@ const page = () => {
 
 
 
-        <section className=" bg-[#F9F8F3] p-8 md:p-10  lg:px-12 lg:py-16">
+        <section className=" bg-[#F9F8F3] p-8 md:p-10  lg:px-16 lg:py-16">
           <h1 className="text-3xl lg:text-5xl font-playfair mb-16">
             Find your interest
           </h1>
-          <div className="flex flex-row flex-wrap justify-start md:justify-between gap-8">
+          <div className="flex flex-row flex-wrap justify-start md:justify-between gap-[36px]">
             {intrests.map((intrest, index) => (
-              <div key={index} className="flex flex-col flex-nowrap items-center justify-between">
+              <div key={index} className="flex flex-col flex-nowrap gap-6 items-center justify-between">
                 <div className="mb-3">
                   <Image
                     src={intrest.image}
@@ -463,8 +479,8 @@ const page = () => {
         </section>
 
         <section className="bg-white">
-          <div className=" py-8 border-b border-[#EBE9E0] px-4 md:px-6 lg:px-12 flex items-center font-playfair justify-between">
-            <h2 className="text-lg 2xl:text-2xl  ">PERIODS</h2>
+          <div className=" py-6 border-b border-[#EBE9E0] px-4 md:px-6 lg:px-16 flex items-center font-playfair justify-between">
+            <h2 className="text-lg md:text-[24px]">PERIODS</h2>
             <Link href={"#"} className="text-sm font-sans">
               VIEW ALL
             </Link>
@@ -474,34 +490,34 @@ const page = () => {
 
 
 
-        <section className="bg-[#FFFFFF] px-4 md:px-6 lg:px-12 py-10 md:py-20 border-b border-[#EBE9E0]">
+        <section className="bg-[#FFFFFF] px-4 md:px-6 lg:px-16 py-10 md:py-20 border-b border-[#EBE9E0]">
           <div className="grid md:grid-cols-4">
-            <div className="md:col-span-3">
+            <div className="md:col-span-3 flex flex-col justify-center ">
 
-              <div className="text-3xl md:text-5xl  font-playfair ">
-                <h1 className="italic">Victorian Elegance:</h1>
-                <h1 className="mt-2">A Journey Through 19th Century Artistry</h1>
+              <div className="text-3xl md:text-[48px] space-y-4 font-playfair ">
+                <h1 className="italic leading-[12px] md:leading-[50px] tracking-tighter">Victorian Elegance:</h1>
+                <h1 className="tracking-normal">A Journey Through 19th Century Artistry</h1>
               </div>
 
 
-              <p className="py-10 text-[14px]">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta exercitationem harum magnam eaque cupiditate natus. Maxime possimus perspiciatis id sed illum reprehenderit natus alias consequuntur ea facilis. Expedita, dignissimos deserunt?</p>
+              <p className="py-10 pr-1 text-[14px]">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta exercitationem harum magnam eaque cupiditate natus. Maxime possimus perspiciatis id sed illum reprehenderit natus alias consequuntur ea facilis. Expedita, dignissimos deserunt? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta iste esse, praesentium nobis consequuntur dolores numquam ad debitis, beatae et corrupti id eius perferendis sunt. Sint nulla earum laborum voluptas?</p>
 
               <Link href={"#"} className="text-sm uppercase">See Collection</Link>
             </div>
 
-            <div className="md:col-span-1  relative py-3 mt-8 md:mt-0 md:mx-8 bg-[#EBE9E0] px-3">
+            <div className="md:col-span-1  relative py-3 mt-8 md:mt-0  bg-[#EBE9E0] p-[20px] pb-[24px]">
 
-              <div className="absolute top-4 right-5 ">
+              <div className="absolute top-5 right-7 ">
                 <CiHeart />
               </div>
               <Image src="/images/products/p1.png" width={140} height={100} alt="img" layout="responsive" />
 
               <div className="text-sm text-[#919089] flex flex-row gap-2 justify-between flex-nowrap mt-3">
                 <h1>Seller Name</h1>
-                <Link href={"#"}>Follow</Link>
+                <Link href={"#"} className="uppercase text-[12px]">Follow</Link>
               </div>
 
-              <p className="text-[#0D0106] text-sm mt-2">NATIVE IRON CHAIR</p>
+              <p className="text-[#0D0106] text-[14px] mt-2">NATIVE IRON CHAIR</p>
 
             </div>
 
@@ -512,8 +528,8 @@ const page = () => {
 
 
         <section className="bg-white">
-          <div className=" py-8 border-b border-[#EBE9E0] px-4 md:px-6 lg:px-12 flex items-center font-playfair justify-between">
-            <h2 className="text-lg 2xl:text-2xl  ">Blog</h2>
+          <div className=" py-6 border-b border-[#EBE9E0] px-4 md:px-6 lg:px-16 flex items-center font-playfair justify-between">
+            <h2 className="text-lg md:text-[24px]  ">Blog</h2>
             <Link href={"/blog"} className="text-sm font-sans">
               VIEW ALL
             </Link>
@@ -524,7 +540,7 @@ const page = () => {
 
 
         {/* blogs card details add here */}
-        <section className="px-4 md:px-6 lg:px-10 ">
+        <section className="px-4 md:px-6 lg:px-16 ">
           <div className="grid  sm:grid-cols-2 md:grid-cols-3 gap-4 w-full ">
             {posts.map((b) => (
               <div key={b.id} className="w-full py-3 md:py-5 md:pr-4  border-b last:border-b-0 md:border-r border-[#DFDEDB] last:border-r-0">
@@ -535,7 +551,7 @@ const page = () => {
                   width={120}
                   alt={b.title}
                 />
-                <h1 className="text-xl font-playfair py-3">{b.title}</h1>
+                <h1 className="text-[24px] font-playfair py-3 capitalize tracking-tight">{b.title}</h1>
                 <p className="text-sm text-[#463F3A] line-clamp-6">{b.body}</p>
 
 
@@ -554,23 +570,23 @@ const page = () => {
 
         <section className="bg-[#F9F8F3] pt-10 pb-12 md:pb-28 md:px-8">
           <div className="flex flex-col items-center  px-6">
-            <h1 className="text-4xl font-playfair">How it works</h1>
-            <p className="uppercase py-4 text-xs text-center">we are specialized in adornments, that bring charm to any environment.</p>
-            <p className="md:w-[600px] text-justify ">Lorem ipsum dolor sit amet consectetur. In laoreet viverra sed auctor amet nec senectus porta. Ac commodo cum ut quam vitae sollicitudin aenean. Sit volutpat nunc et aenean. Sed condimentum felis at rhoncus. Gravida placerat senectus tortor id vitae nullam orci mollis. Consequat commodo tellus varius purus quam nulla. Enim tellus ac convallis enim convallis sed. Augue amet morbi penatibus.</p>
+            <h1 className="text-[64px] font-playfair">How it works</h1>
+            <p className="uppercase tracking-widest py-4 text-xs text-center">we are specialized in adornments, that bring charm to any environment.</p>
+            <p className="md:w-[500px] text-center ">Lorem ipsum dolor sit amet consectetur. In laoreet viverra sed auctor amet nec senectus porta. Ac commodo cum ut quam vitae sollicitudin aenean. Sit volutpat nunc et aenean. Sed condimentum felis at rhoncus. Gravida placerat senectus tortor id vitae nullam orci mollis. Consequat commodo tellus varius purus quam nulla. Enim tellus ac convallis enim convallis sed. Augue amet morbi penatibus.</p>
 
-            <Button onClick={handleLogin} label="Create a Free Account" className="uppercase my-8 " />
+            <Button onClick={handleLogin} label="Create a Free Account" className="uppercase my-8 text-sm py-4 px-8  hover:opacity-80" />
           </div>
 
 
 
           <div className="bg-[#463F3A] py-10  text-white px-4">
             <div className="flex flex-col items-center justify-between">
-              <h1 className="text-2xl md:text-3xl font-light font-playfair italic">Stay in the Loop:</h1>
-              <h1 className="text-2xl text-center font-light md:text-3xl font-playfair mt-3">
+              <h1 className="text-2xl md:text-[48px] leading-[50px] tracking-tight font-light font-playfair italic">Stay in the Loop:</h1>
+              <h1 className="text-2xl text-center font-light md:text-[48px] font-playfair mt-3">
                 Discover Exclusive Antiques & Insights</h1>
 
 
-              <div className="w-full md:w-1/3 my-8 flex flex-row gap-2 sm:gap-2">
+              <div className="w-full md:w-1/3 my-12 flex flex-row  gap-1">
                 <InputField
                   type="email"
                   value={subEmail}
@@ -585,15 +601,15 @@ const page = () => {
                 />
               </div>
             </div>
-            <div className="flex  flex-row flex-wrap  justify-between items-center gap-2 ">
+            <div className="px-4 flex  flex-row flex-wrap  justify-between items-center gap-2 ">
               {intrests.map((intrest, index) => (
                 <div key={index} className="">
                   <div className="mb-3">
                     <Image
                       src={intrest.image}
                       alt="interest"
-                      width={60}
-                      height={60}
+                      width={80}
+                      height={80}
                       className=" "
                     />
                   </div>

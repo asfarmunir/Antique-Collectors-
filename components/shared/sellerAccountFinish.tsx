@@ -61,7 +61,7 @@ const SellerAccountFinish = ({ onClose, sellerData }: { onClose: any, sellerData
                   }))
                 }
               />
-              <label htmlFor="notifications" className="text-[10px] uppercase font-sans tracking-wider">
+              <label htmlFor="notifications" className="text-[11px] uppercase font-sans tracking-wider">
                 Enable email notifications to get updates on items matching your preferences.
               </label>
             </div>

@@ -35,3 +35,25 @@ const useProducts = () => {
 };
 
 export default useProducts;
+
+
+export const useProductDetails = (id: number) => {
+  const [productDetails, setProductDetails] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      if (!id) return; // Ensure an ID is provided
+      try {
+        const response = await fetch(`https://dummyjson.com/products/${id}`);
+        const data = await response.json();
+        setProductDetails(data); // Single product object
+      } catch (error) {
+        console.error("Error fetching product details:", error);
+      }
+    };
+
+    fetchProductDetails();
+  }, [id]); // Trigger whenever `id` changes
+
+  return { productDetails };
+};

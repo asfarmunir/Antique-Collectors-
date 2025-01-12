@@ -1,6 +1,6 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
-const config = {
+const config: Config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -13,42 +13,42 @@ const config = {
       center: true,
       padding: "2rem",
       screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
         "2xl": "1400px",
       },
     },
     extend: {
       colors: {
         primary: {
-          500: "#624CF5",
-          50: " #FEAFB1",
+          DEFAULT: "#624CF5",
+          50: "#FEAFB1",
           100: "#230E2C",
-          200: '#470257',
-          DEFAULT: "#FEE2E4",
+          200: "#470257",
+          500: "#624CF5",
           foreground: "hsl(var(--primary-foreground))",
         },
         primary2: {
-          DEFAULT:"#AD1AAF",
-          50:"#E71CE8",
-          100:"#05778D",
-          200:"#10394D",
-        },
-        coral: {
-          500: "#15BF59",
+          DEFAULT: "#AD1AAF",
+          50: "#E71CE8",
+          100: "#05778D",
+          200: "#10394D",
         },
         brown: {
-          DEFAULT:"#C6AC8F",
-          50:"#EFE7DD",
-          100:"#65625D",
-          200: '#C6AC8F',
-          300:"#E9DED3",
-          400: "#F3EFE8"
+          DEFAULT: "#C6AC8F",
+          50: "#EFE7DD",
+          100: "#65625D",
+          200: "#C6AC8F",
+          300: "#E9DED3",
+          400: "#F3EFE8",
         },
-
         grey: {
-          600: "#545454", // Subdued - color name in figma
+          600: "#545454",
           500: "#757575",
-          400: "#AFAFAF", // Disabled - color name in figma
-          50: "#F6F6F6", // White Grey - color name in figma
+          400: "#AFAFAF",
+          50: "#F6F6F6",
         },
         black: "#000000",
         white: "#FFFFFF",
@@ -85,7 +85,7 @@ const config = {
         oxanium: ["var(--font-oxanium)"],
         averia: ["var(--font-averia)"],
         playfair: ["var(--font-playfair-display)"],
-        poppins : ["var(--font-poppins)"]
+        poppins: ["var(--font-poppins)"],
       },
       backgroundImage: {
         "hero-img": "url('/assets/images/hero.png')",
@@ -95,7 +95,6 @@ const config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      // these keyframes will be used bt the shadCn Ui library for animations of components.
       keyframes: {
         aurora: {
           from: {
@@ -120,17 +119,14 @@ const config = {
         },
       },
       animation: {
-                aurora: "aurora 60s linear infinite",
-
+        aurora: "aurora 60s linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-          scroll:
-          "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
-     
+        scroll: "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+};
 
-export default config
+export default config;

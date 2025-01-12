@@ -11,15 +11,17 @@ import { FaRegCommentDots } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useProducts from "@/hooks/useProducts";
+import { useProductDetails } from "@/hooks/useProducts";
 
 
 const ProductDetails = ({ params }: { params: any }) => {
     //  const [products, setProducts] = useState<any>(null); // Full product list
     const { products, toggleFavorite, isFavorite } = useProducts();
-
     const router = useRouter()
     const { id } = params;
+    const { productDetails } = useProductDetails(id);
 
+    console.log('detail', productDetails);
 
 
     const images = [
@@ -57,15 +59,12 @@ const ProductDetails = ({ params }: { params: any }) => {
 
 
 
-
-
-
     return (
         <>
             <div>
                 <div className="py-4 px-4 md:px-6 lg:px-12 border-y border-[#EBE9E0]" >
-                    <h1 className="text-xs">Home / Products / {products?.category}</h1>
-                    <h1 className="font-playfair pt-4 uppercase text-xl ">{products?.title}</h1>
+                    <h1 className="text-xs">Home / Products / {productDetails?.category}</h1>
+                    <h1 className="font-playfair pt-4 uppercase text-[24px] ">{productDetails?.title}</h1>
                 </div>
 
                 {/* Product details here */}
@@ -132,36 +131,36 @@ const ProductDetails = ({ params }: { params: any }) => {
                                     <div className="bg-[#EBE9E0] p-2 rounded-full w-8 h-8 flex items-center justify-center">
                                         <Image src="/" width={10} height={10} className="rounded-full" alt="Seller logo" />
                                     </div>
-                                    <h1 className="uppercase font-playfair">Seller Name</h1>
+                                    <h1 className="uppercase font-playfair text-[20px]">Seller Name</h1>
                                 </div>
-                                <h1 className="text-[#0D0106] text-xs cursor-pointer hover:underline">FOLLOW</h1>
+                                <h1 className="text-[#0D0106] text-[12px] cursor-pointer hover:underline">FOLLOW</h1>
                             </div>
 
                             {/* Product Title */}
-                            <h1 className="text-lg md:text-xl uppercase font-playfair my-4">{products?.title}</h1>
+                            <h1 className="text-lg md:text-xl uppercase font-playfair my-4">{productDetails?.title}</h1>
 
                             {/* Product Description */}
                             <p className="text-[#919089]  mb-4 text-sm md:text-sm">
-                                {products?.description}
+                                {productDetails?.description}
                             </p>
 
                             {/* Product Specifications */}
                             <div className="flex flex-wrap justify-between py-3 gap-4  text-gray-800">
-                                <div className="text-[10px]">
+                                <div className="text-[12px] ">
                                     <p className="text-[#919089] uppercase">Price</p>
-                                    <p className="">$ {products?.price}</p>
+                                    <p className="mt-2">$ {productDetails?.price}</p>
                                 </div>
-                                <div className="text-[10px]">
+                                <div className="text-[12px]">
                                     <p className="text-[#919089] uppercase">Measurements</p>
-                                    <p>{products?.dimensions?.width} CM X {products?.dimensions?.height} CM</p>
+                                    <p className="mt-2">{productDetails?.dimensions?.width} CM X {productDetails?.dimensions?.height} CM</p>
                                 </div>
-                                <div className="text-[10px]">
+                                <div className="text-[12px]">
                                     <p className="text-[#919089] uppercase">Date & Origin</p>
-                                    <p>140CM X 120CM</p>
+                                    <p className="mt-2">140CM X 120CM</p>
                                 </div>
-                                <div className="text-[10px]">
+                                <div className="text-[12px]">
                                     <p className="text-[#919089] uppercase">Materials</p>
-                                    <p>140CM X 120CM</p>
+                                    <p className="mt-2">140CM X 120CM</p>
                                 </div>
                             </div>
 
@@ -170,7 +169,7 @@ const ProductDetails = ({ params }: { params: any }) => {
                                 <Button
                                     label="Add to favorite"
                                     icon={<CiHeart className="text-xl" />}
-                                    className="bg-white uppercase text-xs text-nowrap md:text-sm border border-black text-black w-full py-2 hover:bg-gray-100"
+                                    className="bg-white uppercase text-xs hover:bg-black hover:text-white text-nowrap md:text-sm border border-black text-black w-full py-2 "
                                 />
                                 <Button
                                     label="Send a Query"
@@ -204,10 +203,10 @@ const ProductDetails = ({ params }: { params: any }) => {
 
                                 <div className="flex flex-row gap-6  text-[#919089]">
                                     <button className="flex flex-row gap-2 items-center ">
-                                        <CiHeart className="text-xl" /> 23
+                                        <CiHeart className="text-xl]" /> <span className="text-[#463F3A]"> 23</span>
                                     </button>
                                     <button className="flex flex-row gap-2 items-center ">
-                                        <LuReply className="text-xl" /> 32
+                                        <LuReply className="text-xl" /> <span className="text-[#463F3A]"> 35</span>
                                     </button>
                                 </div>
 
@@ -218,12 +217,12 @@ const ProductDetails = ({ params }: { params: any }) => {
                     <div className="md:col-span-4">
 
 
-                        <div className="flex flex-row flex-wrap items-center justify-between gap-2 mx-4 md:mx-5 my-2 border-b pb-3 border-[#EBE9E0]">
-                            <p className="text-sm md:text-base font-playfair uppercase">Other Products by Seller Name</p>
+                        <div className="flex flex-row flex-wrap items-center justify-between gap-2 mx-4 md:ml-10 my-2 border-b pb-3 border-[#EBE9E0]">
+                            <p className="text-sm md:text-[20px] font-playfair uppercase">Other Products by Seller Name</p>
                             <Link href={"/sellers"} className="uppercase text-[#463F3A] text-sm">View All</Link>
                         </div>
-                        <div className=" w-full px-4">
-                            <div className="flex flex-row flex-nowrap md:flex-nowrap overflow-x-auto px-4 md:px-6 lg:px-10 my-6">
+                        <div className=" w-full pr-4">
+                            <div className="flex flex-row flex-nowrap md:flex-nowrap overflow-x-auto  lg:ml-10 my-6">
                                 {products.map((p, index) => {
 
                                     const isFavorited = isFavorite(p.id);
@@ -232,7 +231,7 @@ const ProductDetails = ({ params }: { params: any }) => {
                                             key={p.id}
                                             className={`flex-shrink-0 w-full md:w-1/2 flex flex-col  border-r border-[#EBE9E0] last:border-r-0 relative px-6`}
                                             onClick={() => handleProductDetails(p.id)}>
-                                            <div className=" flex items-center justify-center relative">
+                                            <div className=" flex items-center justify-center relative group">
                                                 <div className="absolute top-2 right-4 z-20">
                                                     <button
                                                         onClick={() => toggleFavorite(p.id)}
@@ -253,6 +252,12 @@ const ProductDetails = ({ params }: { params: any }) => {
                                                     className="w-full h-full object-contain object-center transform hover:scale-105 transition duration-500 ease-in-out"
                                                     height={150}
                                                 />
+
+                                                {/* Likes and Comments Overlay on Hover */}
+                                                <div className="absolute inset-0 bg-white bg-opacity-80   flex flex-row gap-4 items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                    <p className="text-sm text-black flex items-center gap-4"><CiHeart className="text-lg" /> {p.likes || 34}</p>
+                                                    <p className="text-sm text-black flex items-center gap-4"><FaRegCommentDots className="text-lg" /> {p.comments || 34}</p>
+                                                </div>
                                             </div>
                                             <div className="w-full mt-4">
                                                 <div className="flex flex-row gap-4 justify-between">
@@ -275,58 +280,64 @@ const ProductDetails = ({ params }: { params: any }) => {
 
                 {/* recommeded product add below */}
 
-                <div className="px-4 md:px-6 lg:px-10">
+                <div className="px-4 md:px-6 lg:px-12">
                     <div className="flex flex-row flex-wrap items-center justify-between gap-6 mt-8 pb-3">
-                        <h2 className="text-sm md:text-base font-playfair uppercase">Recommedned Product for you</h2>
+                        <h2 className="text-sm md:text-[20px] font-playfair uppercase">Recommedned Product for you</h2>
                         <Link href={"/products"} className="text-sm ">
                             VIEW ALL
                         </Link>
                     </div>
 
 
-                    <div className="border-y border-[#EBE9E0] w-full py-6">
-                    <div className="flex flex-row flex-nowrap md:flex-nowrap overflow-x-auto  my-6">
-                                {products.map((p, index) => {
+                    <div className="border-y border-[#EBE9E0] w-full py-2">
+                        <div className="flex flex-row flex-nowrap md:flex-nowrap overflow-x-auto  my-6">
+                            {products.map((p, index) => {
 
-                                    const isFavorited = isFavorite(p.id);
-                                    return (
-                                        <div
-                                            key={p.id}
-                                            className={`flex-shrink-0 w-full md:w-1/4 flex flex-col  border-r border-[#EBE9E0] last:border-r-0 relative px-6`}
-                                            onClick={() => handleProductDetails(p.id)}>
-                                            <div className=" flex items-center justify-center relative">
-                                                <div className="absolute top-2 right-4 z-20">
-                                                    <button
-                                                        onClick={() => toggleFavorite(p.id)}
-                                                        aria-label={`Add ${p.title} to favorites`}
-                                                        className="text-xl font-semibold focus:outline-none"
-                                                    >
-                                                        {isFavorited ? (
-                                                            <FaHeart className="text-red-500" /> // Filled heart for favorited
-                                                        ) : (
-                                                            <CiHeart className="text-gray-500" /> // Outline heart for non-favorited
-                                                        )}
-                                                    </button>
-                                                </div>
-                                                <Image
-                                                    src="/images/products/p1.png"
-                                                    alt={p.title}
-                                                    width={150}
-                                                    className="w-full h-full object-contain object-center transform hover:scale-105 transition duration-500 ease-in-out"
-                                                    height={150}
-                                                />
+                                const isFavorited = isFavorite(p.id);
+                                return (
+                                    <div
+                                        key={p.id}
+                                        className={`flex-shrink-0 w-full md:w-1/4 flex flex-col  border-r border-[#EBE9E0] last:border-r-0 relative px-6`}
+                                        onClick={() => handleProductDetails(p.id)}>
+                                        <div className=" flex items-center justify-center relative group">
+                                            <div className="absolute top-2 right-4 z-20">
+                                                <button
+                                                    onClick={() => toggleFavorite(p.id)}
+                                                    aria-label={`Add ${p.title} to favorites`}
+                                                    className="text-xl font-semibold focus:outline-none"
+                                                >
+                                                    {isFavorited ? (
+                                                        <FaHeart className="text-red-500" /> // Filled heart for favorited
+                                                    ) : (
+                                                        <CiHeart className="text-gray-500" /> // Outline heart for non-favorited
+                                                    )}
+                                                </button>
                                             </div>
-                                            <div className="w-full mt-4">
-                                                <div className="flex flex-row gap-4 justify-between">
-                                                    <p className="text-[#919089] mb-1 text-sm">{p.brand}</p>
-                                                    <Link href={"#"} className="text-[#919089] text-sm">FOLLOW</Link>
-                                                </div>
-                                                <h2 className="text-sm md:text-base">{p.title}</h2>
+                                            <Image
+                                                src="/images/products/p1.png"
+                                                alt={p.title}
+                                                width={150}
+                                                className="w-full h-full object-contain object-center transform hover:scale-105 transition duration-500 ease-in-out"
+                                                height={150}
+                                            />
+
+                                            {/* Likes and Comments Overlay on Hover */}
+                                            <div className="absolute inset-0 bg-white bg-opacity-80   flex flex-row gap-4 items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <p className="text-sm text-black flex items-center gap-4"><CiHeart className="text-lg" /> {p.likes || 34}</p>
+                                                <p className="text-sm text-black flex items-center gap-4"><FaRegCommentDots className="text-lg" /> {p.comments || 34}</p>
                                             </div>
                                         </div>
-                                    );
-                                })}
-                            </div>
+                                        <div className="w-full mt-4">
+                                            <div className="flex flex-row gap-4 justify-between">
+                                                <p className="text-[#919089] mb-1 text-sm">{p.brand}</p>
+                                                <Link href={"#"} className="text-[#919089] text-sm">FOLLOW</Link>
+                                            </div>
+                                            <h2 className="text-sm md:text-base">{p.title}</h2>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
 
 

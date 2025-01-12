@@ -5,8 +5,9 @@ export interface Product {
     price: number;
     image: string;
     brand: string;
-    like?: number;
-    comment?: number;
+    likes?: number;
+    comments?: number;
+    category: string;
 }
 
 

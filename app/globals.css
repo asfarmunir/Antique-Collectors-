@@ -7,6 +7,10 @@
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
+    --font-poppins: 'Poppins', sans-serif;
+    --font-open-sans: 'Open Sans', sans-serif;
+    --font-playfair-display: 'Playfair Display', serif;
+
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 

@@ -735,7 +735,7 @@ export const sellerdata=[
 
 export const intrests = [
     {
-        name: "jwellery",
+        name: "jewellry",
         image: "/images/jewellery.svg",
     },
     {

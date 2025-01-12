@@ -21,7 +21,7 @@ export function LivePresentation({ onClose }: { onClose: any }) {
   return (
     <div className="relative">
       <Dialog open onOpenChange={onClose}>
-        <DialogContent className="font-playfair max-h-[90vh] overflow-y-auto">
+        <DialogContent className="font-playfair max-h-[90vh] overflow-y-auto" customWidth="max-w-2xl">
           <DialogHeader className="font-playfair text-xl border-b border-[#EBE9E0] pb-2">
             <DialogTitle>
               <Button onClick={onClose} icon={<RxCross2 className="text-black" />} label="" className="bg-transparent absolute right-0 top-4" />
@@ -29,8 +29,8 @@ export function LivePresentation({ onClose }: { onClose: any }) {
             </DialogTitle>
           </DialogHeader>
 
-          <div>
-            <p className="bg-[#EBE9E0] text-center text-sm py-1">Available to watch for another 14 hours</p>
+          <div className="mt-2">
+            <p className="bg-[#EBE9E0] text-center text-sm py-1 font-sans uppercase">Available to watch for another 14 hours</p>
             <div className="my-2">
               <div className="pb-2">
                 <div style={{ height: "200px", width: "full", position: "relative" }}>
@@ -43,11 +43,11 @@ export function LivePresentation({ onClose }: { onClose: any }) {
                 </div>
 
                 <div className="flex flex-row items-center gap-4 py-2 justify-between">
-                  <h1 className="font-playfair">Home Decor originating from Italy</h1>
+                  <h1 className="font-playfair text-[20px]">Home Decor originating from Italy</h1>
                   <button><LuUpload className="text-lg" /></button>
                 </div>
 
-                <p className="text-sm">Streamed 22 hours ago</p>
+                <p className="text-sm font-sans">Streamed 22 hours ago</p>
               </div>
 
               <div>
@@ -63,10 +63,10 @@ export function LivePresentation({ onClose }: { onClose: any }) {
                       />
                     </div>
 
-                    <h1 className="text-xs uppercase text-[#919089]">Seller Name</h1>
+                    <h1 className="text-xs uppercase text-[#919089] font-sans">Seller Name</h1>
                   </div>
 
-                  <Button label="Follow" className="uppercase text-[10px] p-0 bg-transparent text-[#0D0106]" />
+                  <Button label="Follow" className="uppercase font-sans text-[10px] p-0 bg-transparent text-[#0D0106]" />
                 </div>
 
                 <div className="mx-4">
@@ -80,7 +80,7 @@ export function LivePresentation({ onClose }: { onClose: any }) {
           </div>
 
           <DialogFooter>
-            <Button onClick={onClose} label="Watch Now" className="text-sm capitalize w-full" />
+            <Button onClick={onClose} label="Watch Now" className="text-sm uppercase font-sans hover:opacity-80 w-full" />
           </DialogFooter>
         </DialogContent>
       </Dialog>

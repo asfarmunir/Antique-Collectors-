@@ -65,7 +65,7 @@ const Navbar = () => {
 
       {/* Burger Menu (Mobile/Small Screen) */}
       <div
-        className={`absolute top-[100%] left-0 w-full bg-white opacity-95 z-10 border-y-2 border-[#EBE9E0] shadow-lg md:hidden ${
+        className={`absolute top-[100%] left-0 w-full bg-white opacity-95 z-30 border-y-2 border-[#EBE9E0] shadow-lg md:hidden ${
           isMenuOpen ? "flex" : "hidden"
         } flex-col  gap-5 py-2`}
       >

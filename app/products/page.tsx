@@ -13,7 +13,7 @@ import { CiHeart } from "react-icons/ci";
 import { FaRegCommentDots } from "react-icons/fa";
 import Link from "next/link";
 import { categoriesData } from '@/lib/data';
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import useProducts from "@/hooks/useProducts";
 import { checkboxLabels, conditionLabels, sortOptions } from "@/lib/constants";
 import { FaHeart } from "react-icons/fa";
@@ -21,7 +21,7 @@ import { FaHeart } from "react-icons/fa";
 const Product = () => {
   const { products, toggleFavorite, isFavorite } = useProducts();
   const [isGridView, setIsGridView] = useState(true); // State for grid layout
-  const [filterOpen, setFilterOpen] = useState(true);
+  const [filterOpen, setFilterOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<number | null>(null); // Tracks which dropdown is open
   const router = useRouter();
   const [isViewMore, setIsViewMore] = useState(true);
@@ -29,7 +29,26 @@ const Product = () => {
   const [horizontalProductCount, setHorizontalProductCount] = useState(10);
 
 
-  console.log(categoriesData);
+
+
+  // Open filter sidebar by default on large screens
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setFilterOpen(true);
+      } else {
+        setFilterOpen(false);
+      }
+    };
+
+    handleResize(); // Set initial state based on screen size
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
 
 
   const handleGridView = () => {
@@ -173,58 +192,69 @@ const Product = () => {
           )}
 
           {/* Conditional rendering for Grid and Horizontal layouts */}
-          <div className={`col-span-${filterOpen ? 3: 4} py-8 md:py-2`}>
+          <div className={`col-span-${filterOpen ? 3 : 4} py-8 md:py-2`}>
             {isGridView ? (
 
+              <>
+                <div className={` grid grid-cols-1 sm:grid-cols-4 gap-4  md:grid-cols-${filterOpen ? 3 : 4} lg:grid-cols-${filterOpen ? 3 : 4}`}>
+                  {products.slice(0, gridProductCount).map((p, index) => {
+                    const columns = 3; // Adjust based on your actual column count for grid view
+                    const isLastRow = Math.floor(index / columns) === Math.floor((products.length - 1) / columns);
+                    const isLastColumn = (index + 1) % columns === 0;
+                    const isFavorited = isFavorite(p.id);
 
-              <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4  md:grid-cols-${filterOpen ? 3: 4} lg:grid-cols-${ filterOpen ? 3: 4}`}>
-                {products.slice(0, gridProductCount).map((p, index) => {
-                  const columns = 3; // Adjust based on your actual column count for grid view
-                  const isLastRow = Math.floor(index / columns) === Math.floor((products.length - 1) / columns);
-                  const isLastColumn = (index + 1) % columns === 0;
-                  const isFavorited = isFavorite(p.id);
+                    return (
+                      <div
+                        key={p.id}
+                        className={`flex flex-col stroke-black md:py-6 px-6 cursor-pointer border-[#EBE9E0]
+                          ${!isLastRow ? 'md:border-b' : ''} 
+                          ${!isLastColumn ? 'md:border-r -mr-[3px]' : ''}`}
+                        onClick={() => handleProductDetails(p.id)}
+                      >
+                        <div className="flex items-center justify-center relative group">
+                          <div className="absolute top-2 right-4 z-20">
+                            <button
+                              onClick={() => toggleFavorite(p.id)}
+                              aria-label={`Add ${p.title} to favorites`}
+                              className="text-xl font-semibold focus:outline-none"
+                            >
+                              {isFavorited ? (
+                                <FaHeart className="text-red-500" /> // Filled heart for favorited
+                              ) : (
+                                <CiHeart className="text-gray-500" /> // Outline heart for non-favorited
+                              )}
+                            </button>
+                          </div>
+                          <Image
+                            src="/images/products/p2.png"
+                            alt={p.title}
+                            width={150}
+                            height={150}
+                            className="w-full h-full object-contain object-center transform hover:scale-105 transition duration-500 ease-in-out"
+                          />
 
-                  return (
-                    <div
-                      key={p.id}
-                      className={`flex flex-col stroke-black md:py-6 px-6 cursor-pointer border-[#EBE9E0]
-                  ${!isLastRow ? 'md:border-b' : ''} 
-                  ${!isLastColumn ? 'md:border-r -mr-[3px]' : ''}`}
-                      onClick={() => handleProductDetails(p.id)}
-                    >
-                      <div className="bg-red-50 flex items-center justify-center relative">
-                        <div className="absolute top-2 right-4 z-20">
-                          <button
-                            onClick={() => toggleFavorite(p.id)}
-                            aria-label={`Add ${p.title} to favorites`}
-                            className="text-xl font-semibold focus:outline-none"
-                          >
-                            {isFavorited ? (
-                              <FaHeart className="text-red-500" /> // Filled heart for favorited
-                            ) : (
-                              <CiHeart className="text-gray-500" /> // Outline heart for non-favorited
-                            )}
-                          </button>
+                          {/* Likes and Comments Overlay on Hover */}
+                          <div className="absolute inset-0 bg-white bg-opacity-80   flex flex-row gap-4 items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p className="text-sm text-black flex items-center gap-4"><CiHeart className="text-lg" /> {p.likes || 34}</p>
+                            <p className="text-sm text-black flex items-center gap-4"><FaRegCommentDots className="text-lg" /> {p.comments || 34}</p>
+                          </div>
                         </div>
-                        <Image
-                          src="/images/products/p2.png"
-                          alt={p.title}
-                          width={150}
-                          height={150}
-                          className="w-full h-full object-contain object-center transform hover:scale-105 transition duration-500 ease-in-out"
-                        />
-                      </div>
-                      <div className="w-full pt-4 flex flex-col justify-between">
-                        <div className="text-sm flex flex-row justify-between gap-4">
-                          <p className="text-[#919089] mb-1">{p.brand}</p>
-                          <p className="text-[#aa994c]">FOLLOW</p>
+                        <div className="w-full pt-4 flex flex-col justify-between">
+                          <div className="text-sm flex flex-row justify-between gap-4">
+                            <p className="text-[#919089] mb-1">{p.brand}</p>
+                            <p className="text-[#919089]">FOLLOW</p>
+                          </div>
+                          <h2 className="text-sm pt-2 md:text-[14px] uppercase">{p.title}</h2>
                         </div>
-                        <h2 className="md:text-sm">{p.title}</h2>
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
+                    );
+                  })}
+                </div>
+
+
+
+              </>
+
 
 
 
@@ -239,9 +269,9 @@ const Product = () => {
                         <div className="bg-[#EBE9E0] p-2 rounded-full w-8 h-8 flex items-center justify-center">
                           <Image src='/' width={10} height={10} className="rounded-full" alt="" />
                         </div>
-                        <h1>{item.brand}</h1>
+                        <h1 className="font-playfair capitalize text-[20px]">{item.brand}</h1>
                       </div>
-                      <h1 className="text-[#0D0106]">FOLLOW</h1>
+                      <h1 className="text-[#0D0106] text-sm">FOLLOW</h1>
                     </div>
 
                     <div className="flex flex-col">
@@ -251,17 +281,19 @@ const Product = () => {
 
                       <div className="flex flex-row items-center gap-6 mt-2">
                         <button className="flex flex-row gap-2 items-center">
-                          <CiHeart className="text-xl" /> {item.like || '23'}
+                          <CiHeart className="text-xl" /> {item.likes || '23'}
                         </button>
                         <button className="flex flex-row gap-2 items-center">
-                          <FaRegCommentDots className="text-xl" /> {item.comment || '23'}
+                          <FaRegCommentDots className="text-xl" /> {item.comments || '23'}
                         </button>
                       </div>
 
-                      <p className="py-2 font-semibold uppercase">{item.title}</p>
-                      <p className="text-sm">{item.description}</p>
+                      <div>
+                        <p className="py-2 uppercase">{item.title}</p>
+                        <p className="text-sm text-[#463F3A]">{item.description}</p>
+                      </div>
 
-                      <button onClick={() => handleProductDetails(item.id)} className="uppercase text-sm py-3">
+                      <button onClick={() => handleProductDetails(item.id)} className="uppercase text-sm text-start pt-5">
                         READ MORE
                       </button>
                     </div>
@@ -270,7 +302,19 @@ const Product = () => {
               </div>
             )}
           </div>
+
+
         </div>
+
+
+
+
+
+
+
+
+
+        
 
 
         {/* Live Presentation section */}
@@ -280,7 +324,7 @@ const Product = () => {
               <h1 className="font-playfair text-base sm:text-xl md:text-3xl lg:text-5xl">Live Presentations</h1>
               <p className="text-sm py-8">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam esse eos doloremque a natus! Quibusdam eum perferendis perspiciatis deleniti, maiores voluptate odit quis est soluta adipisci, magni debitis? Unde, natus?</p>
 
-              <Button label="See Upcoming live shows" className="uppercase bg-white text-[#2D2D2D]" />
+              <Button label="See Upcoming live shows" className="uppercase text-sm px-6 py-4 hover:bg-[#2D2D2D] hover:text-white bg-white text-[#2D2D2D]" />
             </div>
 
             <div className="col-span-1">
@@ -299,12 +343,12 @@ const Product = () => {
                   />
                 </div>
 
-                <h3 className="text-[#463F3A] font-playfair text-lg">Antique Showcase Live: Unveiling Rare jewelry Finds in Real Time</h3>
+                <h3 className="text-[#463F3A] font-playfair text-[20px]">Antique Showcase Live: Unveiling Rare jewelry Finds in Real Time</h3>
                 <p className="text-[#8B8683] py-2 text-sm">Patrick Boyd Carpenter</p>
 
 
                 <div className="mt-5">
-                  <Button label="Set a reminder" className="uppercase w-full" />
+                  <Button label="Set a reminder" className="uppercase text-sm w-full hover:opacity-80" />
                 </div>
 
               </div>
@@ -338,7 +382,7 @@ const Product = () => {
                 ${!isLastColumn ? 'border-r -mr-[3px]' : ''}`}
                       onClick={() => handleProductDetails(p.id)}
                     >
-                      <div className="bg-red-50 flex items-center justify-center relative">
+                      <div className=" flex items-center justify-center relative group">
                         <div className="absolute top-2 right-4 z-20">
                           <button
                             onClick={() => toggleFavorite(p.id)}
@@ -359,13 +403,20 @@ const Product = () => {
                           height={150}
                           className="w-full h-full object-contain object-center transform  hover:scale-105 transition duration-500 ease-in-out"
                         />
+
+
+                        {/* Likes and Comments Overlay on Hover */}
+                        <div className="absolute inset-0 bg-white bg-opacity-80   flex flex-row gap-4 items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <p className="text-sm text-black flex items-center gap-4"><CiHeart className="text-lg" /> {p.likes || 34}</p>
+                          <p className="text-sm text-black flex items-center gap-4"><FaRegCommentDots className="text-lg" /> {p.comments || 34}</p>
+                        </div>
                       </div>
                       <div className="w-full pt-4 flex flex-col justify-between">
                         <div className="text-sm flex flex-row justify-between gap-4">
                           <p className="text-[#919089] mb-1">{p.brand}</p>
-                          <p className="text-[#aa994c]">FOLLOW</p>
+                          <p className="text-[#919089]">FOLLOW</p>
                         </div>
-                        <h2 className="text-xs md:text-sm">{p.title}</h2>
+                        <h2 className="text-sm md:text-[14px] uppercase pt-2">{p.title}</h2>
                       </div>
                     </div>
                   );
@@ -377,14 +428,14 @@ const Product = () => {
               <div className="py-6 text-[#0D0106] px-4">
                 {products.slice(gridProductCount).map((item) => (
                   <div className="mb-10" key={item.id}>
-                    <div className="flex flex-row  hover:scale-105 transition duration-500 ease-in-out items-center justify-between border-b pb-2 border-[#EBE9E0]">
+                    <div className="flex flex-row   items-center justify-between border-b pb-2 border-[#EBE9E0]">
                       <div className="flex flex-row items-center text-sm gap-3">
                         <div className="bg-[#EBE9E0] p-2 rounded-full w-8 h-8 flex items-center justify-center">
                           <Image src='/' width={10} height={10} className="rounded-full" alt="" />
                         </div>
-                        <h1>{item.brand}</h1>
+                        <h1 className="text-[20px] capitalize font-playfair">{item.brand || 'Seller Name'}</h1>
                       </div>
-                      <h1 className="text-[#0D0106]">FOLLOW</h1>
+                      <h1 className="text-[#0D0106] text-sm">FOLLOW</h1>
                     </div>
 
                     <div className="flex flex-col">
@@ -394,17 +445,17 @@ const Product = () => {
 
                       <div className="flex flex-row items-center gap-6 mt-2">
                         <button className="flex flex-row gap-2 items-center">
-                          <CiHeart className="text-xl" /> {item.like || '23'}
+                          <CiHeart className="text-xl" /> {item.likes || '23'}
                         </button>
                         <button className="flex flex-row gap-2 items-center">
-                          <FaRegCommentDots className="text-xl" /> {item.comment || '23'}
+                          <FaRegCommentDots className="text-xl" /> {item.comments || '23'}
                         </button>
                       </div>
 
-                      <p className="py-2 font-semibold uppercase">{item.title}</p>
-                      <p className="text-sm">{item.description}</p>
+                      <p className="py-2 uppercase">{item.title}</p>
+                      <p className="text-sm text-[#463F3A]">{item.description}</p>
 
-                      <button onClick={() => handleProductDetails(item.id)} className="uppercase text-sm py-3">
+                      <button onClick={() => handleProductDetails(item.id)} className="uppercase text-sm pt-5 text-start">
                         READ MORE
                       </button>
                     </div>
@@ -420,7 +471,7 @@ const Product = () => {
 
         <div className="">
           <div className="flex flex-row justify-center items-center py-6">
-            <Button onClick={handleViewToggle} label={isViewMore ? "View More" : "View Less"} className="uppercase border border-[#0D0106] py-2 px-8  bg-white text-[#0D0106] " />
+            <Button onClick={handleViewToggle} label={isViewMore ? "View More" : "View Less"} className="uppercase border border-[#0D0106] hover:bg-[#0D0106] hover:text-white py-2 px-8 text-sm md:px-16  bg-white text-[#0D0106] " />
           </div>
         </div>
 

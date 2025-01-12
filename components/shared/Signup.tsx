@@ -37,7 +37,7 @@ const SignUp = ({ onClose }: { onClose: any }) => {
         <>
             <div className="relative ">
                 <Dialog open onOpenChange={onClose}>
-                    <DialogContent className="font-playfair max-h-[90vh] overflow-y-auto">
+                    <DialogContent className="font-playfair max-h-[90vh] overflow-y-auto" customWidth="max-w-2xl">
                         <DialogHeader className="font-playfair text-xl border-b border-[#EBE9E0] pb-2">
                             <DialogTitle>
                                 <Button onClick={onClose} icon={<RxCross2 className="text-black" />} label="" className="bg-transparent absolute right-0 top-4" />
@@ -60,15 +60,15 @@ const SignUp = ({ onClose }: { onClose: any }) => {
                         {currentStep === 1 && (
                             <div className="flex flex-col px-2 md:px-6">
 
-                                <h1 className="text-2xl">Welcome to The Antique Collector</h1>
-                                <p className="text-xs text-[#919089] font-sans pt-2">Discover a world of timeless treasures, crafted to match your unique tastes.</p>
+                                <h1 className="text-[32px]">Welcome to The Antique Collector</h1>
+                                <p className="text-sm text-[#919089] font-sans pt-2">Discover a world of timeless treasures, crafted to match your unique tastes.</p>
 
 
                                 <div className="my-4">
                                     <form onSubmit={handleSubmit}>
 
                                         <div className="space-y-2">
-                                            <label className="block text-xs uppercase font-sans">use your email address to sign up or login</label>
+                                            <label className="block text-xs uppercase font-sans tracking-wide">use your email address to sign up or log in</label>
                                             <InputField className="text-sm font-sans placeholder:text-sm text-[#919089] w-full border border-[#EBE9E0]"
                                                 placeholder="email@gmail.com"
                                                 type="email"
@@ -77,7 +77,7 @@ const SignUp = ({ onClose }: { onClose: any }) => {
                                                 value={formData.email}
                                                 onChange={handleInputChange} />
 
-                                            <Button type="submit" label="Continue" className="text-sm capitalize w-full font-sans" />
+                                            <Button type="submit" label="Continue" className="text-sm hover:opacity-80 capitalize w-full font-sans" />
                                         </div>
 
                                     </form>
@@ -96,8 +96,8 @@ const SignUp = ({ onClose }: { onClose: any }) => {
                                     <p className="text-[10px] font-sans uppercase text-[#0D0106] py-2">Instantly Login or sign up via google</p>
 
                                     <div className="flex flex-col md:flex-row gap-3">
-                                        <Button icon={<FcGoogle />} label="Continue with google" className="w-full font-semibold font-sans bg-white uppercase  border border-[#919089] text-nowrap flex text-xs text-black flex-row " />
-                                        <Button icon={<FaApple />} label="Continue with apple" className="w-full font-semibold uppercase font-sans bg-white border border-[#919089] text-nowrap text-xs flex flex-row text-black " />
+                                        <Button icon={<FcGoogle />} label="Continue with google" className="w-full font-semibold hover:bg-gray-100 font-sans bg-white uppercase  border border-[#919089] text-nowrap flex text-xs text-black flex-row " />
+                                        <Button icon={<FaApple />} label="Continue with apple" className="w-full font-semibold  hover:bg-gray-100 uppercase font-sans bg-white border border-[#919089] text-nowrap text-xs flex flex-row text-black " />
                                     </div>
                                 </div>
 
@@ -111,8 +111,8 @@ const SignUp = ({ onClose }: { onClose: any }) => {
 
                         {currentStep === 2 && (
 
-                            <div className="flex flex-col px-2 md:px-6 ">
-                                <h1 className="text-2xl">Welcome to The Antique Collector</h1>
+                            <div className="flex flex-col px-2 md:px-6 py-4">
+                                <h1 className="text-[32px]">Welcome to The Antique Collector</h1>
                                 <p className="text-xs text-[#919089] font-sans pt-2">Discover a world of timeless treasures, crafted to match your unique tastes.</p>
 
 
@@ -167,7 +167,7 @@ const SignUp = ({ onClose }: { onClose: any }) => {
                                             />
                                         </div>
 
-                                        <Button type="submit" label="Continue" className="text-sm capitalize w-full font-sans" />
+                                        <Button type="submit" label="Continue" className="text-sm hover:opacity-80 capitalize w-full font-sans" />
 
                                     </form>
                                 </div>
@@ -185,8 +185,8 @@ const SignUp = ({ onClose }: { onClose: any }) => {
                                     <p className="text-[10px] font-sans uppercase text-[#0D0106] py-2">Instantly Login or sign up via google</p>
 
                                     <div className="flex flex-col md:flex-row  gap-3">
-                                        <Button icon={<FcGoogle />} label="Continue with google" className="w-full font-semibold text-nowrap font-sans bg-white uppercase  border border-[#919089] flex text-xs text-black flex-row " />
-                                        <Button icon={<FaApple />} label="Continue with apple" className="w-full font-semibold uppercase text-nowrap font-sans bg-white border border-[#919089] text-xs flex flex-row text-black " />
+                                        <Button icon={<FcGoogle />} label="Continue with google" className="w-full hover:bg-gray-100 font-semibold text-nowrap font-sans bg-white uppercase  border border-[#919089] flex text-xs text-black flex-row " />
+                                        <Button icon={<FaApple />} label="Continue with apple" className="w-full hover:bg-gray-100 font-semibold uppercase text-nowrap font-sans bg-white border border-[#919089] text-xs flex flex-row text-black " />
                                     </div>
                                 </div>
                             </div>
@@ -201,11 +201,11 @@ const SignUp = ({ onClose }: { onClose: any }) => {
                         {currentStep === 3 && (
                             <div>
 
-                                <h1 className="text-[#0D0106] text-2xl">Please verify your email address to finish creating your account</h1>
+                                <h1 className="text-[#0D0106] text-[36px]">Please verify your email address to finish creating your account</h1>
 
 
                                 <div className="mt-6 text-[#0D0106]">
-                                    <p className="font-sans text-[10px] uppercase">We’ve sent a verification code to your email address.</p>
+                                    <p className="font-sans text-xs mb-2 uppercase">We’ve sent a verification code to your email address.</p>
 
                                     <InputField className="text-sm text-black font-sans placeholder:text-sm  w-full border-b border-[#919089]" placeholder="email@gmail.com"
                                         value={formData.email}
@@ -226,7 +226,7 @@ const SignUp = ({ onClose }: { onClose: any }) => {
                                             ))}
                                         </div>
 
-                                        <p className="text-[10px] font-sans">Didn't receive a code? <Link href={"#"} className="uppercase">Resend</Link></p>
+                                        <p className="text-[12px] font-sans">Didn't receive a code? <Link href={"#"} className="uppercase text-[10px]">Resend</Link></p>
                                     </div>
 
                                 </div>

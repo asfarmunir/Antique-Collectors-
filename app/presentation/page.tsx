@@ -45,23 +45,23 @@ const Presentations = () => {
                 <div className="py-4 px-4 md:px-6 lg:px-12 border-b border-[#EBE9E0] flex flex-row flex-wrap gap-4 justify-between items-center" >
                     <div>
                         <p className="text-xs">Home / Live Presentations</p>
-                        <h1 className="font-playfair pt-4 uppercase text-base md:text-xl ">Live Presentations</h1>
+                        <h1 className="font-playfair pt-4 uppercase text-base md:text-[24px] ">Live Presentations</h1>
                     </div>
 
                     <div>
-                        <Button onClick={handleDialog} label="Create a live presentation" className="text-xs text-white uppercase" />
+                        <Button onClick={handleDialog} label="Create a live presentation" className="text-sm hover:opacity-80 py-3 px-4 text-white uppercase" />
                     </div>
                 </div>
 
 
                 <section className="py-4 px-4 md:px-6 lg:px-12 lg:z-10">
-                    <h1 className="text-3xl font-playfair capitalize">Discover Upcoming Live Showcases</h1>
-                    <p className="text-sm py-3 text-[#919089]">Explore our schedule of live presentations where sellers unveil unique antiques, share their stories, and answer your questions in real time. Don’t miss the chance to connect and find your next treasure.</p>
+                    <h1 className="text-[32px] md:text-[44px] font-playfair capitalize">Discover Upcoming Live Showcases</h1>
+                    <p className="text-[14px] py-3 ">Explore our schedule of live presentations where sellers unveil unique antiques, share their stories, and answer your questions in real time. Don’t miss the chance to connect and find your next treasure.</p>
 
 
 
                     {/* Live Presentation section */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 py-5">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 py-5">
                         {Array.from({ length: 6 }).map((items) => (
                             <div className="bg-[#FFFFFF] p-2">
                                 <div className="bg-black text-white py-2 px-1 text-xs flex flex-row justify-between gap-4">
@@ -78,12 +78,12 @@ const Presentations = () => {
                                     />
                                 </div>
 
-                                <h3 className="text-[#463F3A] font-playfair text-lg pt-2">Antique Showcase Live: Unveiling Rare jewelry Finds in Real Time</h3>
+                                <h3 className="text-[#463F3A] font-playfair text-[18px] pt-2">Antique Showcase Live: Unveiling Rare jewelry Finds in Real Time</h3>
                                 <p className="text-[#8B8683] py-2 text-sm">Patrick Boyd Carpenter</p>
 
 
                                 <div className="mt-5">
-                                    <Button label="Set a reminder" className="uppercase w-full" />
+                                    <Button label="Set a reminder" className="uppercase w-full py-3 text-sm hover:opacity-80" />
                                 </div>
 
                             </div>
@@ -93,7 +93,7 @@ const Presentations = () => {
 
 
                 <section className="py-4 px-8 md:block hidden">
-                    <h1 className="text-3xl font-playfair capitalize">Time Table</h1>
+                    <h1 className="text-[44px] font-playfair capitalize">Time Table</h1>
                     <p className="text-sm py-3">Explore our schedule of live presentations where sellers unveil unique antiques, share their stories, and answer your questions in real time. Don’t miss the chance to connect and find your next treasure.</p>
 
 
@@ -105,9 +105,9 @@ const Presentations = () => {
                             <TableHeader>
                                 <TableRow>
                                     <TableHead className="uppercase text-[#919089] border-r  border-[#EBE9E0] text-center">Seller Name</TableHead>
-                                    <TableHead className="border-r  border-[#EBE9E0] text-[#0D0106]">Title</TableHead>
-                                    <TableHead className="border-r  border-[#EBE9E0] text-[#0D0106]">Date</TableHead>
-                                    <TableHead className="border-r  border-[#EBE9E0] text-[#0D0106]">Time</TableHead>
+                                    <TableHead className="border-r uppercase border-[#EBE9E0] text-[#0D0106]">Title</TableHead>
+                                    <TableHead className="border-r uppercase  border-[#EBE9E0] text-[#0D0106]">Date</TableHead>
+                                    <TableHead className="border-r uppercase  border-[#EBE9E0] text-[#0D0106]">Time</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -130,12 +130,13 @@ const Presentations = () => {
                                                 </div>
                                             </div>
                                         </TableCell>
-                                        <TableCell className=" border-r  border-[#EBE9E0]"><p className="font-playfair text-base">{row.title}</p> <p className="text-gray-400 text-xs">Description</p></TableCell>
-                                        <TableCell className="border-r  border-[#EBE9E0] text-[#0D0106]">{row.date}</TableCell>
-                                        <TableCell className="border-r  border-[#EBE9E0] text-[#0D0106]">{row.time}</TableCell>
+                                        <TableCell className=" border-r  border-[#EBE9E0]"><p className="font-playfair text-[16px]">{row.title}</p>
+                                         <p className="text-gray-400 text-xs mt-1">Description</p></TableCell>
+                                        <TableCell className="border-r text-[14px]  border-[#EBE9E0] text-[#0D0106]">{row.date}</TableCell>
+                                        <TableCell className="border-r text-[14px] border-[#EBE9E0] text-[#0D0106]">{row.time}</TableCell>
 
                                         <TableCell>
-                                            <Button label="Set a reminder" className="uppercase text-sm text-white w-full" />
+                                            <Button label="Set a reminder" className="uppercase text-sm text-white w-full hover:opacity-80" />
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -148,10 +149,10 @@ const Presentations = () => {
 
 
                 <section className="py-4 px-4 md:px-6 lg:px-12">
-                    <h1 className="text-3xl font-playfair capitalize">Catch Up on Recent Showcases</h1>
-                    <p className="text-xs py-3">Missed a live session? Watch the highlights and explore featured antiques from the past 24 hours before they’re gone.</p>
+                    <h1 className="text-[32px] md:text-[44px] font-playfair capitalize">Catch Up on Recent Showcases</h1>
+                    <p className="text-[14px] py-4">Missed a live session? Watch the highlights and explore featured antiques from the past 24 hours before they’re gone.</p>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {Array.from({ length: 2 }).map((item) => (
                             <div className="md:mx-2 ">
                                 <div className="border-b border-[#EBE9E0] pb-4">
@@ -166,7 +167,7 @@ const Presentations = () => {
                                     </div>
 
                                     <div className="flex flex-row items-center gap-4 py-2 justify-between">
-                                        <h1 className="font-playfair text-xl">Home Decor originating from Italy</h1>
+                                        <h1 className="font-playfair text-[20px] md:text-[24px]">Home Decor originating from Italy</h1>
                                         <button><LuUpload className="text-lg" /> </button>
                                     </div>
 
@@ -190,12 +191,12 @@ const Presentations = () => {
                                                 />
                                             </div>
 
-                                            <h1 className="text-xs uppercase text-[#919089]">Seller Name</h1>
+                                            <h1 className="text-[14px] uppercase text-[#919089]">Seller Name</h1>
 
 
                                         </div>
 
-                                        <Button label="Follow" className="uppercase text-[10px] p-0 bg-transparent text-[#0D0106]" />
+                                        <Button label="Follow" className="uppercase text-[12px] p-0 bg-transparent text-[#0D0106]" />
                                     </div>
 
 

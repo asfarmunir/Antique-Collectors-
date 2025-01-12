@@ -58,12 +58,12 @@ const Seller = () => {
     return (
         <>
             <div>
-                <div className="py-4 px-4 md:px-6 lg:px-10">
+                <div className="py-4 px-4 md:px-6 lg:px-12">
                     <h1 className="text-xs">Home / Sellers / A-Z Sellers</h1>
                     <h1 className="font-playfair pt-4 uppercase text-xl">Sellers</h1>
                 </div>
 
-                <section className="bg-[#F9F8F3] py-4 px-4 lg:px-10 md:px-6">
+                <section className="bg-[#F9F8F3] py-4 px-4 lg:px-12 md:px-6">
                     <div className="flex flex-wrap gap-5 flex-row justify-between items-center">
                         <div
                             onClick={() => setFilterOpen(!filterOpen)}
@@ -74,9 +74,9 @@ const Seller = () => {
                         </div>
                         <p className="uppercase text-xs md:hidden">Showing {sellers.length} Results</p>
 
-                        <div className="w-full md:w-auto flex flex-row justify-between gap-8 items-center">
+                        <div className="w-full md:w-auto flex flex-row justify-between gap-4 items-center">
                             <div className="lg:flex flex-row items-center gap-4 md:block hidden">
-                                <p className="uppercase text-xs">Showing {sellers.length} Results</p>
+                                <p className="uppercase text-xs text-nowrap">Showing {sellers.length} Results</p>
                                 <div className="flex flex-row gap-2 items-center ">
                                     <HiViewGrid
                                         className={`text-lg cursor-pointer ${isGridView ? "text-black opacity-100" : "text-gray-400 opacity-50"
@@ -106,7 +106,7 @@ const Seller = () => {
                     </div>
                 </section>
 
-                <div className={`px-4 md:px-6 grid gap-6 grid-cols-1 md:grid-cols-${filterOpen ? 4 : 4}`}>
+                <div className={`px-4 md:px-6 lg:px-12 grid gap-6 grid-cols-1 md:grid-cols-${filterOpen ? 4 : 4}`}>
                     {filterOpen && (
                         <div className="md:col-span-1 py-6 md:block hidden">
                             <FilterComponent
@@ -130,17 +130,17 @@ const Seller = () => {
                                 className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-${filterOpen ? 3 : 4} gap-4`}
                             >
                                 {sellers.slice(0, visibleGridUsers).map((items) => (
-                                    <div
-                                        key={items.title}
-                                        className="relative flex flex-col items-center hover:scale-105 transition duration-500 ease-in-out"
-                                        onClick={handleSellerDetails}
-                                    >
+                                       <div
+                                       key={items.id} // Use a unique ID
+                                       className="relative flex flex-col items-center hover:scale-105 transition duration-500 ease-in-out"
+                                       onClick={() => handleSellerDetails(items.id)} // Pass the correct ID to the handler
+                                     >
                                         <div className="relative z-30 top-6">
                                             <Image src={items.src} alt={items.title} width={80} height={80} />
                                         </div>
                                         <div className="bg-[#F9F8F3] w-full capitalize flex flex-col gap-1 items-center relative pt-6 pb-6 z-10">
                                             <div className="flex flex-row items-center gap-2 pt-1">
-                                                <h1 className="font-playfair text-base font-semibold">
+                                                <h1 className="font-playfair text-[20px] font-semibold">
                                                     Seller Name
                                                 </h1>
                                                 {items.verified ? <VscVerifiedFilled className="text-green-600" /> : ""}
@@ -157,7 +157,7 @@ const Seller = () => {
                         )}
 
                         {isHorizontalView && (
-                            <div className="mx-4 md:mx-6">
+                            <div className="">
                                 {sellerdata.slice(0, visibleHorizontalUsers).map((item) => (
                                     <div
                                         className="bg-[#EBE9E0] p-4 my-6"
@@ -179,6 +179,13 @@ const Seller = () => {
                                                 />
                                             ))}
                                         </div>
+                                        <div className="flex flex-row items-center justify-between gap-4 my-3">
+                                            <div className="flex flex-row items-center gap-2">
+                                                <Image src="/images/sellers/s1.png" width={50} height={50} className="rounded-full" />
+                                                <h1 className="text-[20px] md:text-[24px] font-playfair">Antique Animal Jewelry</h1>
+                                                </div>
+                                                <Link href={"#"} className="text-sm uppercase text-[#463F3A]">Follow</Link>
+                                        </div>
                                         <h2 className="pt-2">{item.seller.location}</h2>
                                         <p className="py-3 text-sm">{item.seller.description}</p>
                                     </div>
@@ -187,6 +194,23 @@ const Seller = () => {
                         )}
                     </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
 
                 <div className="mt-6 flex justify-center">
                     <Button
@@ -200,7 +224,7 @@ const Seller = () => {
                                     : "View Less"
                         }
                         onClick={isGridView ? handleGridToggle : handleHorizontalToggle}
-                        className="uppercase border border-[#0D0106] py-2 px-8 bg-white text-[#0D0106]"
+                        className="uppercase border border-[#0D0106] py-2 px-12 hover:bg-black hover:text-white text-sm bg-white text-[#0D0106]"
                     />
                 </div>
             </div>
