@@ -28,7 +28,7 @@ const page = () => {
   const [subEmail, setSubEmail] = useState();
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const { products, isFavorite, toggleFavorite } = useProducts();
   const post = usePosts();
   const router = useRouter();
@@ -97,8 +97,8 @@ const page = () => {
             <Image
               src="/images/hero1.svg"
               alt="hero"
-              width={250}
-              height={270}
+              width={200}
+              height={230}
 
               className=" "
             />
@@ -118,9 +118,8 @@ const page = () => {
             <Image
               src="/images/hero3.svg"
               alt="hero"
-              width={0}
-              height={0}
-              layout="responsive"
+              width={150}
+              height={150}
               className=" "
             />
 
@@ -144,9 +143,8 @@ const page = () => {
             <Image
               src="/images/hero6.svg"
               alt="hero"
-              width={0}
-              height={0}
-              layout="responsive"
+              width={150}
+              height={150}
               className=" "
             />
 
@@ -157,27 +155,32 @@ const page = () => {
             <Image
               src="/images/hero5.svg"
               alt="hero"
-              width={0}
-              height={0}
-              layout="responsive"
+              width={200}
+              height={200}
               className=" "
             />
 
 
           </div>
+          <div className="mt-6">
 
-          <h2 className="text-3xl md:text-5xl leading-normal text-center font-playfair ">
-            Welcome to <br />{" "}
-            <span className=" italic">The Antique Collector</span>
-          </h2>
-          <p className="text-center max-w-lg text-sm 2xl:text-base my-5">
-            A new and exciting global platform where potential buyers can interact
-            with the world's premiere antique and jewelry dealers, and peruse and
-            buy their latest stock.
-          </p>
-          <button className=" py-3 mb-8 2xl:py-4 px-16 2xl:px-20 bg-black text-xs 2xl:text-sm text-white ">
-            Start browsing
-          </button>
+            <h2 className="text-3xl md:text-5xl leading-normal text-center font-playfair ">
+              Welcome to <br />{" "}
+              <span className=" italic">The Antique Collector</span>
+            </h2>
+            <p className="text-center max-w-lg text-sm 2xl:text-base my-5">
+              A new and exciting global platform where potential buyers can interact
+              with the world's premiere antique and jewelry dealers, and peruse and
+              buy their latest stock.
+            </p>
+         
+           <div className="   flex items-center justify-center text-xs">
+           <button className=" py-3 mb-8 2xl:py-4 px-16 2xl:px-20 bg-black  2xl:text-sm text-white ">
+              Start browsing
+            </button>
+
+           </div>
+          </div>
         </section>
 
 
@@ -460,15 +463,15 @@ const page = () => {
           <h1 className="text-3xl lg:text-5xl font-playfair mb-16">
             Find your interest
           </h1>
-          <div className="flex flex-row flex-wrap justify-start md:justify-between gap-[36px]">
+          <div className="flex flex-row flex-wrap justify-start md:justify-between gap-[32px]">
             {intrests.map((intrest, index) => (
-              <div key={index} className="flex flex-col flex-nowrap gap-6 items-center justify-between">
+              <div key={index} className="flex flex-col flex-nowrap gap-4 items-center justify-between">
                 <div className="mb-3">
                   <Image
                     src={intrest.image}
                     alt="interest"
-                    width={70}
-                    height={70}
+                    width={60}
+                    height={60}
                     className=" "
                   />
                 </div>

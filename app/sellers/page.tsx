@@ -140,7 +140,7 @@ const Seller = () => {
                                         </div>
                                         <div className="bg-[#F9F8F3] w-full capitalize flex flex-col gap-1 items-center relative pt-6 pb-6 z-10">
                                             <div className="flex flex-row items-center gap-2 pt-1">
-                                                <h1 className="font-playfair text-[20px] font-semibold">
+                                                <h1 className="font-playfair text-[20px] ">
                                                     Seller Name
                                                 </h1>
                                                 {items.verified ? <VscVerifiedFilled className="text-green-600" /> : ""}
